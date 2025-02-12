@@ -1,0 +1,120 @@
+import { Card, Col, Row, Select } from "antd";
+import {
+  DashboardStatusCard,
+  DashboardAreaChart,
+  DashboardColumnChart,
+  DashboardTable,
+} from "../components";
+import "./styles/dashboard.css";
+
+export const Dashboard = () => {
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+  return (
+    <Row
+      gutter={[0, 16]}
+      className="dashboard"
+      style={{ background: "#CACACA" }}
+    >
+      {/* dashboard-status-bar */}
+      <Col span={24}>
+        <Row gutter={16} className="dashboard-status-bar">
+          <Col span={12}>
+            <DashboardStatusCard />
+          </Col>
+          <Col span={12}>
+            <DashboardStatusCard />
+          </Col>
+        </Row>
+      </Col>
+
+      {/* dashboard-chart-section */}
+      <Col span={24}>
+        <Row gutter={16} className="dashboard-chart-section">
+          <Col span={12}>
+            <Card
+              style={{
+                background: "#FDFDFD",
+                color: "#FDFDFD",
+                border: "none",
+              }}
+            >
+              <div
+                className=""
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <h5 style={{ fontWeight: 400, fontSize: 20, color: "#010101" }}>
+                  User Overview
+                </h5>
+                <Select
+                  defaultValue="2025"
+                  style={{ width: 120, border: "none", outline: "none" }}
+                  onChange={handleChange}
+                  options={[
+                    { value: "2024", label: "2024" },
+                    { value: "2025", label: "2025" },
+                    { value: "2026", label: "2026" },
+                  ]}
+                />
+              </div>
+              <DashboardAreaChart />
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card
+              style={{
+                background: "#FDFDFD",
+                color: "#FDFDFD",
+                border: "none",
+              }}
+            >
+              <div
+                className=""
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <h5 style={{ fontWeight: 400, fontSize: 20, color: "#010101" }}>
+                  Earning Overview
+                </h5>
+                <div
+                  className=""
+                  style={{ display: "flex", alignItems: "center", gap: 10 }}
+                >
+                  <p
+                    style={{ fontWeight: 400, fontSize: 14, color: "#010101" }}
+                  >
+                    Monthly Growth: 35.80%
+                  </p>
+                  <Select
+                    defaultValue="2025"
+                    style={{ width: 120, border: "none", outline: "none" }}
+                    onChange={handleChange}
+                    options={[
+                      { value: "2024", label: "2024" },
+                      { value: "2025", label: "2025" },
+                      { value: "2026", label: "2026" },
+                    ]}
+                  />
+                </div>
+              </div>
+              <DashboardColumnChart />
+            </Card>
+          </Col>
+        </Row>
+      </Col>
+
+      {/* dashboard-table-section */}
+      <Col span={24}>
+        <DashboardTable />
+      </Col>
+    </Row>
+  );
+};
