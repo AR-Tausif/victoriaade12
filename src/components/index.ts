@@ -1,3 +1,3 @@
-export { DashboardStatusCard } from "./cards";
-export { DashboardAreaChart, DashboardColumnChart } from "./charts";
-export { DashboardTable } from "./tables";
+export * from "./cards";
+export * from "./charts";
+export * from "./tables";

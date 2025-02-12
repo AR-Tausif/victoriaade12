@@ -1,17 +1,10 @@
 import { Table, TableColumnsType } from "antd";
 import React from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { data, DataType } from "../../assets/data/data.account-details";
 
-export const DashboardTable = () => {
-  interface DataType {
-    key: React.Key;
-    serial: string;
-    name: string;
-    email: string;
-    accountType: string;
-    date: string;
-    action: string;
-  }
+export const AccountDetailsTable = () => {
+ 
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -106,41 +99,13 @@ export const DashboardTable = () => {
     },
   ];
 
-  const data: DataType[] = [
-    {
-      key: "1",
-      serial: "#01",
-      name: "John Brown",
-      email: "tausif.ritu1@gmail.com",
-      accountType: "Service Provider",
-      date: "2021-10-10",
-      action: "Edit",
-    },
-    {
-      key: "2",
-      serial: "#02",
-      name: "John Brown",
-      email: "tausif.ritu1@gmail.com",
-      accountType: "User",
-      date: "2021-10-10",
-      action: "Edit",
-    },
-    {
-      key: "3",
-      serial: "#01",
-      name: "John Brown",
-      email: "tausif.ritu1@gmail.com",
-      accountType: "Service Provider",
-      date: "2021-10-10",
-      action: "Edit",
-    },
-  ];
+ 
   return (
     <Table<DataType>
       columns={columns}
       dataSource={data}
       size="middle"
-      pagination={false}
+      pagination={true}
     />
   );
 };

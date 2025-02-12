@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Dashboard } from "../pages";
+import { AccountDetails, Dashboard } from "../pages";
 import App from "../App";
 
 const router = createBrowserRouter([
@@ -10,6 +10,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/account-details",
+        element: <AccountDetails />,
       },
     ],
   },
