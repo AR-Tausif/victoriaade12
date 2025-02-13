@@ -1,17 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 
-*{
+* {
   margin: 0;
-  padding:0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: 'Urbanist', sans-serif;
-  color: #010101;
+  font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
 }
 
-body{
-  font-family: 'Urbanist', sans-serif;
+body {
+  font-family: "Urbanist", sans-serif;
   background-color: #f0f0f0;
   color: #010101;
+}
+button {
+  border: none;
+  outline: none;
 }

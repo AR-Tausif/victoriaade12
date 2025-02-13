@@ -1,5 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import { AccountDetails, AccountDetailsById, Dashboard } from "../pages";
+import {
+  AccountDetails,
+  AccountDetailsById,
+  Dashboard,
+  Service,
+} from "../pages";
 import App from "../App";
 
 const router = createBrowserRouter([
@@ -18,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/account-details/:accountId",
         element: <AccountDetailsById />,
+      },
+      {
+        path: "/service",
+        element: <Service />,
       },
     ],
   },
