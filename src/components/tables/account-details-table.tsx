@@ -1,11 +1,10 @@
-import { Table, TableColumnsType } from "antd";
-import React from "react";
+import { Modal, Table, TableColumnsType } from "antd";
+import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { data, DataType } from "../../assets/data/data.account-details";
 
 export const AccountDetailsTable = () => {
- 
-
+  const [modal2Open, setModal2Open] = useState(false);
   const columns: TableColumnsType<DataType> = [
     {
       title: "Serial",
@@ -77,6 +76,7 @@ export const AccountDetailsTable = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
+            onClick={() => setModal2Open(true)}
           >
             <EyeInvisibleOutlined style={{ color: "#010101" }} />
           </p>
@@ -99,13 +99,25 @@ export const AccountDetailsTable = () => {
     },
   ];
 
- 
   return (
-    <Table<DataType>
-      columns={columns}
-      dataSource={data}
-      size="middle"
-      pagination={true}
-    />
+    <>
+      <Table<DataType>
+        columns={columns}
+        dataSource={data}
+        size="middle"
+        pagination={false}
+      />
+      <Modal
+        title="Vertically centered modal dialog"
+        centered
+        open={modal2Open}
+        onOk={() => setModal2Open(false)}
+        onCancel={() => setModal2Open(false)}
+      >
+        <p>some contents...</p>
+        <p>some contents...</p>
+        <p>some contents...</p>
+      </Modal>
+    </>
   );
 };
