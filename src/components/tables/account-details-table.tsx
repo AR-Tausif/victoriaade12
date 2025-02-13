@@ -4,7 +4,8 @@ import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { data, DataType } from "../../assets/data/data.account-details";
 
 export const AccountDetailsTable = () => {
-  const [modal2Open, setModal2Open] = useState(false);
+  const [openAccountDetail, setOpenAccountDetail] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
   const columns: TableColumnsType<DataType> = [
     {
       title: "Serial",
@@ -76,7 +77,7 @@ export const AccountDetailsTable = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
-            onClick={() => setModal2Open(true)}
+            onClick={() => setOpenAccountDetail(true)}
           >
             <EyeInvisibleOutlined style={{ color: "#010101" }} />
           </p>
@@ -91,6 +92,7 @@ export const AccountDetailsTable = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
+            onClick={() => setDeleteUser(true)}
           >
             <UserDeleteOutlined style={{ color: "red" }} />
           </p>
@@ -110,13 +112,22 @@ export const AccountDetailsTable = () => {
       <Modal
         title="Vertically centered modal dialog"
         centered
-        open={modal2Open}
-        onOk={() => setModal2Open(false)}
-        onCancel={() => setModal2Open(false)}
+        open={openAccountDetail}
+        onOk={() => setOpenAccountDetail(false)}
+        onCancel={() => setOpenAccountDetail(false)}
       >
         <p>some contents...</p>
         <p>some contents...</p>
         <p>some contents...</p>
+      </Modal>
+      <Modal
+        centered
+        open={deleteUser}
+        onOk={() => setDeleteUser(false)}
+        onCancel={() => setDeleteUser(false)}
+      >
+        <h3 style={{fontSize:24, fontWeight:700, color:"#A011FF", textAlign:"center"}}>Are You Sure?</h3>
+      
       </Modal>
     </>
   );
