@@ -1,0 +1,36 @@
+/* Post.css */
+
+/* The container for the post */
+.post {
+    width: 100%;
+    max-width: 600px; /* Max post width */
+    margin: 0 auto;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Content area */
+  .post-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Default image container (single image) */
+  .image-container {
+    display: block;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* For multiple images, we will use CSS Grid */
+  .image-container:not(.single) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Grid with responsive columns */
+    gap: 8px; /* Space between images */
+  }
