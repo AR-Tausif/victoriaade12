@@ -1,4 +1,7 @@
-export const MapDotIcon = ({ size }: { size: string }) => {
+interface IconProps {
+  size?: string;
+}
+export const MapDotIcon = ({ size }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

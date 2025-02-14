@@ -5,6 +5,7 @@
       "name": "tulparnehir",
       "dependencies": {
         "antd": "^5.23.4",
+        "lucide": "^0.475.0",
         "react": "^19.0.0",
         "react-apexcharts": "^1.7.0",
         "react-dom": "^19.0.0",
@@ -437,6 +438,8 @@
     "loose-envify": ["loose-envify@1.4.0", "", { "dependencies": { "js-tokens": "^3.0.0 || ^4.0.0" }, "bin": { "loose-envify": "cli.js" } }, "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="],
 
     "lru-cache": ["lru-cache@5.1.1", "", { "dependencies": { "yallist": "^3.0.2" } }, "sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w=="],
+
+    "lucide": ["lucide@0.475.0", "", {}, "sha512-86jIup6DQGWX5etGuhLlojx0bu+HbxLvRI5B2SumOBznImMxEXyKF0YpScZ51BOix2gq5LfeO8mnvVVPlK/Fdg=="],
 
     "merge2": ["merge2@1.4.1", "", {}, "sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg=="],
 
