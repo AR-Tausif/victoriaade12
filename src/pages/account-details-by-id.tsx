@@ -11,8 +11,7 @@ export const AccountDetailsById = () => {
 
   return (
     <div className="account-grid">
-
-{/* profile details view */}
+      {/* profile details view */}
       <div className="profile-details">
         {/* profile intro with name and email */}
         <div className="profile-intro">
@@ -33,7 +32,7 @@ export const AccountDetailsById = () => {
         </div>
       </div>
 
-    {/* content section */}
+      {/* content section */}
       <div className="content-section">
         <div className="content-grid">
           <div className="post-card">

@@ -1,10 +1,30 @@
 
-.ant-menu-item {
-  background-color: #e6e6fa !important;
+.ant-layout-sider{
+  flex:  0 0 300px !important;
+  max-width: 300px !important;
+  padding: 0 20px;
+  background: #FDFDFD;
+}
+.ant-menu{
+border: none !important;
+}
+.list-item {
+  background: #e6e6fa !important;
   color: #000 !important;
+  font-size: 16px;
+  padding: 17px 21px !important;
+  margin-top: 10px !important;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+}
+.icon {
+  font-size: 24px !important;
 }
 
-.ant-menu-item-selected {
+.list-item-selected {
   background-color: #a011ff !important;
   color: #dcddde !important;
 }
