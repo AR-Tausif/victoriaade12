@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import {
   BellOutlined,
   CrownOutlined,
@@ -8,9 +8,9 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
+  ProductOutlined,
   SettingOutlined,
   TeamOutlined,
-  UploadOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Badge, Button, Layout, Menu, theme } from "antd";
@@ -30,7 +30,7 @@ const sidebarItems = [
   },
   {
     key: "3",
-    icon: <UploadOutlined />,
+    icon: <ProductOutlined />,
     label: "Service",
   },
   {
@@ -63,23 +63,9 @@ const sidebarItems = [
 const { Header, Sider, Content } = Layout;
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedElementId, setSelectedElementId] = useState("1");
-  const [selected, setSelected ] = useState(true);
-
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
-  const handleSelect = (e:BaseSyntheticEvent) => {
-    const elementId = e.target.closest("li").getAttribute("id")
-    setSelectedElementId(elementId)
-    // setSelected(true)
-  };
-
-  const generateSelectedClassName = (key: string): string => {
-    console.log("hello")
-    return selectedElementId == key ? "ant-list-item-selected" : "not";
-  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -104,13 +90,13 @@ const App: React.FC = () => {
         >
           <Logo />
         </div>
-        {/* <Menu
+        <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={["4"]} */}
-        {/* // items={sidebarItems} */}
-        {/* > */}
-        <ul>
+          defaultSelectedKeys={["4"]}
+          items={sidebarItems}
+        />
+        {/* <ul>
           {sidebarItems.map((item) => (
             <li
               key={item.key}
@@ -122,7 +108,7 @@ const App: React.FC = () => {
               <p>{item.label}</p>
             </li>
           ))}
-        </ul>
+        </ul> */}
         {/* <Menu
           mode="vertical"
           selectedElementId={[selectedKeys]}
