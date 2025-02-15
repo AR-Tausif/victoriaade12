@@ -103,12 +103,9 @@ export const AccountDetailsTable = () => {
 
   return (
     <>
-      <Table<DataType>
-        columns={columns}
-        dataSource={data}
-        size="middle"
-        pagination={false}
-      />
+      <Table<DataType> columns={columns} dataSource={data} size="middle" style={{
+        minHeight:"100vh"
+      }}/>
       <Modal
         title="Vertically centered modal dialog"
         centered
@@ -126,8 +123,16 @@ export const AccountDetailsTable = () => {
         onOk={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
       >
-        <h3 style={{fontSize:24, fontWeight:700, color:"#A011FF", textAlign:"center"}}>Are You Sure?</h3>
-      
+        <h3
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "#A011FF",
+            textAlign: "center",
+          }}
+        >
+          Are You Sure?
+        </h3>
       </Modal>
     </>
   );
