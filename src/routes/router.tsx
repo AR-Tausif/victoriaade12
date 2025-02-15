@@ -3,6 +3,7 @@ import {
   AccountDetails,
   AccountDetailsById,
   Dashboard,
+  Login,
   Service,
 } from "../pages";
 import App from "../App";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         element: <Service />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 export default router;
