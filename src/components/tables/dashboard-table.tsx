@@ -1,18 +1,19 @@
-import { Table, TableColumnsType } from "antd";
-import React from "react";
+import { Modal, Table, TableColumnsType } from "antd";
+import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
+interface DataType {
+  key: React.Key;
+  serial: string;
+  name: string;
+  email: string;
+  accountType: string;
+  date: string;
+  action: string;
+}
 
 export const DashboardTable = () => {
-  interface DataType {
-    key: React.Key;
-    serial: string;
-    name: string;
-    email: string;
-    accountType: string;
-    date: string;
-    action: string;
-  }
-
+  const [openAccountDetail, setOpenAccountDetail] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
   const columns: TableColumnsType<DataType> = [
     {
       title: "Serial",
@@ -84,6 +85,7 @@ export const DashboardTable = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
+            onClick={() => setOpenAccountDetail(true)}
           >
             <EyeInvisibleOutlined style={{ color: "#010101" }} />
           </p>
@@ -98,6 +100,7 @@ export const DashboardTable = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
+            onClick={() => setDeleteUser(true)}
           >
             <UserDeleteOutlined style={{ color: "red" }} />
           </p>
@@ -136,11 +139,41 @@ export const DashboardTable = () => {
     },
   ];
   return (
-    <Table<DataType>
-      columns={columns}
-      dataSource={data}
-      size="middle"
-      pagination={false}
-    />
+    <>
+      <Table<DataType>
+        columns={columns}
+        dataSource={data}
+        size="middle"
+        pagination={false}
+      />
+      <Modal
+        title="Vertically centered modal dialog"
+        centered
+        open={openAccountDetail}
+        onOk={() => setOpenAccountDetail(false)}
+        onCancel={() => setOpenAccountDetail(false)}
+      >
+        <p>some contents...</p>
+        <p>some contents...</p>
+        <p>some contents...</p>
+      </Modal>
+      <Modal
+        centered
+        open={deleteUser}
+        onOk={() => setDeleteUser(false)}
+        onCancel={() => setDeleteUser(false)}
+      >
+        <h3
+          style={{
+            fontSize: 24,
+            fontWeight: 700,
+            color: "#A011FF",
+            textAlign: "center",
+          }}
+        >
+          Are You Sure?
+        </h3>
+      </Modal>
+    </>
   );
 };

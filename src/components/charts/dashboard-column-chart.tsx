@@ -6,13 +6,16 @@ export const DashboardColumnChart = () => {
     series: [
       {
         name: "Net Profit",
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 90,60,45,100],
+        data: [44, 55, 57, 56, 61, 58, 63, 60, 90, 60, 45, 100],
       },
     ],
     options: {
       chart: {
         type: "bar",
         height: 350,
+        toolbar: {
+          show: false,
+        },
       },
       plotOptions: {
         bar: {
@@ -20,7 +23,6 @@ export const DashboardColumnChart = () => {
           columnWidth: "40%",
           borderRadius: 5,
           borderRadiusApplication: "end",
-        
         },
       },
       dataLabels: {
@@ -63,8 +65,18 @@ export const DashboardColumnChart = () => {
         },
       },
       colors: [
-        "#A011FF", "#A011FF", "#A011FF", "#A011FF", "#A011FF", "#A011FF", // Jan to Jun
-        "#A011FF", "#A011FF", "#A011FF", "#A011FF", "#A011FF", "#A011FF", // Jul to Dec
+        "#A011FF",
+        "#A011FF",
+        "#A011FF",
+        "#A011FF",
+        "#A011FF",
+        "#A011FF", // Jan to Jun
+        "#A011FF",
+        "#A011FF",
+        "#A011FF",
+        "#A011FF",
+        "#A011FF",
+        "#A011FF", // Jul to Dec
       ],
     },
   });
@@ -77,6 +89,11 @@ export const DashboardColumnChart = () => {
           series={state.series}
           type="bar"
           height={350}
+          style={
+            {
+              color:"#010101"
+            }
+          }
         />
       </div>
       <div id="html-dist"></div>

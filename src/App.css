@@ -1,31 +1,46 @@
-.ant-layout-sider{
-  flex:  0 0 300px !important;
+.ant-layout{
+  background: #fdfdfd !important;
+}
+.ant-layout-content{
+  background: #000;
+}
+.app-layout .ant-select-arrow{
+  color: #010101;
+}
+
+
+/* header section styles here */
+
+/* For Sider */
+.ant-layout-sider {
+  flex: 0 0 300px !important;
+  width: 300px !important; /* Use width instead of flex to avoid conflicts */
   max-width: 300px !important;
   padding: 0 20px;
-  background: #FDFDFD;
+  background-color: #fdfdfd !important;
 }
-.ant-menu{
-border: none !important;
+
+/* For Menu */
+.app-sider .ant-menu {
+  border: none !important;
 }
-.ant-menu-item {
-  background: #e6e6fa !important;
+
+.app-sider .ant-menu-item,
+.app-sider .ant-menu-submenu {
+  background-color: #e6e6fa !important;
   color: #000 !important;
-  font-size: 16px;
+  font-size: 18px;
   padding: 21px !important;
   margin-top: 10px !important;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  height: 48px !important;
   border-radius: 8px;
-  /* extra add higt on the class of no overwride css */
-  height: 48px;
 }
-.anticon {
+
+.app-sider .anticon {
   font-size: 24px !important;
 }
 
-.ant-menu-item-selected {
+.app-sider .ant-menu-item-selected {
   background-color: #a011ff !important;
   color: #dcddde !important;
 }

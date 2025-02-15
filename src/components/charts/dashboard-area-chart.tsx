@@ -91,6 +91,11 @@ export const DashboardAreaChart = () => {
             series={state.series}
             type="area"
             height={350}
+            style={
+              {
+                color:"#010101"
+              }
+            }
           />
         </div>
         {/* <div id="html-dist"></div> */}

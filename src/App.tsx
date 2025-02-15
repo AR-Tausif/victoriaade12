@@ -14,51 +14,60 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Avatar, Badge, Button, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
-import "./App.css";
+import { Link, Outlet } from "react-router-dom";
+import "./app.css";
 import { Logo } from "./components";
 const sidebarItems = [
   {
     key: "1",
     icon: <PieChartOutlined />,
     label: "Dashboard",
+    path: "/dashboard", // Added path to the item
   },
   {
     key: "2",
     icon: <TeamOutlined />,
     label: "Accounts Details",
+    path: "/account-details", // Added path to the item
   },
   {
     key: "3",
     icon: <ProductOutlined />,
     label: "Service",
+    path: "/service", // Added path to the item
   },
   {
     key: "4",
     icon: <DollarOutlined />,
     label: "Earnings",
+    path: "/earnings", // Added path to the item
   },
   {
     key: "5",
     icon: <CrownOutlined />,
     label: "Manage Subscription",
+    path: "/subscription", // Added path to the item
   },
   {
     key: "6",
     icon: <FileDoneOutlined />,
-    label: "Disputed Reviewws",
+    label: "Disputed Reviews",
+    path: "/reviews", // Added path to the item
   },
   {
     key: "7",
     icon: <SettingOutlined />,
     label: "Setting",
+    path: "/settings", // Added path to the item
   },
   {
     key: "8",
     icon: <LoginOutlined />,
     label: "Logout",
+    path: "/logout", // Added path to the item
   },
 ];
+
 
 const { Header, Sider, Content } = Layout;
 const App: React.FC = () => {
@@ -68,8 +77,9 @@ const App: React.FC = () => {
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
+      className="app-sider"
         // breakpoint="lg"
         // collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -94,7 +104,14 @@ const App: React.FC = () => {
           theme="light"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={sidebarItems}
+          items={sidebarItems.map(item => ({
+            ...item,
+            label: (
+              <Link to={item.path}> {/* Wrap label with Link component */}
+                {item.label}
+              </Link>
+            ),
+          }))}
         />
         {/* <ul>
           {sidebarItems.map((item) => (
