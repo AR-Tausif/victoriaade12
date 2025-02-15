@@ -2,6 +2,7 @@ import { CloseOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Lists } from "../components/lists";
 import { MapDotIcon } from "../components/icons";
 import "./styles/account-details.css";
+import { ProfileDetailsViewCard } from "../components";
 
 export const AccountDetailsById = () => {
   const images = [
@@ -12,26 +13,8 @@ export const AccountDetailsById = () => {
   return (
     <div className="account-grid">
       {/* profile details view */}
-      <div className="profile-details">
-        {/* profile intro with name and email */}
-        <div className="profile-intro">
-          <p className="close-button">
-            <CloseOutlined />
-          </p>
-          <img
-            src="https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ="
-            alt="profile picture"
-            className="profile-image"
-          />
-          <h5 className="profile-name">Anna Suraiya</h5>
-          <p className="profile-email">tausif.ritu1@gmail.com</p>
-        </div>
 
-        <div className="lists-container">
-          <Lists />
-        </div>
-      </div>
-
+      <ProfileDetailsViewCard />
       {/* content section */}
       <div className="content-section">
         <div className="content-grid">
