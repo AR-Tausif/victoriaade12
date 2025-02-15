@@ -1,13 +1,12 @@
-.ant-layout{
-  background: red !important;
+.ant-layout {
+  background: #fdfdfd !important;
 }
-.ant-layout-content{
+.ant-layout-content {
   background: #000;
 }
-.app-layout .ant-select-arrow{
+.app-layout .ant-select-arrow {
   color: #010101;
 }
-
 
 /* header section styles here */
 

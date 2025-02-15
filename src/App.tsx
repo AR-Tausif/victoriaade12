@@ -68,7 +68,6 @@ const sidebarItems = [
   },
 ];
 
-
 const { Header, Sider, Content } = Layout;
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -79,7 +78,7 @@ const App: React.FC = () => {
   return (
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
-      className="app-sider"
+        className="app-sider"
         // breakpoint="lg"
         // collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -104,64 +103,19 @@ const App: React.FC = () => {
           theme="light"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={sidebarItems.map(item => ({
+          items={sidebarItems.map((item) => ({
             ...item,
             label: (
-              <Link to={item.path}> {/* Wrap label with Link component */}
+              <Link to={item.path}>
+                {" "}
+                {/* Wrap label with Link component */}
                 {item.label}
               </Link>
             ),
           }))}
         />
-        {/* <ul>
-          {sidebarItems.map((item) => (
-            <li
-              key={item.key}
-              className={`list-item ${selected ? generateSelectedClassName(item.key) : ""}`}
-              id={item.key}
-              onClick={(e)=>handleSelect(e)}
-            >
-              <p className="icon">{item.icon}</p>
-              <p>{item.label}</p>
-            </li>
-          ))}
-        </ul> */}
-        {/* <Menu
-          mode="vertical"
-          selectedElementId={[selectedKeys]}
-          onSelect={handleMouseSelectElement}
-        >
-          {sidebarItems.map((item) => (
-            <Menu.Item
-              key={item.key}
-             
-              className={generateSelectedClassName(item.key)}
-            >
-              <p>{item.label}</p>
-              <p>{item.label}</p>
-            </Menu.Item>
-          ))}
-        </Menu> */}
       </Sider>
-      {/* <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
-        <div
-          className="demo-logo-vertical"
-          style={{
-            fontSize: "1rem",
-            fontWeight: 600,
-            color: "#fff",
-            textAlign: "center",
-          }}
-        >
-          VOUCHED
-        </div>
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={sidebarItems}
-        />
-      </Sider> */}
+
       <Layout style={{ background: "#CACACA" }}>
         <Header
           style={{
