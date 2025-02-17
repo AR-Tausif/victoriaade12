@@ -6,6 +6,7 @@ import { serviceData, DataType } from "../../assets/data/data.account-details";
 export const ServiceListTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
+
   const columns: TableColumnsType<DataType> = [
     {
       title: "Serial",
@@ -17,20 +18,11 @@ export const ServiceListTable = () => {
       dataIndex: "image",
       align: "center",
       render: (text: string, record: DataType) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div style={styles.imageContainer}>
           <img
             src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
             alt={record.name}
-            style={{
-              maxWidth: 100,
-              border: "1px solid #CACACA",
-            }}
+            style={styles.image}
           />
         </div>
       ),
@@ -44,17 +36,9 @@ export const ServiceListTable = () => {
       title: "Status",
       dataIndex: "status",
       align: "center",
-      render: (s) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div className="" style={{ background: "#D6FEEB7D", padding:"8px 12px", borderRadius:"8px", border:"1px solid #498A6C ", color:"#498A6C0", fontWeight:700}}>
-            {s}
-          </div>
+      render: (status) => (
+        <div style={styles.statusContainer}>
+          <div style={styles.statusBadge}>{status}</div>
         </div>
       ),
     },
@@ -68,43 +52,12 @@ export const ServiceListTable = () => {
       dataIndex: "action",
       align: "center",
       render: (text: string, record: DataType) => (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 8,
-          }}
-        >
-          <p
-            style={{
-              width: 24,
-              height: 24,
-              padding: 8,
-              border: "1px solid #CACACA",
-              borderRadius: "50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onClick={() => setOpenAccountDetail(true)}
-          >
-            <EyeInvisibleOutlined style={{ color: "#010101" }} />
+        <div style={styles.actionContainer}>
+          <p style={styles.actionIcon} onClick={() => setOpenAccountDetail(true)}>
+            <EyeInvisibleOutlined style={styles.icon} />
           </p>
-          <p
-            style={{
-              width: 24,
-              height: 24,
-              padding: 5,
-              border: "1px solid #CACACA",
-              borderRadius: "50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onClick={() => setDeleteUser(true)}
-          >
-            <UserDeleteOutlined style={{ color: "red" }} />
+          <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
+            <UserDeleteOutlined style={styles.iconDelete} />
           </p>
         </div>
       ),
@@ -117,12 +70,10 @@ export const ServiceListTable = () => {
         columns={columns}
         dataSource={serviceData}
         size="middle"
-        style={{
-          minHeight: "100vh",
-        }}
+        style={styles.table}
       />
       <Modal
-        title="Vertically centered modal dialog"
+        title="Service Details"
         centered
         open={openAccountDetail}
         onOk={() => setOpenAccountDetail(false)}
@@ -138,17 +89,66 @@ export const ServiceListTable = () => {
         onOk={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
       >
-        <h3
-          style={{
-            fontSize: 24,
-            fontWeight: 700,
-            color: "#A011FF",
-            textAlign: "center",
-          }}
-        >
-          Are You Sure?
-        </h3>
+        <h3 style={styles.modalTitle}>Are You Sure?</h3>
       </Modal>
     </>
   );
+};
+
+// Style object
+const styles = {
+  table: {
+    minHeight: "100vh",
+  },
+  imageContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    maxWidth: 100,
+    border: "1px solid #CACACA",
+  },
+  statusContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  statusBadge: {
+    background: "#D6FEEB7D",
+    padding: "8px 12px",
+    borderRadius: "8px",
+    border: "1px solid #498A6C",
+    color: "#498A6C",
+    fontWeight: 700,
+  },
+  actionContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
+  },
+  actionIcon: {
+    width: 24,
+    height: 24,
+    padding: 8,
+    border: "1px solid #CACACA",
+    borderRadius: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  },
+  icon: {
+    color: "#010101",
+  },
+  iconDelete: {
+    color: "red",
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 700,
+    color: "#A011FF",
+    textAlign: "center" as const,
+  },
 };

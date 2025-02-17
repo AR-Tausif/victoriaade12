@@ -1,58 +1,80 @@
-import React, { useEffect, useState } from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import React from "react";
+import {
+  Button,
+  Checkbox,
+  CheckboxProps,
+  Form,
+  Input,
+  message,
+  Select,
+  Space,
+} from "antd";
+import { Option } from "antd/es/mentions";
 
 export const LoginForm: React.FC = () => {
   const [form] = Form.useForm();
-  const [clientReady, setClientReady] = useState<boolean>(false);
 
-  // To disable submit button at the beginning.
-  useEffect(() => {
-    setClientReady(true);
-  }, []);
+  const onFinish = () => {
+    message.success("Submit success!");
+  };
 
-  const onFinish = (values: unknown) => {
-    console.log("Finish:", values);
+  const onFinishFailed = () => {
+    message.error("Submit failed!");
+  };
+
+  const onFill = () => {
+    form.setFieldsValue({
+      url: "https://taobao.com/",
+    });
+  };
+
+  const onCheckboxRememberChange: CheckboxProps["onChange"] = (e) => {
+    console.log(`checked = ${e.target.checked}`);
   };
 
   return (
     <Form
       form={form}
-      name="horizontal_login"
-      layout="inline"
+      layout="vertical"
       onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
     >
       <Form.Item
-        name="username"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        name="email"
+        label="Email or Username"
+        rules={[{ type: "string", min: 3 }]}
       >
-        <Input prefix={<UserOutlined />} placeholder="Username" />
+        <Input placeholder="Enter your email or username" />
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
+        label="Password"
+        rules={[{ type: "string", min: 4 }]}
       >
-        <Input
-          prefix={<LockOutlined />}
-          type="password"
-          placeholder="Password"
-        />
+        <Input placeholder="Enter your password" />
       </Form.Item>
-      <Form.Item shouldUpdate>
-        {() => (
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={
-              !clientReady ||
-              !form.isFieldsTouched(true) ||
-              !!form.getFieldsError().filter(({ errors }) => errors.length)
-                .length
-            }
-          >
-            Log in
-          </Button>
-        )}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Form.Item name="remember_me" rules={[{ type: "string", min: 4 }]}>
+          <Checkbox onChange={onCheckboxRememberChange}>Checkbox</Checkbox>
+        </Form.Item>
+        <p>Forgot Password</p>
+      </div>
+
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{ width: "100%", background: "#9D0DFE" }}
+        >
+          Submit
+        </Button>
       </Form.Item>
     </Form>
   );
