@@ -1,6 +1,10 @@
 import { Modal, Table, TableColumnsType } from "antd";
 import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { ProfileDetailsViewCard } from "../cards";
+import { data, userArray } from "../../assets/data/data.account-details";
+import { IUserDetails } from "../../types";
+import { Link } from "react-router-dom";
 interface DataType {
   key: React.Key;
   serial: string;
@@ -14,6 +18,16 @@ interface DataType {
 export const DashboardTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
+  const [modalShowUser, setModalShowUser] = useState({});
+  const hanldeUserShow = (data) => {
+    console.log(data.record);
+    const filteredData = userArray.filter(
+      (user) => user.email === data.record.email
+    );
+    console.log(filteredData[0]);
+    setModalShowUser(filteredData[0]);
+    setOpenAccountDetail(true)
+  };
   const columns: TableColumnsType<DataType> = [
     {
       title: "Serial",
@@ -66,6 +80,7 @@ export const DashboardTable = () => {
       dataIndex: "action",
       align: "center",
       render: (text: string, record: DataType) => (
+        <Link to="/account-details/12">
         <div
           style={{
             display: "flex",
@@ -85,7 +100,7 @@ export const DashboardTable = () => {
               justifyContent: "center",
               alignItems: "center",
             }}
-            onClick={() => setOpenAccountDetail(true)}
+            // onClick={() => hanldeUserShow({ text, record })}
           >
             <EyeInvisibleOutlined style={{ color: "#010101" }} />
           </p>
@@ -104,59 +119,59 @@ export const DashboardTable = () => {
           >
             <UserDeleteOutlined style={{ color: "red" }} />
           </p>
-        </div>
+        </div></Link>
       ),
     },
   ];
 
-  const data: DataType[] = [
-    {
-      key: "1",
-      serial: "#01",
-      name: "John Brown",
-      email: "tausif.ritu1@gmail.com",
-      accountType: "Service Provider",
-      date: "2021-10-10",
-      action: "Edit",
-    },
-    {
-      key: "2",
-      serial: "#02",
-      name: "John Brown",
-      email: "tausif.ritu1@gmail.com",
-      accountType: "User",
-      date: "2021-10-10",
-      action: "Edit",
-    },
-    {
-      key: "3",
-      serial: "#01",
-      name: "John Brown",
-      email: "tausif.ritu1@gmail.com",
-      accountType: "Service Provider",
-      date: "2021-10-10",
-      action: "Edit",
-    },
-  ];
+  // const data: DataType[] = [
+  //   {
+  //     key: "1",
+  //     serial: "#01",
+  //     name: "John Brown",
+  //     email: "tausif.ritu1@gmail.com",
+  //     accountType: "Service Provider",
+  //     date: "2021-10-10",
+  //     action: "Edit",
+  //   },
+  //   {
+  //     key: "2",
+  //     serial: "#02",
+  //     name: "John Brown",
+  //     email: "tausif.ritu1@gmail.com",
+  //     accountType: "User",
+  //     date: "2021-10-10",
+  //     action: "Edit",
+  //   },
+  //   {
+  //     key: "3",
+  //     serial: "#01",
+  //     name: "John Brown",
+  //     email: "tausif.ritu1@gmail.com",
+  //     accountType: "Service Provider",
+  //     date: "2021-10-10",
+  //     action: "Edit",
+  //   },
+  // ];
   return (
     <>
       <Table<DataType>
         columns={columns}
         dataSource={data}
         size="middle"
-        pagination={false}
+        // pagination={false}
       />
-      <Modal
-        title="Vertically centered modal dialog"
+      {/* <Modal
         centered
         open={openAccountDetail}
         onOk={() => setOpenAccountDetail(false)}
         onCancel={() => setOpenAccountDetail(false)}
       >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
-      </Modal>
+        <ProfileDetailsViewCard
+          user={modalShowUser as IUserDetails}
+          isNoneClose={true}
+        />
+      </Modal> */}
       <Modal
         centered
         open={deleteUser}

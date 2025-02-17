@@ -1,23 +1,25 @@
 import React from "react";
 import { Divider, List, Typography } from "antd";
+import { IUserDetails } from "../../types";
 
-const data = [
-  { prop: "Full Name", value: "Anna Suraiya" },
-  { prop: "User Name", value: "Anna@13" },
-  { prop: "Email", value: "anna.suraiya@gmail.com" },
-  { prop: "Phone Number", value: "+880 123 456 7890" },
-  { prop: "Location", value: "123/A, West California-USA" },
-  { prop: "Account Type", value: "Service Provider" },
-  { prop: "Subscription type", value: "Basic Subscritpion Plan" },
-  { prop: "Services", value: "Hair Service, nail service" },
-  { prop: "Business Name", value: "Bliss Studio Lyd." },
-  { prop: "Overall Rating", value: "⭐4.7 (1.2k reviews)" },
-  { prop: "Value For Money", value: "0%" },
-];
 
-export const Lists: React.FC = () => {
+export const Lists = ({user}:{user:IUserDetails}) => {
+  const userDetails = [
+    { prop: "Full Name", value: user.fullName },
+    { prop: "User Name", value: user.userName },
+    { prop: "Email", value: user.email },
+    { prop: "Phone Number", value: user.phoneNumber },
+    { prop: "Location", value: user.location },
+    { prop: "Account Type", value: user.accountType },
+    { prop: "Subscription Type", value: user.subscriptionType },
+    { prop: "Services", value: user.services },
+    { prop: "Business Name", value: user.businessName },
+    { prop: "Overall Rating", value: user.overallRating },
+    { prop: "Value For Money", value: user.valueForMoney },
+  ];
   return (
     <List
+    key={user.email}
       header={
         <h4
           style={{
@@ -31,7 +33,7 @@ export const Lists: React.FC = () => {
       }
       bordered
     >
-      {data.map((item) => (
+      {userDetails.map((item) => (
         <List.Item style={{ display: "flex", gap: 20, alignItems: "center" }}>
           <p style={{ fontSize: 10, fontWeight: 700, color: "#727272" }}>
             {item.prop}:
