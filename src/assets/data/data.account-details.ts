@@ -1,11 +1,15 @@
 export interface DataType {
   key: React.Key;
   serial: string;
-  name: string;
-  email: string;
-  accountType: string;
+  name?: string;
+  email?: string;
+  accountType?: string;
   date: string;
   action: string;
+  // additional for service
+  image?:string;
+  serviceName?:string;
+  status?:string;
 }
 
 export const userArray = [
@@ -299,6 +303,16 @@ export const data = userArray.map((user, index)=>({
   date: "2022-01-15",
   action: "Edit"
 }))
+export const serviceData = userArray.map((user, index)=>({
+  key:index.toString(),
+  serial: `#${index}`,
+  image:user.photo,
+  serviceName:user.fullName,
+  status: user.email.slice(0, user.email.indexOf("@")),
+  date: "2022-01-15",
+  action: "Edit"
+}))
+console.log({serviceData})
 export const d = [
   {
     key: "1",

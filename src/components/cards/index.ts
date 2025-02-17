@@ -1,2 +1,3 @@
 export { DashboardStatusCard } from "./dashboard-status-card";
-export {  ProfileDetailsViewCard} from "./profile-details-view-card";
+export { ProfileDetailsViewCard } from "./profile-details-view-card";
+export { CreateServiceCard } from "./create-service-card";
