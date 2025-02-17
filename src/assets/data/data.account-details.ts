@@ -25,7 +25,7 @@ export const userArray = [
     businessName: "Bliss Studio Lyd.",
     overallRating: "⭐4.7 (1.2k reviews)",
     valueForMoney: "0%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg"
   },
   {
     fullName: "John Doe",
@@ -53,7 +53,7 @@ export const userArray = [
     businessName: "Stone Consulting",
     overallRating: "⭐4.9 (300 reviews)",
     valueForMoney: "15%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture-Thumbnail.jpg"
   },
   {
     fullName: "Sophia Green",
@@ -67,7 +67,7 @@ export const userArray = [
     businessName: "Sophia Law Firm",
     overallRating: "⭐4.8 (700 reviews)",
     valueForMoney: "10%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://www.shutterstock.com/image-photo/photo-beautiful-young-business-woman-260nw-1906641364.jpg"
   },
   {
     fullName: "James Brown",
@@ -81,7 +81,7 @@ export const userArray = [
     businessName: "Brown's Event Studio",
     overallRating: "⭐4.6 (900 reviews)",
     valueForMoney: "12%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129417.jpg"
   },
   {
     fullName: "Chris Evans",
@@ -109,7 +109,7 @@ export const userArray = [
     businessName: "Queen Security",
     overallRating: "⭐4.4 (800 reviews)",
     valueForMoney: "8%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://thumbs.dreamstime.com/b/profile-picture-smiling-male-employee-posing-workplace-close-up-headshot-portrait-smiling-caucasian-businessman-look-190961990.jpg"
   },
   {
     fullName: "Natalie Portman",
@@ -123,7 +123,7 @@ export const userArray = [
     businessName: "Portman Designs",
     overallRating: "⭐4.3 (600 reviews)",
     valueForMoney: "18%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://thumbs.dreamstime.com/b/portrait-pride-professional-business-man-office-commercial-architect-confidence-creative-agency-project-manager-350683972.jpg"
   },
   {
     fullName: "Robert Downey",
@@ -137,7 +137,7 @@ export const userArray = [
     businessName: "Downey Consulting",
     overallRating: "⭐5.0 (1k reviews)",
     valueForMoney: "25%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo: "https://thumbs.dreamstime.com/z/intellectual-man-looking-to-camera-smiling-portrait-isolated-white-intellectual-man-looking-to-camera-smiling-portrait-139290103.jpg"
   },
   {
     fullName: "Liam Neeson",

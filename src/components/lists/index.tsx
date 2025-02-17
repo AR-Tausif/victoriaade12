@@ -11,11 +11,11 @@ export const Lists = ({user}:{user:IUserDetails}) => {
     { prop: "Phone Number", value: user.phoneNumber },
     { prop: "Location", value: user.location },
     { prop: "Account Type", value: user.accountType },
-    { prop: "Subscription Type", value: user.subscriptionType },
-    { prop: "Services", value: user.services },
-    { prop: "Business Name", value: user.businessName },
-    { prop: "Overall Rating", value: user.overallRating },
-    { prop: "Value For Money", value: user.valueForMoney },
+    // { prop: "Subscription Type", value: user.subscriptionType },
+    // { prop: "Services", value: user.services },
+    // { prop: "Business Name", value: user.businessName },
+    // { prop: "Overall Rating", value: user.overallRating },
+    // { prop: "Value For Money", value: user.valueForMoney },
   ];
   return (
     <List

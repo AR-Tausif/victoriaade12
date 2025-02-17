@@ -1,7 +1,11 @@
 import { Modal, Table, TableColumnsType } from "antd";
 import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import { data, DataType, userArray } from "../../assets/data/data.account-details";
+import {
+  data,
+  DataType,
+  userArray,
+} from "../../assets/data/data.account-details";
 import { ProfileDetailsViewCard } from "../cards";
 import { IUserDetails } from "../../types";
 
@@ -29,20 +33,32 @@ export const AccountDetailsTable = () => {
     { title: "Email", dataIndex: "email", align: "center" },
     { title: "Account Type", dataIndex: "accountType", align: "center" },
     { title: "Date", dataIndex: "date", align: "center" },
-    { title: "Action", dataIndex: "action", align: "center", render: renderActions },
+    {
+      title: "Action",
+      dataIndex: "action",
+      align: "center",
+      render: renderActions,
+    },
   ];
 
   return (
     <>
-      <Table<DataType> columns={columns} dataSource={data} size="middle" style={styles.table} />
+      <Table<DataType>
+        columns={columns}
+        dataSource={data}
+        size="middle"
+        style={styles.table}
+      />
       <Modal
-        title="Vertically centered modal dialog"
         centered
         open={openAccountDetail}
         onOk={() => setOpenAccountDetail(false)}
         onCancel={() => setOpenAccountDetail(false)}
       >
-        <ProfileDetailsViewCard user={modalShowUser as IUserDetails} isNoneClose={true} />
+        <ProfileDetailsViewCard
+          user={modalShowUser as IUserDetails}
+          isNoneClose={true}
+        />
       </Modal>
       <Modal
         centered
@@ -72,7 +88,10 @@ export const AccountDetailsTable = () => {
   function renderActions(text: string, record: DataType) {
     return (
       <div style={styles.actionContainer}>
-        <p style={styles.actionIcon} onClick={() => handleUserShow({ text, record })}>
+        <p
+          style={styles.actionIcon}
+          onClick={() => handleUserShow({ text, record })}
+        >
           <EyeInvisibleOutlined style={styles.icon} />
         </p>
         <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
@@ -89,8 +108,8 @@ const styles = {
     minHeight: "100vh",
   },
   flexCenter: {
+    padding:"0 0 0 100px",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
   },
   avatar: {
@@ -131,4 +150,3 @@ const styles = {
     textAlign: "center" as const, // Explicitly declare textAlign type
   },
 };
-
