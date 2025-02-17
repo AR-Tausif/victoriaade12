@@ -1,13 +1,12 @@
-import { Button, Modal, Table, TableColumnsType } from "antd";
 import React, { useState } from "react";
+import { Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import {
-  data,
-  DataType,
-  userArray,
-} from "../../assets/data/data.account-details";
 import { ProfileDetailsViewCard } from "../cards";
+
+import { data, DataType, userArray } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
+import { DeleteActionButtons } from "../cards/delete-action-card";
+import { UserDetailsModal } from "../modals";
 
 export const AccountDetailsTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
@@ -24,12 +23,7 @@ export const AccountDetailsTable = () => {
 
   const columns: TableColumnsType<DataType> = [
     { title: "Serial", dataIndex: "serial", align: "center" },
-    {
-      title: "Name",
-      dataIndex: "name",
-      align: "center",
-      render: renderName,
-    },
+    { title: "Name", dataIndex: "name", align: "center", render: renderName },
     { title: "Email", dataIndex: "email", align: "center" },
     { title: "Account Type", dataIndex: "accountType", align: "center" },
     { title: "Date", dataIndex: "date", align: "center" },
@@ -37,70 +31,26 @@ export const AccountDetailsTable = () => {
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: renderActions,
+      render: (text: string, record: DataType) => renderActions(text, record),
     },
   ];
 
   return (
     <>
-      <Table<DataType>
-        columns={columns}
-        dataSource={data}
-        size="middle"
-        style={styles.table}
-      />
-      <Modal
-        centered
+      <Table<DataType> columns={columns} dataSource={data} size="middle" style={styles.table} />
+      <UserDetailsModal
         open={openAccountDetail}
-        onOk={() => setOpenAccountDetail(false)}
-        onCancel={() => setOpenAccountDetail(false)}
-      >
-        <ProfileDetailsViewCard
-          user={modalShowUser as IUserDetails}
-          isNoneClose={true}
-        />
-      </Modal>
-      <Modal
-        centered
+        onClose={() => setOpenAccountDetail(false)}
+        user={modalShowUser}
+      />
+      <DeleteActionButtons
         open={deleteUser}
-        onOk={() => setDeleteUser(false)}
+        onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
-        footer={null}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "50%",
-              display: "flex",
-              flexDirection: "column",
-              gap: 20,
-              textAlign: "center",
-            }}
-          >
-            <h3 style={styles.modalTitle}>Are You Sure!</h3>
-            <p>Do you want to delete this User?</p>
-            <Button
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
-                color: "#fdfdfd",
-              }}
-            >
-              Confirm
-            </Button>
-          </div>
-        </div>
-      </Modal>
+      />
     </>
   );
 
-  // Render functions for name and actions
   function renderName(text: string, record: DataType) {
     return (
       <div style={styles.flexCenter}>
@@ -131,7 +81,7 @@ export const AccountDetailsTable = () => {
   }
 };
 
-// Style object
+// Styles
 const styles = {
   table: {
     minHeight: "100vh",
@@ -171,11 +121,5 @@ const styles = {
   },
   deleteIcon: {
     color: "red",
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: 700,
-    color: "#A011FF",
-    textAlign: "center" as const, // Explicitly declare textAlign type
   },
 };

@@ -2,6 +2,7 @@ import { Modal, Table, TableColumnsType } from "antd";
 import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { serviceData, DataType } from "../../assets/data/data.account-details";
+import { DeleteActionButtons } from "../cards/delete-action-card";
 
 export const ServiceListTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
@@ -53,7 +54,10 @@ export const ServiceListTable = () => {
       align: "center",
       render: (text: string, record: DataType) => (
         <div style={styles.actionContainer}>
-          <p style={styles.actionIcon} onClick={() => setOpenAccountDetail(true)}>
+          <p
+            style={styles.actionIcon}
+            onClick={() => setOpenAccountDetail(true)}
+          >
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
           <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
@@ -78,19 +82,17 @@ export const ServiceListTable = () => {
         open={openAccountDetail}
         onOk={() => setOpenAccountDetail(false)}
         onCancel={() => setOpenAccountDetail(false)}
+        footer={null}
       >
         <p>some contents...</p>
         <p>some contents...</p>
         <p>some contents...</p>
       </Modal>
-      <Modal
-        centered
+      <DeleteActionButtons
         open={deleteUser}
-        onOk={() => setDeleteUser(false)}
+        onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
-      >
-        <h3 style={styles.modalTitle}>Are You Sure?</h3>
-      </Modal>
+      />
     </>
   );
 };

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ProfileDetailsViewCard } from "../cards";
 import { data, userArray } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
+import { DeleteActionButtons } from "../cards/delete-action-card";
 
 interface DataType {
   key: React.Key;
@@ -35,20 +36,22 @@ export const DashboardTable = () => {
     { title: "Email", dataIndex: "email", align: "center" },
     { title: "Account Type", dataIndex: "accountType", align: "center" },
     { title: "Date", dataIndex: "date", align: "center" },
-    { title: "Action", dataIndex: "action", align: "center", render: renderActions },
+    {
+      title: "Action",
+      dataIndex: "action",
+      align: "center",
+      render: renderActions,
+    },
   ];
 
   return (
     <>
       <Table<DataType> columns={columns} dataSource={data} size="middle" />
-      <Modal
-        centered
+      <DeleteActionButtons
         open={deleteUser}
-        onOk={() => setDeleteUser(false)}
+        onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
-      >
-        <h3 style={styles.modalTitle}>Are You Sure?</h3>
-      </Modal>
+      />
       {openAccountDetail && modalShowUser && (
         <Modal
           centered
@@ -78,16 +81,16 @@ export const DashboardTable = () => {
 
   function renderActions(text: string, record: DataType) {
     return (
-      <Link to="/account-details/12">
-        <div style={styles.actionContainer}>
+      <div style={styles.actionContainer}>
+        <Link to="/account-details/12">
           <p style={styles.actionIcon}>
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
-          <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-            <UserDeleteOutlined style={styles.deleteIcon} />
-          </p>
-        </div>
-      </Link>
+        </Link>
+        <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
+          <UserDeleteOutlined style={styles.deleteIcon} />
+        </p>
+      </div>
     );
   }
 };
@@ -136,4 +139,3 @@ const styles = {
     textAlign: "center" as const,
   },
 };
-
