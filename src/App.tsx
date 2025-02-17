@@ -40,7 +40,7 @@ const sidebarItems = [
     key: "4",
     icon: <DollarOutlined />,
     label: "Earnings",
-    path: "/earnings", // Added path to the item
+    path: "/earning", // Added path to the item
   },
   {
     key: "5",

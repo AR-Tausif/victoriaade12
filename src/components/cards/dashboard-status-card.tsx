@@ -1,9 +1,17 @@
 import { Card } from "antd";
+import { ReactNode } from "react";
 
-import { UserOutlined } from "@ant-design/icons";
-export const DashboardStatusCard = () => {
+export const DashboardStatusCard = ({
+  icon,
+  desc,
+  title,
+}: {
+  icon: ReactNode;
+  title: string;
+  desc: string;
+}) => {
   return (
-    <Card style={{ background: "#A011FF", color: "#FDFDFD", border:"none" }}>
+    <Card style={{ background: "#A011FF", color: "#FDFDFD", border: "none" }}>
       <div className="" style={{ display: "flex", alignItems: "center" }}>
         <div
           className=""
@@ -17,16 +25,16 @@ export const DashboardStatusCard = () => {
             alignItems: "center",
           }}
         >
-          <UserOutlined style={{ fontSize: 40, color: "#010101" }} />
+          {icon}
         </div>
         <div style={{ marginLeft: 16 }}>
           <p style={{ fontWeight: 400, fontSize: 24, lineHeight: "28.8px" }}>
-            Total User
+            {title}
           </p>
           <h3
             style={{ fontWeight: 600, fontSize: "32px", lineHeight: "38.4px" }}
           >
-            218
+            {desc}
           </h3>
         </div>
       </div>

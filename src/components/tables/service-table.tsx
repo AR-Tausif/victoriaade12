@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { serviceData, DataType } from "../../assets/data/data.account-details";
 import { DeleteActionButtons } from "../cards/delete-action-card";
+import ServiceItemViewCard from "../cards/service-item-view-card";
 
 export const ServiceListTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
@@ -77,16 +78,13 @@ export const ServiceListTable = () => {
         style={styles.table}
       />
       <Modal
-        title="Service Details"
         centered
         open={openAccountDetail}
         onOk={() => setOpenAccountDetail(false)}
         onCancel={() => setOpenAccountDetail(false)}
         footer={null}
       >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+       <ServiceItemViewCard/>
       </Modal>
       <DeleteActionButtons
         open={deleteUser}

@@ -7,6 +7,7 @@ import {
   Service,
 } from "../pages";
 import App from "../App";
+import { Earning } from "../pages/earning";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/service",
         element: <Service />,
+      },
+      {
+        path: "/earning",
+        element: <Earning />,
       },
     ],
   },
