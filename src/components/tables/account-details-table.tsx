@@ -1,4 +1,4 @@
-import { Modal, Table, TableColumnsType } from "antd";
+import { Button, Modal, Table, TableColumnsType } from "antd";
 import React, { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import {
@@ -65,8 +65,37 @@ export const AccountDetailsTable = () => {
         open={deleteUser}
         onOk={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
+        footer={null}
       >
-        <h3 style={styles.modalTitle}>Are You Sure?</h3>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "50%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 20,
+              textAlign: "center",
+            }}
+          >
+            <h3 style={styles.modalTitle}>Are You Sure!</h3>
+            <p>Do you want to delete this User?</p>
+            <Button
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
+                color: "#fdfdfd",
+              }}
+            >
+              Confirm
+            </Button>
+          </div>
+        </div>
       </Modal>
     </>
   );
@@ -108,7 +137,7 @@ const styles = {
     minHeight: "100vh",
   },
   flexCenter: {
-    padding:"0 0 0 100px",
+    padding: "0 0 0 100px",
     display: "flex",
     alignItems: "center",
   },
