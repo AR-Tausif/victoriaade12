@@ -4,6 +4,7 @@ import {
   AccountDetailsById,
   Dashboard,
   Login,
+  ManageSubscription,
   Service,
 } from "../pages";
 import App from "../App";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/earning",
         element: <Earning />,
+      },
+      {
+        path: "/manage-subscription",
+        element: <ManageSubscription />,
       },
     ],
   },

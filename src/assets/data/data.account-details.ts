@@ -7,9 +7,9 @@ export interface DataType {
   date: string;
   action: string;
   // additional for service
-  image?:string;
-  serviceName?:string;
-  status?:string;
+  image?: string;
+  serviceName?: string;
+  status?: string;
 }
 
 export const userArray = [
@@ -25,7 +25,8 @@ export const userArray = [
     businessName: "Bliss Studio Lyd.",
     overallRating: "⭐4.7 (1.2k reviews)",
     valueForMoney: "0%",
-    photo: "https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg"
+    photo:
+      "https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
   },
   {
     fullName: "John Doe",
@@ -39,7 +40,8 @@ export const userArray = [
     businessName: "Super Services",
     overallRating: "⭐4.5 (500 reviews)",
     valueForMoney: "5%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Emma Stone",
@@ -53,7 +55,8 @@ export const userArray = [
     businessName: "Stone Consulting",
     overallRating: "⭐4.9 (300 reviews)",
     valueForMoney: "15%",
-    photo: "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture-Thumbnail.jpg"
+    photo:
+      "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture-Thumbnail.jpg",
   },
   {
     fullName: "Sophia Green",
@@ -67,7 +70,8 @@ export const userArray = [
     businessName: "Sophia Law Firm",
     overallRating: "⭐4.8 (700 reviews)",
     valueForMoney: "10%",
-    photo: "https://www.shutterstock.com/image-photo/photo-beautiful-young-business-woman-260nw-1906641364.jpg"
+    photo:
+      "https://www.shutterstock.com/image-photo/photo-beautiful-young-business-woman-260nw-1906641364.jpg",
   },
   {
     fullName: "James Brown",
@@ -81,7 +85,8 @@ export const userArray = [
     businessName: "Brown's Event Studio",
     overallRating: "⭐4.6 (900 reviews)",
     valueForMoney: "12%",
-    photo: "https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129417.jpg"
+    photo:
+      "https://img.freepik.com/free-photo/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129417.jpg",
   },
   {
     fullName: "Chris Evans",
@@ -95,7 +100,8 @@ export const userArray = [
     businessName: "Evans Digital Solutions",
     overallRating: "⭐4.9 (400 reviews)",
     valueForMoney: "20%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Oliver Queen",
@@ -109,7 +115,8 @@ export const userArray = [
     businessName: "Queen Security",
     overallRating: "⭐4.4 (800 reviews)",
     valueForMoney: "8%",
-    photo: "https://thumbs.dreamstime.com/b/profile-picture-smiling-male-employee-posing-workplace-close-up-headshot-portrait-smiling-caucasian-businessman-look-190961990.jpg"
+    photo:
+      "https://thumbs.dreamstime.com/b/profile-picture-smiling-male-employee-posing-workplace-close-up-headshot-portrait-smiling-caucasian-businessman-look-190961990.jpg",
   },
   {
     fullName: "Natalie Portman",
@@ -123,7 +130,8 @@ export const userArray = [
     businessName: "Portman Designs",
     overallRating: "⭐4.3 (600 reviews)",
     valueForMoney: "18%",
-    photo: "https://thumbs.dreamstime.com/b/portrait-pride-professional-business-man-office-commercial-architect-confidence-creative-agency-project-manager-350683972.jpg"
+    photo:
+      "https://thumbs.dreamstime.com/b/portrait-pride-professional-business-man-office-commercial-architect-confidence-creative-agency-project-manager-350683972.jpg",
   },
   {
     fullName: "Robert Downey",
@@ -137,7 +145,8 @@ export const userArray = [
     businessName: "Downey Consulting",
     overallRating: "⭐5.0 (1k reviews)",
     valueForMoney: "25%",
-    photo: "https://thumbs.dreamstime.com/z/intellectual-man-looking-to-camera-smiling-portrait-isolated-white-intellectual-man-looking-to-camera-smiling-portrait-139290103.jpg"
+    photo:
+      "https://thumbs.dreamstime.com/z/intellectual-man-looking-to-camera-smiling-portrait-isolated-white-intellectual-man-looking-to-camera-smiling-portrait-139290103.jpg",
   },
   {
     fullName: "Liam Neeson",
@@ -151,7 +160,8 @@ export const userArray = [
     businessName: "Neeson Productions",
     overallRating: "⭐4.7 (550 reviews)",
     valueForMoney: "30%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Daniel Craig",
@@ -165,7 +175,8 @@ export const userArray = [
     businessName: "Craig Designs",
     overallRating: "⭐4.8 (1200 reviews)",
     valueForMoney: "17%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Tom Hardy",
@@ -179,7 +190,8 @@ export const userArray = [
     businessName: "Hardy Constructors",
     overallRating: "⭐4.3 (1000 reviews)",
     valueForMoney: "22%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Scarlett Johansson",
@@ -193,7 +205,8 @@ export const userArray = [
     businessName: "Johansson Translations",
     overallRating: "⭐4.6 (400 reviews)",
     valueForMoney: "6%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Chris Hemsworth",
@@ -207,7 +220,8 @@ export const userArray = [
     businessName: "Hemsworth Fitness",
     overallRating: "⭐4.9 (1300 reviews)",
     valueForMoney: "19%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Zendaya",
@@ -221,7 +235,8 @@ export const userArray = [
     businessName: "Zendaya Styles",
     overallRating: "⭐5.0 (250 reviews)",
     valueForMoney: "27%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Will Smith",
@@ -235,7 +250,8 @@ export const userArray = [
     businessName: "Will's Events",
     overallRating: "⭐4.8 (600 reviews)",
     valueForMoney: "9%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Johnny Depp",
@@ -249,7 +265,8 @@ export const userArray = [
     businessName: "Depp Studios",
     overallRating: "⭐4.5 (700 reviews)",
     valueForMoney: "14%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Benedict Cumberbatch",
@@ -263,7 +280,8 @@ export const userArray = [
     businessName: "Cumberbatch Consulting",
     overallRating: "⭐4.9 (950 reviews)",
     valueForMoney: "23%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Emma Watson",
@@ -277,7 +295,8 @@ export const userArray = [
     businessName: "Watson Writers",
     overallRating: "⭐4.8 (500 reviews)",
     valueForMoney: "11%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
   },
   {
     fullName: "Megan Fox",
@@ -291,28 +310,39 @@ export const userArray = [
     businessName: "Fox Models",
     overallRating: "⭐4.6 (800 reviews)",
     valueForMoney: "17%",
-    photo: "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww"
-  }
+    photo:
+      "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
+  },
 ];
-export const data = userArray.map((user, index)=>({
-  key:index.toString(),
+export const data = userArray.map((user, index) => ({
+  key: index.toString(),
   serial: `#${index}`,
-  name:user.fullName,
-  email:user.email,
+  name: user.fullName,
+  email: user.email,
   accountType: "Admin",
   date: "2022-01-15",
-  action: "Edit"
-}))
-export const serviceData = userArray.map((user, index)=>({
-  key:index.toString(),
+  action: "Edit",
+}));
+export const accountDetailData = userArray.map((user, index) => ({
+  key: index.toString(),
   serial: `#${index}`,
-  image:user.photo,
-  serviceName:user.fullName,
+  name: user.fullName,
+  email: user.email,
+  subscriptionType: "Basic Plan",
+  purchaseDate: "2022-01-15",
+  amount: 30.0,
+  action: "Edit",
+}));
+export const serviceData = userArray.map((user, index) => ({
+  key: index.toString(),
+  serial: `#${index}`,
+  image: user.photo,
+  serviceName: user.fullName,
   status: user.email.slice(0, user.email.indexOf("@")),
   date: "2022-01-15",
-  action: "Edit"
-}))
-console.log({serviceData})
+  action: "Edit",
+}));
+console.log({ serviceData });
 export const d = [
   {
     key: "1",
@@ -430,6 +460,5 @@ export const d = [
     accountType: "Admin",
     date: "2022-11-07",
     action: "Edit",
-  }, 
+  },
 ];
- 

@@ -1,7 +1,6 @@
 import { Col, Row, Select } from "antd";
 import {
   DashboardStatusCard,
-  DashboardTable,
 } from "../components";
 import "./styles/dashboard.css";
 import { Option } from "antd/es/mentions";

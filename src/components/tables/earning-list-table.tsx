@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { Modal, Table, TableColumnsType } from "antd";
-import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { ProfileDetailsViewCard } from "../cards";
-import { data, userArray } from "../../assets/data/data.account-details";
+import {
+  accountDetailData,
+  userArray,
+} from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 
-interface DataType {
+export interface AccDetailsDataType {
   key: React.Key;
   serial: string;
-  name: string;
-  email: string;
-  accountType: string;
-  date: string;
+  name?: string;
+  email?: string;
+  subscriptionType: string;
+  purchaseDate: string;
+  amount: number;
   action: string;
 }
 
@@ -23,30 +27,40 @@ export const EarningListTable = () => {
   const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
 
   const handleUserShow = (data: any) => {
+    console.log("hello");
+
     const user = userArray.find((user) => user.email === data.record.email);
+    console.log({ userArray });
+
     if (user) {
       setModalShowUser(user);
-      setOpenAccountDetail(true);
     }
+    setOpenAccountDetail(true);
   };
 
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<AccDetailsDataType> = [
     { title: "Serial", dataIndex: "serial", align: "center" },
     { title: "Name", dataIndex: "name", align: "center", render: renderName },
-    { title: "Email", dataIndex: "email", align: "center" },
-    { title: "Account Type", dataIndex: "accountType", align: "center" },
-    { title: "Date", dataIndex: "date", align: "center" },
+    { title: "Subscription", dataIndex: "subscriptionType", align: "center" },
+    { title: "Purchase Date", dataIndex: "purchaseDate", align: "center" },
+    { title: "Amount", dataIndex: "amount", align: "center" },
     {
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: renderActions,
+      render: (text: string, record: AccDetailsDataType) =>
+        renderActions(text, record),
     },
   ];
+  console.log({ accountDetailData });
 
   return (
     <>
-      <Table<DataType> columns={columns} dataSource={data} size="middle" />
+      <Table<AccDetailsDataType>
+        columns={columns}
+        dataSource={accountDetailData}
+        size="middle"
+      />
       <DeleteActionButtons
         open={deleteUser}
         onConfirm={() => setDeleteUser(false)}
@@ -58,6 +72,7 @@ export const EarningListTable = () => {
           open={openAccountDetail}
           onOk={() => setOpenAccountDetail(false)}
           onCancel={() => setOpenAccountDetail(false)}
+          footer={null}
         >
           <ProfileDetailsViewCard user={modalShowUser} isNoneClose />
         </Modal>
@@ -66,7 +81,7 @@ export const EarningListTable = () => {
   );
 
   // Render functions should be defined after usage in the columns array.
-  function renderName(text: string, record: DataType) {
+  function renderName(text: string, record: AccDetailsDataType) {
     return (
       <div style={styles.flexCenter}>
         <img
@@ -79,7 +94,7 @@ export const EarningListTable = () => {
     );
   }
 
-  function renderActions(text: string, record: DataType) {
+  function renderActions(text: string, record: AccDetailsDataType) {
     return (
       <div style={styles.actionContainer}>
         <p

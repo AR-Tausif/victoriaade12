@@ -16,6 +16,7 @@ export const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ open, onClos
       open={open}
       onOk={onClose}
       onCancel={onClose}
+      footer={null}
     >
       <ProfileDetailsViewCard user={user as IUserDetails} isNoneClose={true} />
     </Modal>
