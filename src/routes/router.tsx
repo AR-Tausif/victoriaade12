@@ -4,9 +4,12 @@ import {
   AccountDetailsById,
   Dashboard,
   DisputedReview,
+  DisputedReviewById,
   Login,
   ManageSubscription,
+  Profile,
   Service,
+  Setting,
 } from "../pages";
 import App from "../App";
 import { Earning } from "../pages/earning";
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
       {
         path: "/disputed-reviews",
         element: <DisputedReview />,
+      },
+      {
+        path: "/disputed-reviews/:id",
+        element: <DisputedReviewById />,
+      },
+      {
+        path: "/settings",
+        element: <Setting />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },

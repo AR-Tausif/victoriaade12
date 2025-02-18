@@ -58,7 +58,7 @@ const sidebarItems = [
     key: "7",
     icon: <SettingOutlined />,
     label: "Setting",
-    path: "/settings", // Added path to the item
+    path: "/settings",
   },
   {
     key: "8",

@@ -12,3 +12,4 @@ export interface IUserDetails {
   overallRating: string;
   valueForMoney: string;
 }
+

@@ -5,6 +5,7 @@ import { data, userArray } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
+import { Link } from "react-router-dom";
 
 export interface DisputedReviewDataType {
   key: React.Key;
@@ -21,7 +22,11 @@ export const DisputedReviewsTable = () => {
   const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
 
   const handleUserShow = (data: any) => {
-    const user = userArray.find((user) => user.email === data.record.email);
+    const user = userArray.find(
+      (user, index) => index === Number(data.record.key)
+    );
+    console.log({ user, data });
+
     if (user) {
       setModalShowUser(user);
       setOpenAccountDetail(true);
@@ -85,15 +90,13 @@ export const DisputedReviewsTable = () => {
   function renderActions(text: string, record: DisputedReviewDataType) {
     return (
       <div style={styles.actionContainer}>
+        <Link to="/disputed-reviews/1">
         <p
           style={styles.actionIcon}
-          onClick={() => handleUserShow({ text, record })}
-        >
+          >
           <EyeInvisibleOutlined style={styles.icon} />
         </p>
-        <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-          <UserDeleteOutlined style={styles.deleteIcon} />
-        </p>
+          </Link>
       </div>
     );
   }

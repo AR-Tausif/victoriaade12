@@ -2,24 +2,29 @@ import React from "react";
 import { Divider, List, Typography } from "antd";
 import { IUserDetails } from "../../types";
 
-
-export const Lists = ({user}:{user:IUserDetails}) => {
-  const userDetails = [
-    { prop: "Full Name", value: user.fullName },
-    { prop: "User Name", value: user.userName },
-    { prop: "Email", value: user.email },
-    { prop: "Phone Number", value: user.phoneNumber },
-    { prop: "Location", value: user.location },
-    { prop: "Account Type", value: user.accountType },
-    // { prop: "Subscription Type", value: user.subscriptionType },
-    // { prop: "Services", value: user.services },
-    // { prop: "Business Name", value: user.businessName },
-    // { prop: "Overall Rating", value: user.overallRating },
-    // { prop: "Value For Money", value: user.valueForMoney },
-  ];
+const renderProperties = [
+  { prop: "Full Name", value: "Tausif Ahmed" },
+  { prop: "User Name", value: "tausif" },
+  { prop: "Email", value: "tausif.ritu1@gmail.com" },
+  { prop: "Phone Number", value: "01823771127" },
+  { prop: "Location", value: "Jamalganj" },
+  { prop: "Account Type", value: "Provider" },
+  // { prop: "Subscription Type", value: user.subscriptionType },
+  // { prop: "Services", value: user.services },
+  // { prop: "Business Name", value: user.businessName },
+  // { prop: "Overall Rating", value: user.overallRating },
+  // { prop: "Value For Money", value: user.valueForMoney },
+];
+export const Lists = ({
+  user,
+  renderedProperties = [renderProperties],
+}: {
+  user: IUserDetails;
+  renderedProperties: typeof renderProperties;
+}) => {
   return (
     <List
-    key={user.email}
+      key={user.email}
       header={
         <h4
           style={{
@@ -33,13 +38,13 @@ export const Lists = ({user}:{user:IUserDetails}) => {
       }
       bordered
     >
-      {userDetails.map((item) => (
+      {renderedProperties.map((item) => (
         <List.Item style={{ display: "flex", gap: 20, alignItems: "center" }}>
           <p style={{ fontSize: 10, fontWeight: 700, color: "#727272" }}>
             {item.prop}:
           </p>
           <p style={{ fontSize: 10, fontWeight: 600, color: "#010101" }}>
-            {item.value} 
+            {item.value}
           </p>
         </List.Item>
       ))}
