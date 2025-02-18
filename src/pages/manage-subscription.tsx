@@ -3,15 +3,19 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 import { CreateServiceCard, SubscriptionCard } from "../components";
 import { UpdateSubsPlanForm } from "../components/forms";
+import { CreateSubsPlanForm } from "../components/forms/create-subs-plan-form";
 
 export function ManageSubscription() {
-  const [openResponsive, setOpenResponsive] = useState(false);
   const [openSubsPlanModal, setOpenSubsPlanModal] = useState(false);
+  const [createSubsPlanModal, setCreateSubsPlanModal] = useState(false);
 
   return (
     <div>
       <div>
-        <div style={styles.addButton} onClick={() => setOpenResponsive(true)}>
+        <div
+          style={styles.addButton}
+          onClick={() => setCreateSubsPlanModal(true)}
+        >
           <PlusCircleOutlined style={styles.icon} />
           <p>Add new subscirption plan</p>
         </div>
@@ -24,34 +28,30 @@ export function ManageSubscription() {
           }}
         >
           <SubscriptionCard
-          setOpenSubsPlanModal={setOpenSubsPlanModal}
-        openSubsPlanModal={openSubsPlanModal}
-        
-          />
-          <SubscriptionCard
-         
+            setOpenSubsPlanModal={setOpenSubsPlanModal}
+            openSubsPlanModal={openSubsPlanModal}
           />
         </div>
       </div>
       <Modal
         centered
-        open={openResponsive}
-        onOk={() => setOpenResponsive(false)}
-        onCancel={() => setOpenResponsive(false)}
+        open={createSubsPlanModal}
+        onOk={() => setCreateSubsPlanModal(false)}
+        onCancel={() => setCreateSubsPlanModal(false)}
         width={styles.modalWidth}
         footer={null}
       >
-        <CreateServiceCard />
+        <CreateSubsPlanForm />
       </Modal>
       <Modal
         centered
         open={openSubsPlanModal}
         onOk={() => setOpenSubsPlanModal(false)}
         onCancel={() => setOpenSubsPlanModal(false)}
-        width={styles.modalWidth}
+        // width={styles.modalWidth}
         footer={null}
       >
-        <UpdateSubsPlanForm/>
+        <UpdateSubsPlanForm />
       </Modal>
     </div>
   );

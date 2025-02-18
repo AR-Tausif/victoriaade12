@@ -46,13 +46,13 @@ const sidebarItems = [
     key: "5",
     icon: <CrownOutlined />,
     label: "Manage Subscription",
-    path: "/subscription", // Added path to the item
+    path: "/manage-subscription", // Added path to the item
   },
   {
     key: "6",
     icon: <FileDoneOutlined />,
     label: "Disputed Reviews",
-    path: "/reviews", // Added path to the item
+    path: "/disputed-reviews", // Added path to the item
   },
   {
     key: "7",

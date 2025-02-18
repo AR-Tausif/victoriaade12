@@ -5,3 +5,4 @@ export { Service } from "./service";
 export { Login } from "./login";
 export { Earning } from "./earning";
 export { ManageSubscription } from "./manage-subscription";
+export { DisputedReview } from "./disputed-review";

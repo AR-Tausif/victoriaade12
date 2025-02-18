@@ -3,6 +3,7 @@ import {
   AccountDetails,
   AccountDetailsById,
   Dashboard,
+  DisputedReview,
   Login,
   ManageSubscription,
   Service,
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/manage-subscription",
         element: <ManageSubscription />,
+      },
+      {
+        path: "/disputed-reviews",
+        element: <DisputedReview />,
       },
     ],
   },

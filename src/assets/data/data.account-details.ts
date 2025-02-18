@@ -317,10 +317,10 @@ export const userArray = [
 export const data = userArray.map((user, index) => ({
   key: index.toString(),
   serial: `#${index}`,
-  name: user.fullName,
-  email: user.email,
-  accountType: "Admin",
-  date: "2022-01-15",
+  reviewBy: user.fullName,
+  provider: user.services,
+  reason: user.accountType,
+  status: "pending",
   action: "Edit",
 }));
 export const accountDetailData = userArray.map((user, index) => ({
