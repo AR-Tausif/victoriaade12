@@ -1,20 +1,16 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Lists } from "../lists";
+import { IUserDetails } from "../../types";
 
-export const DisputedReviewCard = ({ userDetails }) => {
-    const renderProperties = [
-        { prop: "Full Name", value: "Tausif Ahmed" },
-        { prop: "User Name", value: "tausif" },
-        { prop: "Email", value: "tausif.ritu1@gmail.com" },
-        { prop: "Phone Number", value: "01823771127" },
-        { prop: "Location", value: "Jamalganj" },
-        { prop: "Account Type", value: "Provider" },
-        // { prop: "Subscription Type", value: user.subscriptionType },
-        // { prop: "Services", value: user.services },
-        // { prop: "Business Name", value: user.businessName },
-        // { prop: "Overall Rating", value: user.overallRating },
-        // { prop: "Value For Money", value: user.valueForMoney },
-      ];
+export const DisputedReviewCard = ({
+  title,
+  userDetails,
+  renderProperties,
+}: {
+  title: string;
+  userDetails: IUserDetails;
+  renderProperties: { prop: string; value: string }[];
+}) => {
   return (
     <div className="profile-details">
       {/* profile intro with name and email */}
@@ -27,12 +23,16 @@ export const DisputedReviewCard = ({ userDetails }) => {
           alt="profile picture"
           className="profile-image"
         />
-        <h5 className="profile-name">Tausif Ahmed</h5>
-        <p className="profile-email">tausif.ritu1@gmail.com</p>
+        <h5 className="profile-name">{userDetails?.fullName}</h5>
+        <p className="profile-email">{userDetails?.email}</p>
       </div>
 
       <div className="lists-container">
-        <Lists user={userDetails} renderedProperties={renderProperties} />
+        <Lists
+          title={title}
+          user={userDetails}
+          renderedProperties={renderProperties}
+        />
       </div>
     </div>
   );

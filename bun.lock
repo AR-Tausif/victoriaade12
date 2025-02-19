@@ -5,6 +5,7 @@
       "name": "tulparnehir",
       "dependencies": {
         "antd": "^5.23.4",
+        "jodit-react": "^5.2.14",
         "lucide": "^0.475.0",
         "react": "^19.0.0",
         "react-apexcharts": "^1.7.0",
@@ -295,6 +296,8 @@
 
     "argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
 
+    "autobind-decorator": ["autobind-decorator@2.4.0", "", {}, "sha512-OGYhWUO72V6DafbF8PM8rm3EPbfuyMZcJhtm5/n26IDwO18pohE4eNazLoCGhPiXOCD0gEGmrbU3849QvM8bbw=="],
+
     "balanced-match": ["balanced-match@1.0.2", "", {}, "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="],
 
     "brace-expansion": ["brace-expansion@1.1.11", "", { "dependencies": { "balanced-match": "^1.0.0", "concat-map": "0.0.1" } }, "sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA=="],
@@ -410,6 +413,10 @@
     "isexe": ["isexe@2.0.0", "", {}, "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw=="],
 
     "jiti": ["jiti@1.21.7", "", { "bin": { "jiti": "bin/jiti.js" } }, "sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A=="],
+
+    "jodit": ["jodit@4.5.16", "", { "dependencies": { "autobind-decorator": "^2.4.0" } }, "sha512-aYdLXvDCsY7xRIm7rfaSGZo/VuhhVKoJfjE+cIeQLZM0GMTy2L7qRU/uhOY2fYlHZFoASG4UwUR2L8/YefOs5g=="],
+
+    "jodit-react": ["jodit-react@5.2.14", "", { "dependencies": { "jodit": "^4.5.16" }, "peerDependencies": { "react": "~0.14 || ^15 || ^16 || ^17 || ^18 || ^19", "react-dom": "~0.14 || ^15 || ^16 || ^17 || ^18 || ^19" } }, "sha512-e6kbt3L0jRy0FfA5riP012FfkaNrN/VfNo3FKEaXc2XFMN76iLhvhh5JoIgFK5cculScGkjDowYUcKfqXD9QwA=="],
 
     "js-tokens": ["js-tokens@4.0.0", "", {}, "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="],
 

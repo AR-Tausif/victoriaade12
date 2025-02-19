@@ -1,26 +1,15 @@
-import React from "react";
-import { Divider, List, Typography } from "antd";
+
+import { List } from "antd";
 import { IUserDetails } from "../../types";
 
-const renderProperties = [
-  { prop: "Full Name", value: "Tausif Ahmed" },
-  { prop: "User Name", value: "tausif" },
-  { prop: "Email", value: "tausif.ritu1@gmail.com" },
-  { prop: "Phone Number", value: "01823771127" },
-  { prop: "Location", value: "Jamalganj" },
-  { prop: "Account Type", value: "Provider" },
-  // { prop: "Subscription Type", value: user.subscriptionType },
-  // { prop: "Services", value: user.services },
-  // { prop: "Business Name", value: user.businessName },
-  // { prop: "Overall Rating", value: user.overallRating },
-  // { prop: "Value For Money", value: user.valueForMoney },
-];
 export const Lists = ({
   user,
   renderedProperties,
+  title="Personal Details"
 }: {
+  title?:string;
   user: IUserDetails;
-  renderedProperties: typeof renderProperties;
+  renderedProperties: { prop: string; value: string }[];
 }) => {
   return (
     <List
@@ -33,21 +22,47 @@ export const Lists = ({
             letterSpacing: 0.2,
           }}
         >
-          Personal Details
+          {title}
         </h4>
       }
       bordered
     >
-      {renderedProperties.map((item) => (
-        <List.Item style={{ display: "flex", gap: 20, alignItems: "center" }}>
-          <p style={{ fontSize: 10, fontWeight: 700, color: "#727272" }}>
-            {item.prop}:
-          </p>
-          <p style={{ fontSize: 10, fontWeight: 600, color: "#010101" }}>
-            {item.value}
-          </p>
-        </List.Item>
-      ))}
+      {renderedProperties.map((item) =>
+        item.prop.toLocaleLowerCase() !== "photo" ? (
+          <List.Item style={{ display: "flex", gap: 20, alignItems: "center" }}>
+            <p style={{ fontSize: 10, fontWeight: 700, color: "#727272" }}>
+              {item.prop}:
+            </p>
+            <p style={{ fontSize: 10, fontWeight: 600, color: "#010101" }}>
+              {item.value}
+            </p>
+          </List.Item>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <p
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#727272",
+                marginLeft: 25,
+              }}
+            >
+              {item.prop}:
+            </p>
+            <img
+              src={item.value}
+              alt=""
+              style={{
+                width: "100%",
+                borderRadius: 8,
+                maxHeight: 300,
+                objectFit: "cover",
+                padding: 20,
+              }}
+            />
+          </div>
+        )
+      )}
     </List>
   );
 };

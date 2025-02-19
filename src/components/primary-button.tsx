@@ -1,16 +1,18 @@
 import { Button } from "antd";
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 export const PrimaryButton = ({
   children,
   className = "",
   type = "button",
   styles,
+  onClick,
 }: {
   children: ReactNode;
   type?: "button" | "submit" | "reset" | undefined;
   className?: string;
   styles?: object;
+  onClick?: MouseEventHandler<HTMLElement> | undefined;
 }) => {
   return (
     <Button
@@ -21,6 +23,7 @@ export const PrimaryButton = ({
         ...styles,
       }}
       className={className}
+      onClick={onClick}
     >
       {children}
     </Button>

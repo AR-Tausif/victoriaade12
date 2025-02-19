@@ -21,7 +21,8 @@ export const DisputedReviewsTable = () => {
   const [deleteUser, setDeleteUser] = useState(false);
   const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
 
-  const handleUserShow = (data: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  const handleUserShow = (data:any) => {
     const user = userArray.find(
       (user, index) => index === Number(data.record.key)
     );
@@ -43,7 +44,9 @@ export const DisputedReviewsTable = () => {
     },
     { title: "Privider", dataIndex: "provider", align: "center" },
     { title: "Reason", dataIndex: "reason", align: "center" },
-    { title: "Status", dataIndex: "status", align: "center" },
+    { title: "Status", dataIndex: "status", align: "center", render:(text, record)=>(
+      <p style={{fontWeight:600, color:"#F7B814"}}>{text}</p>
+    )},
     {
       title: "Action",
       dataIndex: "action",
@@ -52,7 +55,7 @@ export const DisputedReviewsTable = () => {
         renderActions(),
     },
   ];
-
+ 
   return (
     <>
       <Table<DisputedReviewDataType>

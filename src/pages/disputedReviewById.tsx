@@ -1,15 +1,12 @@
 import { Checkbox, CheckboxProps, Col, Row } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
 import { DisputedReviewCard, PrimaryButton } from "../components";
-import { Lists } from "../components/lists";
-import { IUserDetails } from "../types";
 
 export const DisputedReviewById = () => {
   const onChange: CheckboxProps["onChange"] = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
   const userDetails = {
-    fullName: "Tausif Ahmed",
+    fullName: "Anika Tabassum",
     userName: "tausif",
     email: "string@gmail.com",
     phoneNumber: "01823771127",
@@ -22,6 +19,33 @@ export const DisputedReviewById = () => {
     overallRating: "string",
     valueForMoney: "string",
   };
+  const renderPropertiesOne = [
+    { prop: "Full Name", value: "Anna Suraiya" },
+    {
+      prop: "Review Text",
+      value: "The artist was late and upreunprepared. Very disappointed.",
+    },
+    { prop: "Rating", value: "1/5" },
+    {
+      prop: "Photo",
+      value:
+        "https://elements-resized.envatousercontent.com/elements-cover-images/a6724af2-eb37-4a65-b962-f7905dd31c03?w=433&cf_fit=scale-down&q=85&format=auto&s=8a899a3d9d2b9effa4f27f249d321d2e2066e999a445a9b52ddc7f522c5f94ad",
+    },
+  ];
+  const renderPropertiesTwo = [
+    { prop: "Full Name", value: "Anna Suraiya" },
+    { prop: "Reason", value: "Miscommunication" },
+    {
+      prop: "Explanation",
+      value:
+        "The user was nitified of a delay 30 minutes before the appointment",
+    },
+    {
+      prop: "Photo",
+      value:
+        "https://elements-resized.envatousercontent.com/elements-cover-images/a6724af2-eb37-4a65-b962-f7905dd31c03?w=433&cf_fit=scale-down&q=85&format=auto&s=8a899a3d9d2b9effa4f27f249d321d2e2066e999a445a9b52ddc7f522c5f94ad",
+    },
+  ];
 
   return (
     <div
@@ -67,10 +91,18 @@ export const DisputedReviewById = () => {
 
       <Row gutter={24}>
         <Col span={12}>
-          <DisputedReviewCard userDetails={userDetails} />
+          <DisputedReviewCard
+            title="Review By"
+            renderProperties={renderPropertiesOne}
+            userDetails={userDetails}
+          />
         </Col>
         <Col span={12}>
-          <DisputedReviewCard userDetails={userDetails} />
+          <DisputedReviewCard
+            title="Provider's Dispute"
+            renderProperties={renderPropertiesTwo}
+            userDetails={userDetails}
+          />
         </Col>
       </Row>
     </div>
