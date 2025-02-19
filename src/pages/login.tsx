@@ -1,8 +1,17 @@
 import { LoginForm } from "../components/forms";
 import "./styles/login.css";
+import BgImage from "../assets/bg-pics/bg-login.jpg";
 export const Login = () => {
   return (
-    <div className="login-page">
+    <div
+      className="login-page"
+      style={{
+        backgroundImage: `url(${BgImage})`,
+        backgroundPosition: "center",
+        backgroundSize:"cover",
+        backgroundRepeat:"no-repeat"
+      }}
+    >
       <div
         style={{
           background: "#fff",
