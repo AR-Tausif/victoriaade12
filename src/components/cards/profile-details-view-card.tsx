@@ -9,6 +9,19 @@ export const ProfileDetailsViewCard = ({
   user: IUserDetails;
   isNoneClose?: boolean;
 }) => {
+  const renderProperties = [
+    { prop: "Full Name", value: "Tausif Ahmed" },
+    { prop: "User Name", value: "tausif" },
+    { prop: "Email", value: "tausif.ritu1@gmail.com" },
+    { prop: "Phone Number", value: "01823771127" },
+    { prop: "Location", value: "Jamalganj" },
+    { prop: "Account Type", value: "Provider" },
+    // { prop: "Subscription Type", value: user.subscriptionType },
+    // { prop: "Services", value: user.services },
+    // { prop: "Business Name", value: user.businessName },
+    // { prop: "Overall Rating", value: user.overallRating },
+    // { prop: "Value For Money", value: user.valueForMoney },
+  ];
   return (
     <div className="profile-details">
       {/* profile intro with name and email */}
@@ -25,7 +38,7 @@ export const ProfileDetailsViewCard = ({
       </div>
 
       <div className="lists-container">
-        <Lists user={user} />
+        <Lists renderedProperties={renderProperties} user={user} />
       </div>
     </div>
   );

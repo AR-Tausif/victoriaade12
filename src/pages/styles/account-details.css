@@ -1,6 +1,6 @@
 .account-grid {
   display: grid;
-  grid-template-columns: 4fr 1fr; /* Replicates the original 10/14 span ratio */
+  grid-template-columns: 4fr 4fr; /* Replicates the original 10/14 span ratio */
   gap: 16px;
   width: 100%;
 }

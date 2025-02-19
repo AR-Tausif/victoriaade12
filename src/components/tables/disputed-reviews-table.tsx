@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, TableColumnsType } from "antd";
-import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { data, userArray } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
@@ -48,8 +48,8 @@ export const DisputedReviewsTable = () => {
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: (text: string, record: DisputedReviewDataType) =>
-        renderActions(text, record),
+      render: () =>
+        renderActions(),
     },
   ];
 
@@ -87,7 +87,7 @@ export const DisputedReviewsTable = () => {
     );
   }
 
-  function renderActions(text: string, record: DisputedReviewDataType) {
+  function renderActions() {
     return (
       <div style={styles.actionContainer}>
         <Link to="/disputed-reviews/1">

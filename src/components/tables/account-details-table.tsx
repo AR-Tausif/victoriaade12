@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import { ProfileDetailsViewCard } from "../cards";
 
-import { data, DataType, userArray } from "../../assets/data/data.account-details";
+import {
+  accUserData as data,
+  DataType,
+  userArray,
+} from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
@@ -37,7 +40,12 @@ export const AccountDetailsTable = () => {
 
   return (
     <>
-      <Table<DataType> columns={columns} dataSource={data} size="middle" style={styles.table} />
+      <Table<DataType>
+        columns={columns}
+        dataSource={data}
+        size="middle"
+        style={styles.table}
+      />
       <UserDetailsModal
         open={openAccountDetail}
         onClose={() => setOpenAccountDetail(false)}

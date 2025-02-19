@@ -3,7 +3,7 @@ import { Modal, Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { ProfileDetailsViewCard } from "../cards";
-import { data, userArray } from "../../assets/data/data.account-details";
+import { accUserData as data, userArray } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 
@@ -32,7 +32,7 @@ export const DashboardTable = () => {
 
   const columns: TableColumnsType<DataType> = [
     { title: "Serial", dataIndex: "serial", align: "center" },
-    { title: "Name", dataIndex: "name", align: "center", render: renderName },
+    { title: "Name", dataIndex: "fullName", align: "center", render: renderName },
     { title: "Email", dataIndex: "email", align: "center" },
     { title: "Account Type", dataIndex: "accountType", align: "center" },
     { title: "Date", dataIndex: "date", align: "center" },
@@ -43,6 +43,8 @@ export const DashboardTable = () => {
       render: renderActions,
     },
   ];
+  console.log(data);
+  
 
   return (
     <>
@@ -79,7 +81,7 @@ export const DashboardTable = () => {
     );
   }
 
-  function renderActions(text: string, record: DataType) {
+  function renderActions() {
     return (
       <div style={styles.actionContainer}>
         <Link to="/account-details/12">

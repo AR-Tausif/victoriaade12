@@ -2,8 +2,9 @@ import { CloseOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Lists } from "../components/lists";
 import { MapDotIcon } from "../components/icons";
 import "./styles/account-details.css";
-import { ProfileDetailsViewCard } from "../components";
+import { PostCard, ProfileDetailsViewCard } from "../components";
 import { IUserDetails } from "../types";
+import { PostHeadIntroBox } from "../components/boxes/post-head-intro-box";
 
 export const AccountDetailsById = () => {
   const images = [
@@ -26,12 +27,55 @@ export const AccountDetailsById = () => {
     valueForMoney: "0%",
   };
   return (
-    <div className="account-grid">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        gap: 16,
+      }}
+    >
       {/* profile details view */}
 
-      <ProfileDetailsViewCard user={user}/>
+      <div style={{
+        width:"35%",
+      }}>
+        <ProfileDetailsViewCard user={user} />
+      </div>
       {/* content section */}
-      <div className="content-section">
+      <div
+        style={{
+          width: "64%",
+          minHeight: "100vh",
+          background: "#fdfdfd",
+          padding: 24,
+          borderRadius:8
+        }}
+      >
+        <h2
+          style={{
+            padding: "20px 0",
+          }}
+        >
+          Posts
+        </h2>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 16,
+            alignItems: "center",
+            padding: 16,
+            borderRadius: 8,
+          }}
+        >
+          <PostCard photo={images[0]} />
+          <PostCard photo={images[0]} />
+          <PostCard photo={images[0]} />
+          <PostCard photo={images[0]} />
+          <PostCard photo={images[0]} />
+        </div>
+      </div>
+      {/* <div className="content-section">
         <div className="content-grid">
           <div className="post-card">
             <div className="post-container">
@@ -61,7 +105,7 @@ export const AccountDetailsById = () => {
           </div>
           <div className="empty-section"></div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

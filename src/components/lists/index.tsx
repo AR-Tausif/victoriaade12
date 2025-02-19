@@ -17,7 +17,7 @@ const renderProperties = [
 ];
 export const Lists = ({
   user,
-  renderedProperties = [renderProperties],
+  renderedProperties,
 }: {
   user: IUserDetails;
   renderedProperties: typeof renderProperties;
