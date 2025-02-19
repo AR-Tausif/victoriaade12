@@ -9,3 +9,4 @@ export { DisputedReview } from "./disputed-review";
 export { DisputedReviewById } from "./disputedReviewById";
 export { Setting } from "./setting";
 export { Profile } from "./profile";
+export { Notification } from "./notification";

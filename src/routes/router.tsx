@@ -7,6 +7,7 @@ import {
   DisputedReviewById,
   Login,
   ManageSubscription,
+  Notification,
   Profile,
   Service,
   Setting,
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/notification",
+        element: <Notification  />,
       },
     ],
   },

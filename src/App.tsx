@@ -13,8 +13,8 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Button, Layout, Menu, theme } from "antd";
-import { Link, Outlet } from "react-router-dom";
+import { Avatar, Badge, Button, Dropdown, Flex, Layout, Menu, MenuProps, message, theme } from "antd";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./app.css";
 import { Logo } from "./components";
 const sidebarItems = [
@@ -74,7 +74,27 @@ const App: React.FC = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
+const navigate = useNavigate()
+  const items: MenuProps['items'] = [
+    {
+      key: 'user-profile-link',
+      label: 'profile',
+      icon: <UserOutlined />,
+      onClick: ()=>{
+        const path = "/profile"
+        navigate(path)
+      }
+    },
+    {
+      key: 'user-settings-link',
+      label: 'settings',
+      icon: <SettingOutlined />,
+    },
+    {
+      type: 'divider',
+    },
+    
+  ];
   return (
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
@@ -154,24 +174,42 @@ const App: React.FC = () => {
               <div
                 style={{ fontSize: 18, display: "flex", alignItems: "center" }}
               >
-                <Badge count={5} offset={[0.1, 5]}>
-                  {/* <Avatar shape="square" size="large" /> */}
-                  <BellOutlined
-                    style={{
-                      border: "1px solid #efefef",
-                      padding: "8px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                </Badge>
+                <Link to="/notification">
+                  <Badge count={5} offset={[0.1, 5]}>
+                    {/* <Avatar shape="square" size="large" /> */}
+                    <BellOutlined
+                      style={{
+                        border: "1px solid #efefef",
+                        padding: "8px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </Badge>
+                </Link>
               </div>
-              <div>
+              <Dropdown menu={{ items }} trigger={['click']}>
+                <Flex>
+                  {/* <img
+                    src="/me.jpg"
+                    alt="user profile photo"
+                    height={36}
+                    width={36}
+                    style={{ borderRadius:8, objectFit: 'cover' }}
+                  /> */}
+                  <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                  size={40}
+                />
+                </Flex>
+              </Dropdown>
+              {/* <div>
                 <Avatar
                   style={{ backgroundColor: "#87d068" }}
                   icon={<UserOutlined />}
                   size={40}
                 />
-              </div>
+              </div> */}
             </div>
             <p style={{ fontWeight: 600 }}>Natederwin</p>
           </div>
