@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Modal, Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { ProfileDetailsViewCard } from "../cards";
-import { accUserData as data, userArray } from "../../assets/data/data.account-details";
+import {
+  accUserData as data,
+  userArray,
+} from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 
@@ -22,17 +26,22 @@ export const DashboardTable = () => {
   const [deleteUser, setDeleteUser] = useState(false);
   const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
 
-  const handleUserShow = (data: any) => {
-    const user = userArray.find((user) => user.email === data.record.email);
-    if (user) {
-      setModalShowUser(user);
-      setOpenAccountDetail(true);
-    }
-  };
+  // const handleUserShow = (data: any) => {
+  //   const user = userArray.find((user) => user.email === data.record.email);
+  //   if (user) {
+  //     setModalShowUser(user);
+  //     setOpenAccountDetail(true);
+  //   }
+  // };
 
   const columns: TableColumnsType<DataType> = [
     { title: "Serial", dataIndex: "serial", align: "center" },
-    { title: "Name", dataIndex: "fullName", align: "center", render: renderName },
+    {
+      title: "Name",
+      dataIndex: "fullName",
+      align: "center",
+      render: renderName,
+    },
     { title: "Email", dataIndex: "email", align: "center" },
     { title: "Account Type", dataIndex: "accountType", align: "center" },
     { title: "Date", dataIndex: "date", align: "center" },
@@ -44,7 +53,6 @@ export const DashboardTable = () => {
     },
   ];
   console.log(data);
-  
 
   return (
     <>

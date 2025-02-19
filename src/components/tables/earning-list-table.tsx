@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import { ProfileDetailsViewCard } from "../cards";
 import {
   accountDetailData,

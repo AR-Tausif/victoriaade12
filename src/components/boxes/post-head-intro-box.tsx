@@ -1,4 +1,4 @@
-import React from "react";
+
 import { MapDotIcon } from "../icons";
 
 export const PostHeadIntroBox = () => {

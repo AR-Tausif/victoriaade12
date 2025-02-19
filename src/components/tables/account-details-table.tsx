@@ -59,7 +59,7 @@ export const AccountDetailsTable = () => {
     </>
   );
 
-  function renderName(text: string, record: DataType) {
+  function renderName( record: DataType) {
     return (
       <div style={styles.flexCenter}>
         <img

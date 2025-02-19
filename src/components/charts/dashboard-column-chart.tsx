@@ -78,7 +78,7 @@ export const DashboardColumnChart = () => {
         "#A011FF",
         "#A011FF", // Jul to Dec
       ],
-    },
+    } as any,
   });
 
   return (

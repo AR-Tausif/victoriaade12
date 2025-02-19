@@ -1,7 +1,6 @@
 import { Form, Input, notification } from "antd";
 import { DollarOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
-import React from "react";
 import { PrimaryButton } from "../primary-button";
 
 export const ProfileEditForm = () => {

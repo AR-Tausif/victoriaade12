@@ -13,7 +13,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Button, Dropdown, Flex, Layout, Menu, MenuProps, message, theme } from "antd";
+import { Avatar, Badge, Button, Dropdown, Flex, Layout, Menu, MenuProps, theme } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./app.css";
 import { Logo } from "./components";

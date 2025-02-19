@@ -1,9 +1,11 @@
 import { Button } from "antd";
-import { UpdateSubsPlanModal } from "../modals/update-subs-plan-form";
 
 export const SubscriptionCard = ({
   openSubsPlanModal,
   setOpenSubsPlanModal,
+}: {
+  openSubsPlanModal: any;
+  setOpenSubsPlanModal: any;
 }) => {
   return (
     <div
@@ -50,7 +52,6 @@ export const SubscriptionCard = ({
 
         <Button style={{ width: "100%" }}>Delete</Button>
       </div>
-
     </div>
   );
 };

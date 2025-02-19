@@ -1,10 +1,6 @@
-import { CloseOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Lists } from "../components/lists";
-import { MapDotIcon } from "../components/icons";
 import "./styles/account-details.css";
 import { PostCard, ProfileDetailsViewCard } from "../components";
 import { IUserDetails } from "../types";
-import { PostHeadIntroBox } from "../components/boxes/post-head-intro-box";
 
 export const AccountDetailsById = () => {
   const images = [
@@ -36,9 +32,11 @@ export const AccountDetailsById = () => {
     >
       {/* profile details view */}
 
-      <div style={{
-        width:"35%",
-      }}>
+      <div
+        style={{
+          width: "35%",
+        }}
+      >
         <ProfileDetailsViewCard user={user} />
       </div>
       {/* content section */}
@@ -48,7 +46,7 @@ export const AccountDetailsById = () => {
           minHeight: "100vh",
           background: "#fdfdfd",
           padding: 24,
-          borderRadius:8
+          borderRadius: 8,
         }}
       >
         <h2
