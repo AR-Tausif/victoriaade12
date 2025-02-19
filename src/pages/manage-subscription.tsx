@@ -2,6 +2,8 @@ import { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { UpdateSubsPlanForm } from "../components/forms";
 import { CreateSubsPlanForm } from "../components/forms/create-subs-plan-form";
+import { SubscriptionCard } from "../components";
+import { Modal } from "antd";
 
 export function ManageSubscription() {
   const [openSubsPlanModal, setOpenSubsPlanModal] = useState(false);

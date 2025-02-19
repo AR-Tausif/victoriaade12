@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
-import { data, userArray } from "../../assets/data/data.account-details";
+import { data } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
@@ -19,20 +19,19 @@ export interface DisputedReviewDataType {
 export const DisputedReviewsTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
-  const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
+  const [modalShowUser] = useState<IUserDetails | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  const handleUserShow = (data:any) => {
-    const user = userArray.find(
-      (user, index) => index === Number(data.record.key)
-    );
-    console.log({ user, data });
+  // const handleUserShow = (data:any) => {
+  //   const user = userArray.find(
+  //     (user, index) => index === Number(data.record.key)
+  //   );
+  //   console.log({ user, data });
 
-    if (user) {
-      setModalShowUser(user);
-      setOpenAccountDetail(true);
-    }
-  };
+  //   if (user) {
+  //     setModalShowUser(user);
+  //     setOpenAccountDetail(true);
+  //   }
+  // };
 
   const columns: TableColumnsType<DisputedReviewDataType> = [
     { title: "Serial", dataIndex: "serial", align: "center" },
@@ -44,9 +43,11 @@ export const DisputedReviewsTable = () => {
     },
     { title: "Privider", dataIndex: "provider", align: "center" },
     { title: "Reason", dataIndex: "reason", align: "center" },
-    { title: "Status", dataIndex: "status", align: "center", render:(text, record)=>(
-      <p style={{fontWeight:600, color:"#F7B814"}}>{text}</p>
-    )},
+    {
+      title: "Status", dataIndex: "status", align: "center", render: (text, _record) => (
+        <p style={{ fontWeight: 600, color: "#F7B814" }}>{text}</p>
+      )
+    },
     {
       title: "Action",
       dataIndex: "action",
@@ -55,7 +56,7 @@ export const DisputedReviewsTable = () => {
         renderActions(),
     },
   ];
- 
+
   return (
     <>
       <Table<DisputedReviewDataType>
@@ -77,7 +78,7 @@ export const DisputedReviewsTable = () => {
     </>
   );
 
-  function renderName(text: string, record: DisputedReviewDataType) {
+  function renderName(_text: string, record: DisputedReviewDataType) {
     return (
       <div style={styles.flexCenter}>
         <img
@@ -94,12 +95,12 @@ export const DisputedReviewsTable = () => {
     return (
       <div style={styles.actionContainer}>
         <Link to="/disputed-reviews/1">
-        <p
-          style={styles.actionIcon}
+          <p
+            style={styles.actionIcon}
           >
-          <EyeInvisibleOutlined style={styles.icon} />
-        </p>
-          </Link>
+            <EyeInvisibleOutlined style={styles.icon} />
+          </p>
+        </Link>
       </div>
     );
   }

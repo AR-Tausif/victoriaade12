@@ -1,5 +1,5 @@
 import { Modal, Table, TableColumnsType } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { serviceData, DataType } from "../../assets/data/data.account-details";
 import { DeleteActionButtons } from "../cards/delete-action-card";
@@ -19,7 +19,7 @@ export const ServiceListTable = () => {
       title: "Image",
       dataIndex: "image",
       align: "center",
-      render: (text: string, record: DataType) => (
+      render: (_text: string, record: DataType) => (
         <div style={styles.imageContainer}>
           <img
             src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
@@ -53,7 +53,7 @@ export const ServiceListTable = () => {
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: (text: string, record: DataType) => (
+      render: (_text: string, _record: DataType) => (
         <div style={styles.actionContainer}>
           <p
             style={styles.actionIcon}

@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { ProfileDetailsViewCard } from "../cards";
 import {
   accUserData as data,
-  userArray,
 } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
@@ -24,7 +23,7 @@ interface DataType {
 export const DashboardTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
-  const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
+  const [modalShowUser] = useState<IUserDetails | null>(null);
 
   // const handleUserShow = (data: any) => {
   //   const user = userArray.find((user) => user.email === data.record.email);
@@ -76,15 +75,15 @@ export const DashboardTable = () => {
   );
 
   // Render functions should be defined after usage in the columns array.
-  function renderName(text: string, record: DataType) {
+  function renderName(_text: string, record: DataType) {
     return (
       <div style={styles.flexCenter}>
         <img
           src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
-          alt={record.name}
+          alt={record?.name}
           style={styles.avatar}
         />
-        <h4 style={styles.name}>{record.name}</h4>
+        <h4 style={styles.name}>{record?.name}</h4>
       </div>
     );
   }

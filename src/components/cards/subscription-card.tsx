@@ -1,7 +1,7 @@
 import { Button } from "antd";
 
 export const SubscriptionCard = ({
-  openSubsPlanModal,
+  // openSubsPlanModal,
   setOpenSubsPlanModal,
 }: {
   openSubsPlanModal: any;

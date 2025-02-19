@@ -1,5 +1,5 @@
 import JoditEditor from "jodit-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import  { useCallback, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
 
 export const Setting = () => {
@@ -20,7 +20,7 @@ export const Setting = () => {
     []
   );
 
-  const handleClick = useCallback((newContent) => {
+  const handleClick = useCallback((newContent: any) => {
     console.log({ newContent });
   }, []);
 

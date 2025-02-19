@@ -15,14 +15,14 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Badge, Button, Dropdown, Flex, Layout, Menu, MenuProps, theme } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import "./app.css";
+import "./App.css";
 import { Logo } from "./components";
 const sidebarItems = [
   {
     key: "1",
     icon: <PieChartOutlined />,
     label: "Dashboard",
-    path: "/dashboard", // Added path to the item
+    path: "/", // Added path to the item
   },
   {
     key: "2",

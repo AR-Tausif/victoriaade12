@@ -80,7 +80,7 @@ export const EarningListTable = () => {
   );
 
   // Render functions should be defined after usage in the columns array.
-  function renderName(text: string, record: AccDetailsDataType) {
+  function renderName(_text: string, record: AccDetailsDataType) {
     return (
       <div style={styles.flexCenter}>
         <img

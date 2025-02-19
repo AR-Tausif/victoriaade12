@@ -1,24 +1,24 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-type s =
-  | "line"
-  | "area"
-  | "bar"
-  | "pie"
-  | "donut"
-  | "radialBar"
-  | "scatter"
-  | "bubble"
-  | "heatmap"
-  | "candlestick"
-  | "boxPlot"
-  | "radar"
-  | "polarArea"
-  | "rangeBar"
-  | "rangeArea"
-  | "treemap";
+// type s =
+//   | "line"
+//   | "area"
+//   | "bar"
+//   | "pie"
+//   | "donut"
+//   | "radialBar"
+//   | "scatter"
+//   | "bubble"
+//   | "heatmap"
+//   | "candlestick"
+//   | "boxPlot"
+//   | "radar"
+//   | "polarArea"
+//   | "rangeBar"
+//   | "rangeArea"
+//   | "treemap";
 export const DashboardAreaChart = () => {
-  const [state, setState] = React.useState({
+  const [state, ] = React.useState({
     series: [
       {
         name: "series1",
@@ -87,7 +87,7 @@ export const DashboardAreaChart = () => {
       <div>
         <div>
           <ReactApexChart
-            options={state.options}
+            options={state.options as any}
             series={state.series}
             type="area"
             height={350}

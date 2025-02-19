@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 export const DashboardColumnChart = () => {
-  const [state, setState] = useState({
+  const [state] = useState({
     series: [
       {
         name: "Net Profit",
