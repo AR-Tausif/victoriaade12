@@ -11,9 +11,13 @@ import {
   Profile,
   Service,
   Setting,
+  ForgotPassword,
+  SetPassword,
 } from "../pages";
 import App from "../App";
 import { Earning } from "../pages/earning";
+
+import { AuthWrapper } from "../components/auth-wrapper";
 
 const router = createBrowserRouter([
   {
@@ -62,13 +66,33 @@ const router = createBrowserRouter([
       },
       {
         path: "/notification",
-        element: <Notification  />,
+        element: <Notification />,
       },
     ],
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <AuthWrapper>
+        <Login />,
+      </AuthWrapper>
+    ),
+  },
+  {
+    path: "/forgot-password",
+    element: (
+      <AuthWrapper>
+        <ForgotPassword />,
+      </AuthWrapper>
+    ),
+  },
+  {
+    path: "/set-password",
+    element: (
+      <AuthWrapper>
+        <SetPassword />,
+      </AuthWrapper>
+    ),
   },
 ]);
 export default router;

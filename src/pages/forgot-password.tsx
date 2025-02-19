@@ -1,6 +1,7 @@
-import { LoginForm } from "../components/forms";
-import "./styles/login.css";
-export const Login = () => {
+import React from "react";
+import { ForgotPasswordForm } from "../components/forms";
+
+export const ForgotPassword = () => {
   return (
     <div
       style={{
@@ -12,9 +13,9 @@ export const Login = () => {
       }}
     >
       <h2 style={{ textAlign: "center", fontWeight: 700, padding: "10px 0" }}>
-        Login
+        Forgot Password
       </h2>
-      <LoginForm />
+      <ForgotPasswordForm />
     </div>
   );
 };

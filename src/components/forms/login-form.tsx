@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Checkbox,
@@ -10,10 +10,12 @@ import {
   Space,
 } from "antd";
 import { Option } from "antd/es/mentions";
+import { Link } from "react-router-dom";
+import { EyeInvisibleOutlined } from "@ant-design/icons";
 
 export const LoginForm: React.FC = () => {
   const [form] = Form.useForm();
-
+  const [showPass, setShowPass] = useState(false);
   const onFinish = () => {
     message.success("Submit success!");
   };
@@ -30,6 +32,10 @@ export const LoginForm: React.FC = () => {
 
   const onCheckboxRememberChange: CheckboxProps["onChange"] = (e) => {
     console.log(`checked = ${e.target.checked}`);
+  };
+
+  const handleShwingPassword = () => {
+    setShowPass(!showPass);
   };
 
   return (
@@ -52,7 +58,13 @@ export const LoginForm: React.FC = () => {
         label="Password"
         rules={[{ type: "string", min: 4 }]}
       >
-        <Input placeholder="Enter your password" />
+        <Input
+          type={showPass ? "text" : "password"}
+          placeholder="Enter your password"
+          addonAfter={
+            <EyeInvisibleOutlined onClick={() => handleShwingPassword()} />
+          }
+        />
       </Form.Item>
       <div
         style={{
@@ -62,9 +74,13 @@ export const LoginForm: React.FC = () => {
         }}
       >
         <Form.Item name="remember_me" rules={[{ type: "string", min: 4 }]}>
-          <Checkbox onChange={onCheckboxRememberChange}>Checkbox</Checkbox>
+          <Checkbox onChange={onCheckboxRememberChange}>Remember me</Checkbox>
         </Form.Item>
-        <p>Forgot Password</p>
+        <Form.Item>
+          <Link to="/forgot-password">
+            <p>Forgot Password</p>
+          </Link>
+        </Form.Item>
       </div>
 
       <Form.Item>

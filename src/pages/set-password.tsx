@@ -1,6 +1,6 @@
-import { LoginForm } from "../components/forms";
-import "./styles/login.css";
-export const Login = () => {
+import { SetPasswordForm } from "../components/forms";
+
+export const SetPassword = () => {
   return (
     <div
       style={{
@@ -12,9 +12,9 @@ export const Login = () => {
       }}
     >
       <h2 style={{ textAlign: "center", fontWeight: 700, padding: "10px 0" }}>
-        Login
+        Forgot Password
       </h2>
-      <LoginForm />
+      <SetPasswordForm />
     </div>
   );
 };
