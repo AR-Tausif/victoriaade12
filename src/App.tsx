@@ -122,7 +122,7 @@ const navigate = useNavigate()
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={["4"]}
+          defaultSelectedKeys={["1"]}
           items={sidebarItems.map((item) => ({
             ...item,
             label: (
