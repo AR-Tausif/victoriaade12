@@ -47,6 +47,7 @@ export const Service = () => {
         onOk={() => setOpenResponsive(false)}
         onCancel={() => setOpenResponsive(false)}
         width={styles.modalWidth}
+        footer={null}
       >
         <CreateServiceCard />
       </Modal>

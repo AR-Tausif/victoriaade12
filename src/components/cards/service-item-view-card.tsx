@@ -1,4 +1,3 @@
-import { ServiceUploadBox } from "../boxes/service-upload-box";
 import { ServiceViewForm } from "../forms/service-view-form";
 
 export default function ServiceItemViewCard() {
@@ -15,9 +14,14 @@ export default function ServiceItemViewCard() {
       }}
     >
       <div>
-        <img src="https://media.istockphoto.com/id/482679574/photo/making-a-change-of-look.jpg?s=612x612&w=0&k=20&c=Tr20-tCvPHLKh_W5pNUCymEGRUD_OfOJht97x35i8-o=" alt="service image" width={"100%"} style={{
-            borderRadius:8,
-        }} />
+        <img
+          src="https://media.istockphoto.com/id/482679574/photo/making-a-change-of-look.jpg?s=612x612&w=0&k=20&c=Tr20-tCvPHLKh_W5pNUCymEGRUD_OfOJht97x35i8-o="
+          alt="service image"
+          width={"100%"}
+          style={{
+            borderRadius: 8,
+          }}
+        />
       </div>
       <ServiceViewForm
         serviceName="Hair Service"
