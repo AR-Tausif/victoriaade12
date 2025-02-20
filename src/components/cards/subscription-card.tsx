@@ -11,7 +11,6 @@ export const SubscriptionCard = ({
     <div
       style={{
         maxWidth: "50vw",
-        border: "1px solid red",
         background: "#fdfdfd",
         padding: 20,
         borderRadius: 8,
