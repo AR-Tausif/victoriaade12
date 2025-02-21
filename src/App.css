@@ -1,4 +1,4 @@
-.ant-layout {
+/* .ant-layout {
   background: #fdfdfd !important;
 }
 .ant-layout-content {
@@ -6,20 +6,19 @@
 }
 .app-layout .ant-select-arrow {
   color: #010101;
-}
+} */
 
 /* header section styles here */
 
 /* For Sider */
-.ant-layout-sider {
+/* .ant-layout-sider {
   flex: 0 0 300px !important;
-  width: 300px !important; /* Use width instead of flex to avoid conflicts */
+  width: 300px !important;
   max-width: 300px !important;
   padding: 0 20px;
   background-color: #fdfdfd !important;
 }
 
-/* For Menu */
 .app-sider .ant-menu {
   border: none !important;
 }
@@ -42,4 +41,28 @@
 .app-sider .ant-menu-item-selected {
   background-color: #a011ff !important;
   color: #dcddde !important;
+} */
+
+/* For Sider */
+.app-layout {
+  width: 100vw;
+  min-height: 100vh;
 }
+.app-layout .ant-menu-item {
+  background-color: #e6e6fa !important;
+}
+.app-layout .ant-menu-submenu {
+  background-color: #e6e6fa !important;
+}
+.app-layout .ant-menu-item-selected {
+  background-color: #a011ff !important;
+  color: #dcddde !important;
+}
+.app-layout .ant-layout-sider {
+  /* flex: 0 0 800px !important; */
+  /* width: 300px !important;
+  max-width: 300px !important;
+  padding: 0 20px;
+  background-color: #fdfdfd !important; */
+}
+

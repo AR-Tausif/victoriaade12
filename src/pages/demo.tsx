@@ -1,129 +1,80 @@
-"use client"
+import React, { useState } from 'react';
+import {
+  DesktopOutlined,
+  FileOutlined,
+  PieChartOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
-import { Table, Select, Input, Avatar } from "antd"
-import { SearchOutlined, EyeOutlined, CloseOutlined } from "@ant-design/icons"
-import { useState } from "react"
-// import "./styles/demo.css"
+const { Header, Content, Footer, Sider } = Layout;
 
-const { Option } = Select
+type MenuItem = Required<MenuProps>['items'][number];
 
-export default function Demo() {
-  const [accountTypeFilter, setAccountTypeFilter] = useState("all")
-
-  const data = [
-    {
-      key: "1",
-      serial: "#01",
-      name: "Robert Fox",
-      email: "email@gmail.com",
-      accountType: "Service Provider",
-      date: "11 oct 2024",
-      avatar: "/placeholder.svg",
-    },
-    {
-      key: "2",
-      serial: "#02",
-      name: "Robert Fox",
-      email: "email@gmail.com",
-      accountType: "User",
-      date: "11 oct 2024",
-      avatar: "/placeholder.svg",
-    },
-    {
-      key: "3",
-      serial: "#01",
-      name: "Robert Fox the min",
-      email: "email@gmail.com",
-      accountType: "Service Provider",
-      date: "11 oct 2024",
-      avatar: "/placeholder.svg",
-    },
-    {
-      key: "4",
-      serial: "#02",
-      name: "Robert Fox",
-      email: "email@gmail.com",
-      accountType: "User",
-      date: "11 oct 2024",
-      avatar: "/placeholder.svg",
-    },
-  ]
-
-  const columns = [
-    {
-      title: "Serial",
-      dataIndex: "serial",
-      key: "serial",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (text: string, record: Record<string, string>) => (
-        <div className="name-cell">
-          <Avatar src={record.avatar} size={32}>
-            RF
-          </Avatar>
-          <span>{text}</span>
-        </div>
-      ),
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: (
-        <div className="account-type-header">
-          <span>Account Type</span>
-          <Select onChange={setAccountTypeFilter} className="account-type-filter">
-            
-            <Option value="service-provider">Service Provider</Option>
-            <Option value="user">User</Option>
-          </Select>
-        </div>
-      ),
-      dataIndex: "accountType",
-      key: "accountType",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: () => (
-        <div className="action-buttons">
-          <EyeOutlined className="view-icon" />
-          <CloseOutlined className="delete-icon" />
-        </div>
-      ),
-    },
-  ]
-
-  const filteredData = data.filter((item) =>
-    accountTypeFilter === "all"
-      ? true
-      : accountTypeFilter === "service-provider"
-        ? item.accountType === "Service Provider"
-        : item.accountType === "User",
-  )
-
-  return (
-    <div className="user-table-container">
-      <div className="table-header">
-        <Select defaultValue="this-month" className="month-select">
-          <Option value="this-month">This Month</Option>
-          <Option value="last-month">Last Month</Option>
-          <Option value="3-months">Last 3 Months</Option>
-        </Select>
-        <Input placeholder="Search User" prefix={<SearchOutlined />} className="search-input" />
-      </div>
-      <Table columns={columns} dataSource={filteredData} pagination={false} className="custom-table" />
-    </div>
-  )
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem;
 }
 
+const items: MenuItem[] = [
+  getItem('Option 1', '1', <PieChartOutlined />),
+  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('User', 'sub1', <UserOutlined />, [
+    getItem('Tom', '3'),
+    getItem('Bill', '4'),
+    getItem('Alex', '5'),
+  ]),
+  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Files', '9', <FileOutlined />),
+];
+
+const Demo = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
+  return (
+    <Layout style={{ minHeight: '100vh' }}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <div className="demo-logo-vertical" />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+      </Sider>
+      <Layout>
+        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Content style={{ margin: '0 16px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+          </Breadcrumb>
+          <div
+            style={{
+              padding: 24,
+              minHeight: 360,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            Bill is a cat.
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+        </Footer>
+      </Layout>
+    </Layout>
+  );
+};
+
+export default Demo;

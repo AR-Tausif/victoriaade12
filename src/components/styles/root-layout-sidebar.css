@@ -1,13 +1,13 @@
-/* For Sider */
+/* 
 .ant-layout-sider {
     flex: 0 0 300px !important;
-    width: 300px !important; /* Use width instead of flex to avoid conflicts */
+    width: 300px !important; 
     max-width: 300px !important;
     padding: 0 20px;
     background-color: #fdfdfd !important;
   }
   
-  /* For Menu */
+
   .app-sider .ant-menu {
     border: none !important;
   }
@@ -31,4 +31,4 @@
     background-color: #a011ff !important;
     color: #dcddde !important;
   }
-  
+   */

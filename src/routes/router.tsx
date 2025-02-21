@@ -69,11 +69,11 @@ const router = createBrowserRouter([
         path: "/notification",
         element: <Notification />,
       },
-      {
-        path: "/demo",
-        element: <Demo />,
-      },
     ],
+  },
+  {
+    path: "/demo",
+    element: <Demo />,
   },
   {
     path: "/login",

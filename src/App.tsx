@@ -13,94 +13,143 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Button, Dropdown, Flex, Layout, Menu, MenuProps, theme } from "antd";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Dropdown,
+  Flex,
+  Layout,
+  Menu,
+  MenuProps,
+  theme,
+} from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import "./App.css";
 import { Logo } from "./components";
+import "./app.css"
+
+// Updated sidebarItems with proper nested structure
 const sidebarItems = [
   {
     key: "1",
     icon: <PieChartOutlined />,
     label: "Dashboard",
-    path: "/", // Added path to the item
+    path: "/",
   },
   {
     key: "2",
     icon: <TeamOutlined />,
     label: "Accounts Details",
-    path: "/account-details", // Added path to the item
+    path: "/account-details",
   },
   {
     key: "3",
     icon: <ProductOutlined />,
     label: "Service",
-    path: "/service", // Added path to the item
+    path: "/service",
   },
   {
     key: "4",
     icon: <DollarOutlined />,
     label: "Earnings",
-    path: "/earning", // Added path to the item
+    path: "/earning",
   },
   {
     key: "5",
     icon: <CrownOutlined />,
     label: "Manage Subscription",
-    path: "/manage-subscription", // Added path to the item
+    path: "/manage-subscription",
   },
   {
     key: "6",
     icon: <FileDoneOutlined />,
     label: "Disputed Reviews",
-    path: "/disputed-reviews", // Added path to the item
+    path: "/disputed-reviews",
   },
   {
     key: "7",
     icon: <SettingOutlined />,
     label: "Setting",
-    path: "/settings",
+    children: [
+      {
+        key: "7-1",
+        icon: <SettingOutlined />,
+        label: "General Settings",
+        path: "/settings/general",
+      },
+      {
+        key: "7-2",
+        icon: <SettingOutlined />,
+        label: "Profile Settings",
+        path: "/settings/profile",
+      },
+      {
+        key: "7-3",
+        icon: <SettingOutlined />,
+        label: "Security Settings",
+        path: "/settings/security",
+      },
+    ],
   },
   {
     key: "8",
     icon: <LoginOutlined />,
     label: "Logout",
-    path: "/logout", // Added path to the item
+    path: "/login",
   },
 ];
 
 const { Header, Sider, Content } = Layout;
+
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-const navigate = useNavigate()
-  const items: MenuProps['items'] = [
+  const navigate = useNavigate();
+
+  // Function to recursively transform menu items
+  const transformMenuItem = (item: any) => {
+    const transformed = { ...item };
+
+    if (item.path) {
+      transformed.label = <Link to={item.path}>{item.label}</Link>;
+    }
+
+    if (item.children) {
+      transformed.children = item.children.map(transformMenuItem);
+    }
+
+    return transformed;
+  };
+
+  const transformedSidebarItems = sidebarItems.map(transformMenuItem);
+
+  const items: MenuProps["items"] = [
     {
-      key: 'user-profile-link',
-      label: 'profile',
+      key: "user-profile-link",
+      label: "profile",
       icon: <UserOutlined />,
-      onClick: ()=>{
-        const path = "/profile"
-        navigate(path)
-      }
+      onClick: () => {
+        navigate("/profile");
+      },
     },
     {
-      key: 'user-settings-link',
-      label: 'settings',
+      key: "user-settings-link",
+      label: "settings",
       icon: <SettingOutlined />,
     },
     {
-      type: 'divider',
+      type: "divider",
     },
-    
   ];
+
   return (
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
-        className="app-sider"
-        // breakpoint="lg"
-        // collapsedWidth="0"
+        collapsible
+        collapsed={collapsed}
+        theme="light"
         onBreakpoint={(broken) => {
           console.log(broken);
         }}
@@ -123,19 +172,11 @@ const navigate = useNavigate()
           theme="light"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={sidebarItems.map((item) => ({
-            ...item,
-            label: (
-              <Link to={item.path}>
-                {" "}
-                {/* Wrap label with Link component */}
-                {item.label}
-              </Link>
-            ),
-          }))}
+          items={transformedSidebarItems}
         />
       </Sider>
 
+      {/* Rest of your layout code remains the same */}
       <Layout style={{ background: "#CACACA" }}>
         <Header
           style={{
@@ -144,7 +185,6 @@ const navigate = useNavigate()
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            // paddingRight: 16,
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -158,25 +198,15 @@ const navigate = useNavigate()
                 height: 64,
               }}
             />
-            <h2 style={{}}>Dashboard</h2>
+            <h2>Dashboard</h2>
           </div>
-          <div
-            className=""
-            style={{ display: "flex", alignItems: "center", gap: 6 }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 25,
-              }}
-            >
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 25 }}>
               <div
                 style={{ fontSize: 18, display: "flex", alignItems: "center" }}
               >
                 <Link to="/notification">
                   <Badge count={5} offset={[0.1, 5]}>
-                    {/* <Avatar shape="square" size="large" /> */}
                     <BellOutlined
                       style={{
                         border: "1px solid #efefef",
@@ -187,29 +217,15 @@ const navigate = useNavigate()
                   </Badge>
                 </Link>
               </div>
-              <Dropdown menu={{ items }} trigger={['click']}>
+              <Dropdown menu={{ items }} trigger={["click"]}>
                 <Flex>
-                  {/* <img
-                    src="/me.jpg"
-                    alt="user profile photo"
-                    height={36}
-                    width={36}
-                    style={{ borderRadius:8, objectFit: 'cover' }}
-                  /> */}
                   <Avatar
-                  style={{ backgroundColor: "#87d068" }}
-                  icon={<UserOutlined />}
-                  size={40}
-                />
+                    style={{ backgroundColor: "#87d068" }}
+                    icon={<UserOutlined />}
+                    size={40}
+                  />
                 </Flex>
               </Dropdown>
-              {/* <div>
-                <Avatar
-                  style={{ backgroundColor: "#87d068" }}
-                  icon={<UserOutlined />}
-                  size={40}
-                />
-              </div> */}
             </div>
             <p style={{ fontWeight: 600 }}>Natederwin</p>
           </div>

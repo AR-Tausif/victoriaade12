@@ -7,15 +7,17 @@ import { ConfigProvider } from "antd";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#9333ea",
-          },
-          hashed:false
-        }}
-      >
-        <RouterProvider router={router} />
+    <ConfigProvider
+      theme={{
+        token: {
+          borderRadius:4
+          // colorPrimary: "#FDFDFD",
+          // colorBgContainer: "#A011FF",
+        },
+        hashed: false,
+      }}
+    >
+      <RouterProvider router={router} />
     </ConfigProvider>
   </StrictMode>
 );
