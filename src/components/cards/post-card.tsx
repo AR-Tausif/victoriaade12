@@ -1,6 +1,7 @@
+import { ITableUser } from "../../types";
 import { PostHeadIntroBox } from "../boxes/post-head-intro-box";
 
-export const PostCard = ({ photo }: { photo: string }) => {
+export const PostCard = ({ photo, user }: { photo: string;user:ITableUser }) => {
   return (
     <div
       style={{
@@ -13,7 +14,7 @@ export const PostCard = ({ photo }: { photo: string }) => {
       }}
       role="post item"
     >
-      <PostHeadIntroBox />
+      <PostHeadIntroBox user={user} />
       {/* text section */}
       <div
         style={{

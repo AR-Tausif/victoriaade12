@@ -1,27 +1,72 @@
 import "./styles/account-details.css";
 import { PostCard, ProfileDetailsViewCard } from "../components";
-import { IUserDetails } from "../types";
+import { ITableUser, IUserDetails } from "../types";
+import { useEffect, useState } from "react";
 
 export const AccountDetailsById = () => {
+  const [user, setUser] = useState<ITableUser>();
   const images = [
     "https://andrewstuder.com/wp-content/uploads/2020/04/AF3I3830-scaled.jpg",
     "https://andrewstuder.com/wp-content/uploads/2020/04/AF3I3830-scaled.jpg",
   ];
-  const user: IUserDetails = {
-    fullName: "Anna Suraiya",
-    userName: "Anna@13",
-    email: "anna.suraiya@gmail.com",
-    phoneNumber: "+880 123 456 7890",
-    photo:
-      "https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ=",
-    location: "123/A, West California-USA",
-    accountType: "Service Provider",
-    subscriptionType: "Basic Subscription Plan",
-    services: "Hair Service, nail service",
-    businessName: "Bliss Studio Lyd.",
-    overallRating: "⭐4.7 (1.2k reviews)",
-    valueForMoney: "0%",
-  };
+  const data = [
+    {
+      key: "1",
+      serial: "#01",
+      name: "Diana Doxy",
+      email: "diana@gmail.com",
+      accountType: "Service Provider",
+      date: "11 oct 2024",
+      avatar:
+        "https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
+    },
+    {
+      key: "2",
+      serial: "#02",
+      name: "Robert Fox",
+      email: "robert.fox@gmail.com",
+      accountType: "User",
+      date: "11 oct 2024",
+      avatar:
+        "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
+    },
+    {
+      key: "3",
+      serial: "#03",
+      name: "Rian Bin Kashem",
+      email: "rian.kashem@gmail.com",
+      accountType: "Service Provider",
+      date: "11 oct 2024",
+      avatar:
+        "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture-Thumbnail.jpg",
+    },
+    {
+      key: "4",
+      serial: "#04",
+      name: "William Hanry",
+      email: "bilgates.personal@gmail.com",
+      accountType: "User",
+      date: "11 oct 2024",
+      avatar:
+        "https://www.shutterstock.com/image-photo/photo-beautiful-young-business-woman-260nw-1906641364.jpg",
+    },
+  ];
+
+  useEffect(() => {
+    const handleUserShow = (key: string) => {
+      console.log(key);
+      const users = data.find((userD: ITableUser) => userD.key == key);
+      if (!users) {
+        return;
+      }
+      setUser(users);
+    };
+    handleUserShow("1");
+  }, []);
+  console.log({ user });
+  if (!user) {
+    return <div style={{ fontSize: 54 }}>Loading...</div>;
+  }
   return (
     <div
       style={{
@@ -66,44 +111,13 @@ export const AccountDetailsById = () => {
             borderRadius: 8,
           }}
         >
-          <PostCard photo={images[0]} />
-          <PostCard photo={images[0]} />
-          <PostCard photo={images[0]} />
-          <PostCard photo={images[0]} />
-          <PostCard photo={images[0]} />
+          <PostCard user={user} photo={images[0]} />
+          <PostCard user={user} photo={images[0]} />
+          <PostCard user={user} photo={images[0]} />
+          <PostCard user={user} photo={images[0]} />
+          <PostCard user={user} photo={images[0]} />
         </div>
       </div>
-      {/* <div className="content-section">
-        <div className="content-grid">
-          <div className="post-card">
-            <div className="post-container">
-              <div className="card-header">
-                <div className="user-info">
-                  <img
-                    src="https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=612x612&w=0&k=20&c=tyLvtzutRh22j9GqSGI33Z4HpIwv9vL_MZw_xOE19NQ="
-                    alt="profile picture"
-                    className="user-image"
-                  />
-                  <div className="user-details">
-                    <h5 className="studio-name">Bliss Beauty Studio</h5>
-                    <div className="location">
-                      <p className="map-icon">
-                        <MapDotIcon size="11.10" />
-                      </p>
-                      <p className="address">123/A- Florida, USA</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="delete-icon">
-                  <DeleteOutlined />
-                </div>
-              </div>
-              <Post images={images} />
-            </div>
-          </div>
-          <div className="empty-section"></div>
-        </div>
-      </div> */}
     </div>
   );
 };
