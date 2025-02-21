@@ -1,21 +1,21 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Lists } from "../lists";
 import "./styles/profile-details-view-card.css";
-import { IUserDetails } from "../../types";
+import { ITableUser, IUserDetails } from "../../types";
 export const ProfileDetailsViewCard = ({
   isNoneClose = false,
   user,
 }: {
-  user: IUserDetails;
+  user: ITableUser;
   isNoneClose?: boolean;
 }) => {
   const renderProperties = [
-    { prop: "Full Name", value: "Tausif Ahmed" },
-    { prop: "User Name", value: "tausif" },
-    { prop: "Email", value: "tausif.ritu1@gmail.com" },
+    { prop: "Full Name", value: user.name },
+    { prop: "User Name", value: user.email.split("@")[0] },
+    { prop: "Email", value: user.email },
     { prop: "Phone Number", value: "01823771127" },
     { prop: "Location", value: "Jamalganj" },
-    { prop: "Account Type", value: "Provider" },
+    { prop: "Account Type", value: user.accountType },
     // { prop: "Subscription Type", value: user.subscriptionType },
     // { prop: "Services", value: user.services },
     // { prop: "Business Name", value: user.businessName },
@@ -32,8 +32,12 @@ export const ProfileDetailsViewCard = ({
         >
           <CloseOutlined />
         </p>
-        <img src={user.photo} alt="profile picture" className="profile-image" />
-        <h5 className="profile-name">{user.fullName}</h5>
+        <img
+          src={user.avatar}
+          alt="profile picture"
+          className="profile-image"
+        />
+        <h5 className="profile-name">{user.name}</h5>
         <p className="profile-email">{user.email}</p>
       </div>
 

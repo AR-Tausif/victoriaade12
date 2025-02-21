@@ -1,50 +1,154 @@
+import { Table, Select, Avatar } from "antd";
+import { EyeOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { Table, TableColumnsType } from "antd";
-import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
-
-import {
-  accUserData as data,
-  DataType,
-  userArray,
-} from "../../assets/data/data.account-details";
-import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
+import { ITableUser } from "../../types";
+
+const { Option } = Select;
 
 export const AccountDetailsTable = () => {
-  const [openAccountDetail, setOpenAccountDetail] = useState(false);
+  const [accountTypeFilter, setAccountTypeFilter] = useState("all");
   const [deleteUser, setDeleteUser] = useState(false);
-  const [modalShowUser, setModalShowUser] = useState<IUserDetails | null>(null);
+  const [openAccountDetail, setOpenAccountDetail] = useState(false);
+  const [modalShowUser, setModalShowUser] = useState<ITableUser | null>(null);
 
-  const handleUserShow = (data: any) => {
-    const user = userArray.find((user) => user.email === data.record.email);
-    if (user) {
-      setModalShowUser(user);
-      setOpenAccountDetail(true);
-    }
-  };
-
-  const columns: TableColumnsType<DataType> = [
-    { title: "Serial", dataIndex: "serial", align: "center" },
-    { title: "Name", dataIndex: "name", align: "center", render: renderName },
-    { title: "Email", dataIndex: "email", align: "center" },
-    { title: "Account Type", dataIndex: "accountType", align: "center" },
-    { title: "Date", dataIndex: "date", align: "center" },
+  const data = [
     {
-      title: "Action",
-      dataIndex: "action",
-      align: "center",
-      render: (text: string, record: DataType) => renderActions(text, record),
+      key: "1",
+      serial: "#01",
+      name: "Diana Doxy",
+      email: "diana@gmail.com",
+      accountType: "Service Provider",
+      date: "11 oct 2024",
+      avatar:
+        "https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
+    },
+    {
+      key: "2",
+      serial: "#02",
+      name: "Robert Fox",
+      email: "robert.fox@gmail.com",
+      accountType: "User",
+      date: "11 oct 2024",
+      avatar:
+        "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
+    },
+    {
+      key: "3",
+      serial: "#03",
+      name: "Rian Bin Kashem",
+      email: "rian.kashem@gmail.com",
+      accountType: "Service Provider",
+      date: "11 oct 2024",
+      avatar:
+        "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture-Thumbnail.jpg",
+    },
+    {
+      key: "4",
+      serial: "#04",
+      name: "William Hanry",
+      email: "bilgates.personal@gmail.com",
+      accountType: "User",
+      date: "11 oct 2024",
+      avatar:
+        "https://www.shutterstock.com/image-photo/photo-beautiful-young-business-woman-260nw-1906641364.jpg",
     },
   ];
 
+  const handleUserShow = (userData: any) => {
+    console.log(userData.record, "sss");
+    const users = data.find(
+      (user: ITableUser) => user.key == userData.record.key
+    );
+    if (!users) {
+      return;
+    }
+    setModalShowUser(users);
+    setOpenAccountDetail(true);
+    console.log({ users, modalShowUser });
+  };
+  // console.log(handleUserShow);
+
+  const columns = [
+    {
+      title: "Serial",
+      dataIndex: "serial",
+      key: "serial",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text: string, record: Record<string, string>) => (
+        <div className="name-cell">
+          <Avatar src={record.avatar} size={32}>
+            RF
+          </Avatar>
+          <span>{text}</span>
+        </div>
+      ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: (
+        <div className="account-type-header">
+          <span>Account Type</span>
+          <Select
+            onChange={setAccountTypeFilter}
+            className="account-type-filter"
+          >
+            <Option value="service-provider">Service Provider</Option>
+            <Option value="user">User</Option>
+          </Select>
+        </div>
+      ),
+      dataIndex: "accountType",
+      key: "accountType",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text: string, record: ITableUser) => (
+        <div className="action-buttons">
+          <EyeOutlined
+            className="view-icon"
+            onClick={() => handleUserShow({ text, record })}
+          />
+
+          <UserDeleteOutlined
+            onClick={() => setDeleteUser(true)}
+            className="delete-icon"
+          />
+        </div>
+      ),
+    },
+  ];
+
+  const filteredData = data.filter((item) =>
+    accountTypeFilter === "all"
+      ? true
+      : accountTypeFilter === "service-provider"
+      ? item.accountType === "Service Provider"
+      : item.accountType === "User"
+  );
+
   return (
-    <>
-      <Table<DataType>
+    <div className="user-table-container">
+      <Table
         columns={columns}
-        dataSource={data}
-        size="middle"
-        style={styles.table}
+        dataSource={filteredData}
+        // pagination={false}
+        className="custom-table"
       />
       <UserDetailsModal
         open={openAccountDetail}
@@ -56,78 +160,19 @@ export const AccountDetailsTable = () => {
         onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
       />
-    </>
+    </div>
   );
-
-  function renderName( record: DataType) {
-    return (
-      <div style={styles.flexCenter}>
-        <img
-          src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
-          alt={record.name}
-          style={styles.avatar}
-        />
-        <h4 style={styles.name}>{record.name}</h4>
-      </div>
-    );
-  }
-
-  function renderActions(text: string, record: DataType) {
-    return (
-      <div style={styles.actionContainer}>
-        <p
-          style={styles.actionIcon}
-          onClick={() => handleUserShow({ text, record })}
-        >
-          <EyeInvisibleOutlined style={styles.icon} />
-        </p>
-        <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-          <UserDeleteOutlined style={styles.deleteIcon} />
-        </p>
-      </div>
-    );
-  }
 };
 
-// Styles
-const styles = {
-  table: {
-    minHeight: "100vh",
-  },
-  flexCenter: {
-    padding: "0 0 0 100px",
-    display: "flex",
-    alignItems: "center",
-  },
-  avatar: {
-    width: 24,
-    height: 24,
-    borderRadius: "50%",
-    border: "1px solid #CACACA",
-  },
-  name: {
-    marginLeft: 8,
-  },
-  actionContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-  },
-  actionIcon: {
-    width: 24,
-    height: 24,
-    padding: 8,
-    border: "1px solid #CACACA",
-    borderRadius: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  icon: {
-    color: "#010101",
-  },
-  deleteIcon: {
-    color: "red",
-  },
-};
+{
+  /* <div style={styles.actionContainer}>
+  <Link to="/account-details/12">
+    <p style={styles.actionIcon}>
+      <EyeInvisibleOutlined style={styles.icon} />
+    </p>
+  </Link>
+  <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
+    <UserDeleteOutlined style={styles.deleteIcon} />
+  </p>
+</div> */
+}

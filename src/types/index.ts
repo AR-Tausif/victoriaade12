@@ -13,3 +13,12 @@ export interface IUserDetails {
   valueForMoney: string;
 }
 
+export interface ITableUser {
+  key: string;
+  serial: string;
+  name: string;
+  email: string;
+  accountType: string;
+  date: string;
+  avatar: string;
+}

@@ -1,14 +1,13 @@
-
 import { List } from "antd";
-import { IUserDetails } from "../../types";
+import { ITableUser, IUserDetails } from "../../types";
 
 export const Lists = ({
   user,
   renderedProperties,
-  title="Personal Details"
+  title = "Personal Details",
 }: {
-  title?:string;
-  user: IUserDetails;
+  title?: string;
+  user: ITableUser;
   renderedProperties: { prop: string; value: string }[];
 }) => {
   return (

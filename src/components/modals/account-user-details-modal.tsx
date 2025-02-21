@@ -1,12 +1,12 @@
 import React from "react";
 import { Modal } from "antd";
 import { ProfileDetailsViewCard } from "../cards";
-import { IUserDetails } from "../../types";
+import { ITableUser, IUserDetails } from "../../types";
 
 interface UserDetailsModalProps {
   open: boolean;
   onClose: () => void;
-  user: IUserDetails | null;
+  user: ITableUser | null;
 }
 
 export const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ open, onClose, user }) => {
@@ -18,7 +18,7 @@ export const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ open, onClos
       onCancel={onClose}
       footer={null}
     >
-      <ProfileDetailsViewCard user={user as IUserDetails} isNoneClose={true} />
+      <ProfileDetailsViewCard user={user as ITableUser} isNoneClose={true} />
     </Modal>
   );
 };
