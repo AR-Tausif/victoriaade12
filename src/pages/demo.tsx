@@ -1,19 +1,14 @@
-import { Table, Select, Input, Avatar, Modal } from "antd";
-import {
-  SearchOutlined,
-  EyeOutlined,
-  CloseOutlined,
-  UserDeleteOutlined,
-} from "@ant-design/icons";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { DeleteActionButtons } from "../cards/delete-action-card";
+"use client"
 
-const { Option } = Select;
+import { Table, Select, Input, Avatar } from "antd"
+import { SearchOutlined, EyeOutlined, CloseOutlined } from "@ant-design/icons"
+import { useState } from "react"
+// import "./styles/demo.css"
 
-export const DashboardTable = () => {
-  const [accountTypeFilter, setAccountTypeFilter] = useState("all");
-  const [deleteUser, setDeleteUser] = useState(false);
+const { Option } = Select
+
+export default function Demo() {
+  const [accountTypeFilter, setAccountTypeFilter] = useState("all")
 
   const data = [
     {
@@ -52,7 +47,7 @@ export const DashboardTable = () => {
       date: "11 oct 2024",
       avatar: "/placeholder.svg",
     },
-  ];
+  ]
 
   const columns = [
     {
@@ -82,10 +77,8 @@ export const DashboardTable = () => {
       title: (
         <div className="account-type-header">
           <span>Account Type</span>
-          <Select
-            onChange={setAccountTypeFilter}
-            className="account-type-filter"
-          >
+          <Select onChange={setAccountTypeFilter} className="account-type-filter">
+            
             <Option value="service-provider">Service Provider</Option>
             <Option value="user">User</Option>
           </Select>
@@ -104,64 +97,33 @@ export const DashboardTable = () => {
       key: "action",
       render: () => (
         <div className="action-buttons">
-          <Link to="/account-details/12">
-            <EyeOutlined className="view-icon" />
-          </Link>
-          <UserDeleteOutlined
-            onClick={() => setDeleteUser(true)}
-            className="delete-icon"
-          />
+          <EyeOutlined className="view-icon" />
+          <CloseOutlined className="delete-icon" />
         </div>
       ),
     },
-  ];
+  ]
 
   const filteredData = data.filter((item) =>
     accountTypeFilter === "all"
       ? true
       : accountTypeFilter === "service-provider"
-      ? item.accountType === "Service Provider"
-      : item.accountType === "User"
-  );
+        ? item.accountType === "Service Provider"
+        : item.accountType === "User",
+  )
 
   return (
     <div className="user-table-container">
-      {/* <div className="table-header">
+      <div className="table-header">
         <Select defaultValue="this-month" className="month-select">
           <Option value="this-month">This Month</Option>
           <Option value="last-month">Last Month</Option>
           <Option value="3-months">Last 3 Months</Option>
         </Select>
-        <Input
-          placeholder="Search User"
-          prefix={<SearchOutlined />}
-          className="search-input"
-        />
-      </div> */}
-      <Table
-        columns={columns}
-        dataSource={filteredData}
-        pagination={false}
-        className="custom-table"
-      />
-      <DeleteActionButtons
-        open={deleteUser}
-        onConfirm={() => setDeleteUser(false)}
-        onCancel={() => setDeleteUser(false)}
-      />
+        <Input placeholder="Search User" prefix={<SearchOutlined />} className="search-input" />
+      </div>
+      <Table columns={columns} dataSource={filteredData} pagination={false} className="custom-table" />
     </div>
-  );
-};
-
-{
-  /* <div style={styles.actionContainer}>
-  <Link to="/account-details/12">
-    <p style={styles.actionIcon}>
-      <EyeInvisibleOutlined style={styles.icon} />
-    </p>
-  </Link>
-  <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-    <UserDeleteOutlined style={styles.deleteIcon} />
-  </p>
-</div> */
+  )
 }
+

@@ -18,6 +18,7 @@ import App from "../App";
 import { Earning } from "../pages/earning";
 
 import { AuthWrapper } from "../components/auth-wrapper";
+import Demo from "../pages/demo";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/notification",
         element: <Notification />,
+      },
+      {
+        path: "/demo",
+        element: <Demo />,
       },
     ],
   },

@@ -6,7 +6,8 @@ import {
   DashboardTable,
 } from "../components";
 import "./styles/dashboard.css";
-import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons"
+import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons";
+import "./styles/dashboard-tables.css";
 
 export const Dashboard = () => {
   const handleChange = (value: string) => {
@@ -22,10 +23,22 @@ export const Dashboard = () => {
       <Col span={24}>
         <Row gutter={16} className="dashboard-status-bar">
           <Col span={12}>
-          <DashboardStatusCard icon={ <UserOutlined style={{ fontSize: 40, color: "#010101" }} />} title="Total Users" desc="218" />
+            <DashboardStatusCard
+              icon={<UserOutlined style={{ fontSize: 40, color: "#010101" }} />}
+              title="Total Users"
+              desc="218"
+            />
           </Col>
           <Col span={12}>
-          <DashboardStatusCard icon={ <DollarCircleOutlined style={{ fontSize: 40, color: "#010101" }} />} title="Total Earning" desc="$5,000" />
+            <DashboardStatusCard
+              icon={
+                <DollarCircleOutlined
+                  style={{ fontSize: 40, color: "#010101" }}
+                />
+              }
+              title="Total Earning"
+              desc="$5,000"
+            />
           </Col>
         </Row>
       </Col>
