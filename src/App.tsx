@@ -26,7 +26,7 @@ import {
 } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Logo } from "./components";
-import "./app.css"
+import "./app.css";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -74,20 +74,14 @@ const sidebarItems = [
       {
         key: "7-1",
         icon: <SettingOutlined />,
-        label: "General Settings",
-        path: "/settings/general",
+        label: "Privacy Policy",
+        path: "/privacy-policy",
       },
       {
         key: "7-2",
         icon: <SettingOutlined />,
-        label: "Profile Settings",
-        path: "/settings/profile",
-      },
-      {
-        key: "7-3",
-        icon: <SettingOutlined />,
-        label: "Security Settings",
-        path: "/settings/security",
+        label: "Terms of use",
+        path: "/terms-use",
       },
     ],
   },
@@ -148,7 +142,15 @@ const App: React.FC = () => {
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
         collapsible
+        width={320}
         collapsed={collapsed}
+        style={{
+          paddingInline: `${!collapsed ? "10px" : "4px"}`,
+          paddingBlock: "30px",
+          backgroundColor: "white",
+          maxHeight: "100vh",
+          overflow: "auto",
+        }}
         theme="light"
         onBreakpoint={(broken) => {
           console.log(broken);
@@ -172,6 +174,7 @@ const App: React.FC = () => {
           theme="light"
           mode="inline"
           defaultSelectedKeys={["1"]}
+          
           items={transformedSidebarItems}
         />
       </Sider>
@@ -232,11 +235,10 @@ const App: React.FC = () => {
         </Header>
         <Content
           style={{
-            margin: "24px 16px",
             padding: 24,
             minHeight: 280,
             background: "#CACACA",
-            borderRadius: borderRadiusLG,
+            borderRadius: 10,
           }}
         >
           <Outlet />

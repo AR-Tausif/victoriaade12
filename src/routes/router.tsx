@@ -13,6 +13,7 @@ import {
   Setting,
   ForgotPassword,
   SetPassword,
+  TermsOfUse,
 } from "../pages";
 import App from "../App";
 import { Earning } from "../pages/earning";
@@ -58,8 +59,12 @@ const router = createBrowserRouter([
         element: <DisputedReviewById />,
       },
       {
-        path: "/settings",
+        path: "/privacy-policy",
         element: <Setting />,
+      },
+      {
+        path: "/terms-use",
+        element: <TermsOfUse />,
       },
       {
         path: "/profile",

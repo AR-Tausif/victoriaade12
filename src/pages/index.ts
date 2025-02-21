@@ -12,3 +12,4 @@ export { Profile } from "./profile";
 export { Notification } from "./notification";
 export { ForgotPassword } from "./forgot-password";
 export { SetPassword } from "./set-password";
+export { TermsOfUse } from "./terms-of-use";

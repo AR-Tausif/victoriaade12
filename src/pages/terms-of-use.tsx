@@ -1,8 +1,8 @@
 import JoditEditor from "jodit-react";
-import  { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
 
-export const Setting = () => {
+export const TermsOfUse = () => {
   const [content, setContent] = useState("");
   // const appendLog = useCallback(
   //   (message) => {
@@ -39,7 +39,7 @@ export const Setting = () => {
   );
   return (
     <div>
-      <h3>Privacy Policy</h3>
+      <h3>Terms Of Use</h3>
       <div
         style={{
           background: "#fdfdfd",

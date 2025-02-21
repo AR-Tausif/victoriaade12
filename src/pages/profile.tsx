@@ -1,5 +1,7 @@
 import { Avatar, Badge, Tabs } from "antd";
+import { ClockCircleOutlined } from "@ant-design/icons";
 import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
+import { PenLine } from "lucide-react";
 
 export const Profile = () => {
   const tabsListArr = [
@@ -63,7 +65,11 @@ export const Profile = () => {
           color: "#FDFDFD",
         }}
       >
-        <Badge dot>
+        <Badge count={<p style={{
+          
+          background:"#fff", padding:3,
+          borderRadius:"50%"
+        }}> <PenLine size={16} stroke="#000" /> </p>} offset={[-15, 50]}>
           <Avatar
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXxfn1j1vKFy8yJeBGl2AS6Dcah-lKgHofg&s"
             size={64}
