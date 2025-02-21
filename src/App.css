@@ -50,9 +50,13 @@
 }
 .app-layout .ant-menu-item {
   background-color: #e6e6fa !important;
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
 }
 .app-layout .ant-menu-submenu {
   background-color: #e6e6fa !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
 }
 .app-layout .ant-menu-item-selected {
   background-color: #a011ff !important;

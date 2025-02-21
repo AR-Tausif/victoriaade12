@@ -168,13 +168,14 @@ const App: React.FC = () => {
             alignItems: "center",
           }}
         >
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
         </div>
         <Menu
           theme="light"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          
           items={transformedSidebarItems}
         />
       </Sider>
