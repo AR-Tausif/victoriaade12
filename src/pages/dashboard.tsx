@@ -67,7 +67,7 @@ export const Dashboard = () => {
                 </h5>
                 <Select
                   defaultValue="2025"
-                  style={{ width: 120, border: "none", outline: "none" }}
+                  style={{ width: 120, border: "none", outline: "none", color:"#010101" }}
                   onChange={handleChange}
                   options={[
                     { value: "2024", label: "2024" },
