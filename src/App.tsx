@@ -98,7 +98,7 @@ const { Header, Sider, Content } = Layout;
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer, },
   } = theme.useToken();
   const navigate = useNavigate();
 

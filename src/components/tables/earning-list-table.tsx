@@ -243,7 +243,7 @@ export const EarningListTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (value: string, record: any, index: number) => (
+      render: (value: string, record: any,) => (
         <div className="action-buttons">
           <EyeOutlined
             className="view-icon"

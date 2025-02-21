@@ -1,10 +1,5 @@
-import { Table, Select, Input, Avatar, Modal } from "antd";
-import {
-  SearchOutlined,
-  EyeOutlined,
-  CloseOutlined,
-  UserDeleteOutlined,
-} from "@ant-design/icons";
+import { Table, Select, Avatar } from "antd";
+import { EyeOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { DeleteActionButtons } from "../cards/delete-action-card";

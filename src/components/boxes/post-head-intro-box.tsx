@@ -1,7 +1,7 @@
-import { ITableUser } from "../../types";
+
 import { MapDotIcon } from "../icons";
 
-export const PostHeadIntroBox = ({ user }: { user: ITableUser }) => {
+export const PostHeadIntroBox = ({ user }: { user: any }) => {
   return (
     <div className="user-info">
       <img src={user.avatar} alt="profile picture" className="user-image" />

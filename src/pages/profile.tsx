@@ -1,5 +1,4 @@
 import { Avatar, Badge, Tabs } from "antd";
-import { ClockCircleOutlined } from "@ant-design/icons";
 import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
 import { PenLine } from "lucide-react";
 

@@ -1,12 +1,11 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Lists } from "../lists";
 import "./styles/profile-details-view-card.css";
-import { ITableUser, IUserDetails } from "../../types";
 export const ProfileDetailsViewCard = ({
   isNoneClose = false,
   user,
 }: {
-  user: ITableUser;
+  user: any;
   isNoneClose?: boolean;
 }) => {
   const renderProperties = [

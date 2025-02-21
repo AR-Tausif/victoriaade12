@@ -1,10 +1,9 @@
 import "./styles/account-details.css";
 import { PostCard, ProfileDetailsViewCard } from "../components";
-import { ITableUser, IUserDetails } from "../types";
 import { useEffect, useState } from "react";
 
 export const AccountDetailsById = () => {
-  const [user, setUser] = useState<ITableUser>();
+  const [user, setUser] = useState<any>();
   const images = [
     "https://andrewstuder.com/wp-content/uploads/2020/04/AF3I3830-scaled.jpg",
     "https://andrewstuder.com/wp-content/uploads/2020/04/AF3I3830-scaled.jpg",
@@ -55,7 +54,7 @@ export const AccountDetailsById = () => {
   useEffect(() => {
     const handleUserShow = (key: string) => {
       console.log(key);
-      const users = data.find((userD: ITableUser) => userD.key == key);
+      const users = data.find((userD: any) => userD.key == key);
       if (!users) {
         return;
       }
