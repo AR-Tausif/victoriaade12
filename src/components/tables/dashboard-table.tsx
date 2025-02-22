@@ -138,8 +138,6 @@ export const DashboardTable = () => {
         dataSource={filteredData}
         pagination={false}
         className="custom-table"
-        scroll={{ x: "100%" }}
-        style={{ overflowX: "auto" }}
       />
       <DeleteActionButtons
         open={deleteUser}

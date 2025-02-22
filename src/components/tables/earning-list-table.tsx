@@ -139,67 +139,7 @@ export const EarningListTable = () => {
     setOpenAccountDetail(true);
     console.log({ users, modalShowUser });
   };
-  // console.log(handleUserShow);
-
-  // const columns = [
-  //   {
-  //     title: "Serial",
-  //     dataIndex: "serial",
-  //     key: "serial",
-  //   },
-  //   {
-  //     title: "Name",
-  //     dataIndex: "name",
-  //     key: "name",
-  //     render: (text: string, record: Record<string, string>) => (
-  //       <div className="name-cell">
-  //         <Avatar src={record.avatar} size={32}>
-  //           RF
-  //         </Avatar>
-  //         <span>{text}</span>
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     title: (
-  //       <div className="account-type-header">
-  //         <span>Subscription Type</span>
-  //         <Select
-  //           onChange={setAccountTypeFilter}
-  //           className="account-type-filter"
-  //         >
-  //           <Option value="basic-plan">Basic Plan</Option>
-  //           <Option value="advance-plan">Advance Plan</Option>
-  //         </Select>
-  //       </div>
-  //     ),
-  //     dataIndex: "subscriptionType",
-  //     key: "subscriptionType",
-  //   },
-  //   {
-  //     title: "Amount",
-  //     dataIndex: "amount",
-  //     key: "amount",
-  //   },
-
-  //   {
-  //     title: "Action",
-  //     key: "action",
-  //     render: (text: string, record: ITableUser) => (
-  //       <div className="action-buttons">
-  //         <EyeOutlined
-  //           className="view-icon"
-  //           onClick={() => handleUserShow({ text, record })}
-  //         />
-
-  //         <UserDeleteOutlined
-  //           onClick={() => setDeleteUser(true)}
-  //           className="delete-icon"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  // ];
+  
   const columns = [
     {
       title: "Serial",
@@ -212,7 +152,7 @@ export const EarningListTable = () => {
       key: "name",
       render: (value: string, record: any) => (
         <div className="name-cell">
-          <Avatar src={record.avatar} size={32}>
+          <Avatar src={record.avatars} size={32}>
             RF
           </Avatar>
           <span>{value}</span>

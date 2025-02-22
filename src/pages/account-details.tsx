@@ -1,11 +1,11 @@
 import { Form, Input, Select } from "antd";
 import { AccountDetailsTable } from "../components";
 import { Option } from "antd/es/mentions";
+import { months } from "../assets/data";
 
 export const AccountDetails = () => {
   const [form] = Form.useForm();
 
- 
   const onFinish = (values: unknown) => {
     console.log("Received values of form: ", values);
   };
@@ -19,15 +19,11 @@ export const AccountDetails = () => {
         style={{ maxWidth: "100%", display: "flex", gap: 16 }}
         scrollToFirstError
       >
-        <Form.Item
-          name="month"
-          style={{ width: "100%" }}
-        >
+        <Form.Item name="month" style={{ width: "100%" }}>
           <Select placeholder="This Month">
-            <Option value="january">Male</Option>
-            <Option value="fabruary">Female</Option>
-            <Option value="march">March</Option>
-            <Option value="othrer">Other</Option>
+            {months.map((month) => (
+              <Option value={month}>{month}</Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item
