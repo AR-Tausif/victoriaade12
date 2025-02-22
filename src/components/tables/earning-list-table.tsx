@@ -233,16 +233,3 @@ export const EarningListTable = () => {
     </div>
   );
 };
-
-{
-  /* <div style={styles.actionContainer}>
-  <Link to="/account-details/12">
-    <p style={styles.actionIcon}>
-      <EyeInvisibleOutlined style={styles.icon} />
-    </p>
-  </Link>
-  <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-    <UserDeleteOutlined style={styles.deleteIcon} />
-  </p>
-</div> */
-}
