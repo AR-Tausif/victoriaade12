@@ -27,6 +27,7 @@ import {
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Logo } from "./components";
 import "./app.css";
+import "./antd-overwrite.css";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -98,7 +99,7 @@ const { Header, Sider, Content } = Layout;
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer, },
+    token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate();
 
@@ -141,7 +142,7 @@ const App: React.FC = () => {
   return (
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
-        collapsible
+        // collapsible
         width={320}
         collapsed={collapsed}
         style={{
@@ -158,6 +159,7 @@ const App: React.FC = () => {
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
         }}
+        className="scroll-hide"
       >
         <div
           className="demo-logo-vertical"

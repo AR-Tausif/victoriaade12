@@ -20,6 +20,8 @@ export const PrimaryButton = ({
       style={{
         background: "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
         color: "#FDFDFD",
+        outline:"none",
+        border:"none",
         ...styles,
       }}
       className={className}

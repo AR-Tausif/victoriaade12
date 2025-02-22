@@ -3,6 +3,7 @@ import { Form, Input, Modal, Select } from "antd";
 import { CreateServiceCard, ServiceListTable } from "../components";
 import { Option } from "antd/es/mentions";
 import { useState } from "react";
+import { months } from "../assets/data";
 
 export const Service = () => {
   const [openResponsive, setOpenResponsive] = useState(false);
@@ -29,10 +30,11 @@ export const Service = () => {
         >
           <Form.Item name="month" style={styles.formItem}>
             <Select placeholder="This Month">
-              <Option value="january">Male</Option>
-              <Option value="fabruary">Female</Option>
-              <Option value="march">March</Option>
-              <Option value="other">Other</Option>
+              {months.map((month) => (
+                <Option key={month} value={month.toLowerCase()}>
+                  {month}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item name="search_user" style={styles.formItem}>

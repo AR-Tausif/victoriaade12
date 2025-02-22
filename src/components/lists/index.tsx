@@ -16,7 +16,7 @@ export const Lists = ({
         <h4
           style={{
             fontWeight: 700,
-            fontSize: 14,
+            fontSize: 16,
             letterSpacing: 0.2,
           }}
         >
@@ -27,11 +27,11 @@ export const Lists = ({
     >
       {renderedProperties.map((item) =>
         item.prop.toLocaleLowerCase() !== "photo" ? (
-          <List.Item style={{ display: "flex", gap: 20, alignItems: "center" }}>
-            <p style={{ fontSize: 10, fontWeight: 700, color: "#727272" }}>
+          <List.Item style={{ display: "flex", justifyContent:"space-between", gap: 20, alignItems: "center" }}>
+            <p style={{ fontSize: 14, fontWeight: 700, color: "#727272" }}>
               {item.prop}:
             </p>
-            <p style={{ fontSize: 10, fontWeight: 600, color: "#010101" }}>
+            <p style={{ fontSize: 14, fontWeight: 500, color: "#010101" }}>
               {item.value}
             </p>
           </List.Item>
@@ -39,7 +39,7 @@ export const Lists = ({
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p
               style={{
-                fontSize: 10,
+                fontSize: 14,
                 fontWeight: 700,
                 color: "#727272",
                 marginLeft: 25,

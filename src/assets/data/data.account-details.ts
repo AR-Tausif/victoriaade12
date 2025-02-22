@@ -321,7 +321,7 @@ export const accUserData = userArray.map((user, index) => ({
   name: user.fullName,
   email: user.email,
   accountType: user.accountType,
-  date: "22-05-2024" ,
+  date: "22-05-2024",
   action: "Edit",
 }));
 export const data = userArray.map((user, index) => ({
@@ -330,7 +330,7 @@ export const data = userArray.map((user, index) => ({
   reviewBy: user.fullName,
   provider: user.services,
   reason: user.accountType,
-  status: "pending",
+  status: index === 2 || index === 5 ? "approved" : "pending",
   action: "Edit",
 }));
 export const accountDetailData = userArray.map((user, index) => ({

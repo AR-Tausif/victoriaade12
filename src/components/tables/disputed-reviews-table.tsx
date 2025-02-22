@@ -6,6 +6,7 @@ import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
 import { Link } from "react-router-dom";
+import { titleCase } from "../../utils";
 
 export interface DisputedReviewDataType {
   key: React.Key;
@@ -44,16 +45,26 @@ export const DisputedReviewsTable = () => {
     { title: "Privider", dataIndex: "provider", align: "center" },
     { title: "Reason", dataIndex: "reason", align: "center" },
     {
-      title: "Status", dataIndex: "status", align: "center", render: (text, _record) => (
-        <p style={{ fontWeight: 600, color: "#F7B814" }}>{text}</p>
-      )
+      title: "Status",
+      dataIndex: "status",
+      align: "center",
+      render: (text: string, _record) =>
+        text.toLowerCase() == "approved" ? (
+          <p style={{ fontWeight: 600, color: "#A011FF" }}>
+            {titleCase(text)}{" "}
+          </p>
+        ) : (
+          <p style={{ fontWeight: 600, color: "#F7B814" }}>
+            {" "}
+            {titleCase(text)}{" "}
+          </p>
+        ),
     },
     {
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: () =>
-        renderActions(),
+      render: () => renderActions(),
     },
   ];
 
@@ -95,9 +106,7 @@ export const DisputedReviewsTable = () => {
     return (
       <div style={styles.actionContainer}>
         <Link to="/disputed-reviews/1">
-          <p
-            style={styles.actionIcon}
-          >
+          <p style={styles.actionIcon}>
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
         </Link>
