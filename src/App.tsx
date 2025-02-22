@@ -26,7 +26,7 @@ import {
 } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Logo } from "./components";
-import "./app.css";
+import "./App.css";
 import "./antd-overwrite.css";
 
 // Updated sidebarItems with proper nested structure
