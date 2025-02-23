@@ -24,7 +24,7 @@ import {
   MenuProps,
   theme,
 } from "antd";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "./components";
 import "./App.css";
 import "./antd-overwrite.css";
@@ -32,54 +32,54 @@ import "./antd-overwrite.css";
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
   {
-    key: "1",
+    key: "/",
     icon: <PieChartOutlined />,
     label: "Dashboard",
     path: "/",
   },
   {
-    key: "2",
+    key: "/account-details",
     icon: <TeamOutlined />,
     label: "Accounts Details",
     path: "/account-details",
   },
   {
-    key: "3",
+    key: "/service",
     icon: <ProductOutlined />,
     label: "Service",
     path: "/service",
   },
   {
-    key: "4",
+    key: "/earning",
     icon: <DollarOutlined />,
     label: "Earnings",
     path: "/earning",
   },
   {
-    key: "5",
+    key: "/manage-subscription",
     icon: <CrownOutlined />,
     label: "Manage Subscription",
     path: "/manage-subscription",
   },
   {
-    key: "6",
+    key: "/disputed-reviews",
     icon: <FileDoneOutlined />,
     label: "Disputed Reviews",
     path: "/disputed-reviews",
   },
   {
-    key: "7",
+    key: "/Setting",
     icon: <SettingOutlined />,
     label: "Setting",
     children: [
       {
-        key: "7-1",
+        key: "/privacy-policy",
         icon: <SettingOutlined />,
         label: "Privacy Policy",
         path: "/privacy-policy",
       },
       {
-        key: "7-2",
+        key: "/terms-use",
         icon: <SettingOutlined />,
         label: "Terms of use",
         path: "/terms-use",
@@ -87,7 +87,7 @@ const sidebarItems = [
     ],
   },
   {
-    key: "8",
+    key: "/login",
     icon: <LoginOutlined />,
     label: "Logout",
     path: "/login",
@@ -102,6 +102,7 @@ const App: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   // Function to recursively transform menu items
   const transformMenuItem = (item: any) => {
@@ -133,6 +134,9 @@ const App: React.FC = () => {
       key: "user-settings-link",
       label: "settings",
       icon: <SettingOutlined />,
+      onClick: () => {
+        navigate("/privacy-policy");
+      },
     },
     {
       type: "divider",
@@ -143,23 +147,24 @@ const App: React.FC = () => {
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
         // collapsible
-        width={320}
+        breakpoint="md"
+        // width={320}
         collapsed={collapsed}
         style={{
           paddingInline: `${!collapsed ? "10px" : "4px"}`,
           paddingBlock: "30px",
           backgroundColor: "white",
-          maxHeight: "100vh",
           overflow: "auto",
         }}
         theme="light"
         onBreakpoint={(broken) => {
-          console.log(broken);
+          console.log({ broken });
+          setCollapsed(broken);
         }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+        onCollapse={() => {
+          // console.log(collapsed, type);
         }}
-        className="scroll-hide"
+        className={collapsed ? "" : "myClass"}
       >
         <div
           className="demo-logo-vertical"
@@ -177,13 +182,13 @@ const App: React.FC = () => {
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[pathname]}
           items={transformedSidebarItems}
         />
       </Sider>
 
       {/* Rest of your layout code remains the same */}
-      <Layout style={{ background: "#CACACA" }}>
+      <Layout>
         <Header
           style={{
             padding: "12px",
@@ -241,7 +246,7 @@ const App: React.FC = () => {
             padding: 24,
             minHeight: 280,
             background: "#CACACA",
-            borderRadius: 10,
+            borderTopLeftRadius: 10,
           }}
         >
           <Outlet />

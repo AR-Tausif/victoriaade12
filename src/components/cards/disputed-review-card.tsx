@@ -29,6 +29,7 @@ export const DisputedReviewCard = ({
 
       <div className="lists-container">
         <Lists
+          key={title }
           title={title}
           user={userDetails}
           renderedProperties={renderProperties}

@@ -1,5 +1,5 @@
-import  { ReactNode } from "react";
-import BgImage from "../assets/bg-pics/bg-login.jpg";
+import { ReactNode } from "react";
+const BgImage = "/bg-pics/bg-login.jpg";
 export const AuthWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <div

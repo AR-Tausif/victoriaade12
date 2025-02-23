@@ -352,7 +352,7 @@ export const serviceData = userArray.map((user, index) => ({
   date: "2022-01-15",
   action: "Edit",
 }));
-console.log({ serviceData });
+
 export const d = [
   {
     key: "1",

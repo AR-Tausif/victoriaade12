@@ -6,9 +6,7 @@ import { months } from "../assets/data";
 export const AccountDetails = () => {
   const [form] = Form.useForm();
 
-  const onFinish = (values: unknown) => {
-    console.log("Received values of form: ", values);
-  };
+  const onFinish = () => {};
 
   return (
     <div>

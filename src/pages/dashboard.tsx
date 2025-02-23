@@ -10,9 +10,7 @@ import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles/dashboard-tables.css";
 
 export const Dashboard = () => {
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = () => {};
   return (
     <Row
       gutter={[0, 16]}
@@ -21,15 +19,15 @@ export const Dashboard = () => {
     >
       {/* dashboard-status-bar */}
       <Col span={24}>
-        <Row gutter={16} className="dashboard-status-bar">
-          <Col span={12}>
+        <Row gutter={[16, 16]} className="dashboard-status-bar">
+          <Col span={12} xs={24} sm={24} md={24} lg={12} xl={12}>
             <DashboardStatusCard
               icon={<UserOutlined style={{ fontSize: 40, color: "#010101" }} />}
               title="Total Users"
               desc="218"
             />
           </Col>
-          <Col span={12}>
+          <Col span={12} xs={24} sm={24} md={24} lg={12} xl={12}>
             <DashboardStatusCard
               icon={
                 <DollarCircleOutlined
@@ -45,8 +43,8 @@ export const Dashboard = () => {
 
       {/* dashboard-chart-section */}
       <Col span={24}>
-        <Row gutter={16} className="dashboard-chart-section">
-          <Col span={12}>
+        <Row gutter={[16, 16]} className="dashboard-chart-section">
+          <Col xs={24} sm={24} md={24} lg={12} xl={12} span={12}>
             <Card
               style={{
                 background: "#FDFDFD",
@@ -84,7 +82,7 @@ export const Dashboard = () => {
               <DashboardAreaChart />
             </Card>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={24} md={24} lg={12} xl={12} span={12}>
             <Card
               style={{
                 background: "#FDFDFD",

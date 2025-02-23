@@ -6,7 +6,6 @@ export const TermsOfUse = () => {
   const [content, setContent] = useState("");
   // const appendLog = useCallback(
   //   (message) => {
-  //     console.log("logs = ", logs);
   //     const newLogs = [...logs, message];
   //     setLogs(newLogs);
   //   },
@@ -21,14 +20,6 @@ export const TermsOfUse = () => {
     }),
     []
   );
-
-  const handleClick = useCallback((newContent: any) => {
-    console.log({ newContent });
-  }, []);
-
-  // useEffect(() => {
-  //   console.log("onChange = ", onChange);
-  // }, [onChange]);
 
   const onBlur = useCallback(
     (newContent: string) => {
@@ -63,9 +54,7 @@ export const TermsOfUse = () => {
             ))}
           </div> */}
         </div>
-        <PrimaryButton styles={{ width: "100%" }} onClick={handleClick}>
-          Save Changes
-        </PrimaryButton>
+        <PrimaryButton styles={{ width: "100%" }}>Save Changes</PrimaryButton>
       </div>
     </div>
   );

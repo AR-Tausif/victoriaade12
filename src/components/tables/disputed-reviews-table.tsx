@@ -26,8 +26,6 @@ export const DisputedReviewsTable = () => {
   //   const user = userArray.find(
   //     (user, index) => index === Number(data.record.key)
   //   );
-  //   console.log({ user, data });
-
   //   if (user) {
   //     setModalShowUser(user);
   //     setOpenAccountDetail(true);

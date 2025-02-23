@@ -9,9 +9,7 @@ export const Service = () => {
   const [openResponsive, setOpenResponsive] = useState(false);
   const [form] = Form.useForm();
 
-  const onFinish = (values: unknown) => {
-    console.log("Received values of form: ", values);
-  };
+  const onFinish = () => {};
 
   return (
     <div style={styles.container}>

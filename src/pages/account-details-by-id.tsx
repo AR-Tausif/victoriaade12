@@ -53,7 +53,7 @@ export const AccountDetailsById = () => {
 
   useEffect(() => {
     const handleUserShow = (key: string) => {
-      console.log(key);
+      // console.log(key);
       const users = data.find((userD: any) => userD.key == key);
       if (!users) {
         return;
@@ -62,7 +62,7 @@ export const AccountDetailsById = () => {
     };
     handleUserShow("1");
   }, []);
-  console.log({ user });
+  // console.log({ user });
   if (!user) {
     return <div style={{ fontSize: 54 }}>Loading...</div>;
   }

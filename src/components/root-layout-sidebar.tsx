@@ -1,17 +1,17 @@
-import Sider from 'antd/es/layout/Sider';
-import { Logo } from './logo';
-import { Menu, MenuProps } from 'antd';
+import Sider from "antd/es/layout/Sider";
+import { Logo } from "./logo";
+import { Menu, MenuProps } from "antd";
 import {
-    CrownOutlined,
-    DollarOutlined,
-    FileDoneOutlined,
-    LoginOutlined,
-    PieChartOutlined,
-    ProductOutlined,
-    SettingOutlined,
-    TeamOutlined,
-  } from "@ant-design/icons";
-  import "./styles/root-layout-sidebar.css"
+  CrownOutlined,
+  DollarOutlined,
+  FileDoneOutlined,
+  LoginOutlined,
+  PieChartOutlined,
+  ProductOutlined,
+  SettingOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
+import "./styles/root-layout-sidebar.css";
 
 type MenuItem = Required<MenuProps>["items"][number];
 const sidebarItems: MenuItem[] = [
@@ -58,35 +58,25 @@ const sidebarItems: MenuItem[] = [
 ];
 export const RootLayoutSidebar = () => {
   return (
-    <Sider
-        // breakpoint="lg"
-        // collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
+    <Sider onBreakpoint={() => {}} onCollapse={() => {}} className="app-sider">
+      <div
+        className="demo-logo-vertical"
+        style={{
+          height: "200px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-        className='app-sider'
       >
-        <div
-          className="demo-logo-vertical"
-          style={{
-            height: "200px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Logo />
-        </div>
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={sidebarItems}
-        />
-        {/* <ul>
+        <Logo />
+      </div>
+      <Menu
+        theme="light"
+        mode="inline"
+        defaultSelectedKeys={["4"]}
+        items={sidebarItems}
+      />
+      {/* <ul>
           {sidebarItems.map((item) => (
             <li
               key={item.key}
@@ -99,7 +89,7 @@ export const RootLayoutSidebar = () => {
             </li>
           ))}
         </ul> */}
-        {/* <Menu
+      {/* <Menu
           mode="vertical"
           selectedElementId={[selectedKeys]}
           onSelect={handleMouseSelectElement}
@@ -115,7 +105,6 @@ export const RootLayoutSidebar = () => {
             </Menu.Item>
           ))}
         </Menu> */}
-      </Sider>
-  )
-}
-
+    </Sider>
+  );
+};

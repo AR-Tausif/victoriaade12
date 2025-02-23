@@ -12,7 +12,7 @@ const props: UploadProps = {
   onChange(info) {
     const { status } = info.file;
     if (status !== "uploading") {
-      console.log(info.file, info.fileList);
+      // console.log(info.file, info.fileList);
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
@@ -20,8 +20,8 @@ const props: UploadProps = {
       message.error(`${info.file.name} file upload failed.`);
     }
   },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
+  onDrop() {
+    // console.log("Dropped files", e.dataTransfer.files);
   },
 };
 

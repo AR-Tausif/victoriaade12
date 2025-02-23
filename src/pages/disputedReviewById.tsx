@@ -2,9 +2,7 @@ import { Checkbox, CheckboxProps, Col, Row } from "antd";
 import { DisputedReviewCard, PrimaryButton } from "../components";
 
 export const DisputedReviewById = () => {
-  const onChange: CheckboxProps["onChange"] = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+  const onChange: CheckboxProps["onChange"] = () => {};
   const userDetails = {
     fullName: "Anika Tabassum",
     userName: "tausif",

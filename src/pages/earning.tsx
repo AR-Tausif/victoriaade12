@@ -15,8 +15,8 @@ export const Earning = () => {
     >
       {/* dashboard-status-bar */}
       <Col span={24}>
-        <Row gutter={16} className="dashboard-status-bar">
-          <Col span={12}>
+        <Row gutter={[16, 16]} className="dashboard-status-bar">
+          <Col span={12} xs={24} sm={24} md={24} lg={12} xl={12}>
             <DashboardStatusCard
               icon={
                 <CreditCardOutlined
@@ -27,7 +27,7 @@ export const Earning = () => {
               desc="450"
             />
           </Col>
-          <Col span={12}>
+          <Col span={12} xs={24} sm={24} md={24} lg={12} xl={12}>
             <DashboardStatusCard
               icon={
                 <DollarCircleTwoTone
