@@ -28,11 +28,11 @@ export const ServiceViewForm = ({
   };
   const onFinish = (values: Record<string, unknown>) => {
     openNotification(values);
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   const onFinishFailed = () => {
-    console.log("onfinnished...");
+    // console.log("onfinnished...");
   };
 
   return (

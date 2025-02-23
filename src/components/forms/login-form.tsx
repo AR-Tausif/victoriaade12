@@ -32,16 +32,14 @@ export const LoginForm: React.FC = () => {
   };
   const onFinish = (values: Record<string, unknown>) => {
     openNotification(values);
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
   };
 
   const onFinishFailed = () => {
     message.error("Submit failed!");
   };
 
-  const onCheckboxRememberChange: CheckboxProps["onChange"] = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+  const onCheckboxRememberChange: CheckboxProps["onChange"] = () => {};
 
   const handleShwingPassword = () => {
     setShowPass(!showPass);

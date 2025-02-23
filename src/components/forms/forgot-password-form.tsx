@@ -22,9 +22,9 @@ export const ForgotPasswordForm = () => {
   };
   const navigate = useNavigate();
   const onFinish = (values: Record<string, unknown>) => {
-    console.log(values);
+    // console.log(values);
     openNotification(values);
-    console.log("Received values of form: ", values);
+    // console.log("Received values of form: ", values);
     navigate("/set-password");
   };
   return (

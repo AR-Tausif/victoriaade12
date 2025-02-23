@@ -1,5 +1,3 @@
-const inputString = "this is an example string";
-
 export const titleCase = (inputString: string) => {
   return inputString
     .split(" ") // Split the string into an array of words
@@ -8,6 +6,3 @@ export const titleCase = (inputString: string) => {
     )
     .join(" "); // Join the words back into a single string
 };
-
-// Example usage:
-console.log(titleCase(inputString));

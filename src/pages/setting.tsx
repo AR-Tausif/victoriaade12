@@ -1,12 +1,12 @@
 import JoditEditor from "jodit-react";
-import  { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
 
 export const Setting = () => {
   const [content, setContent] = useState("");
   // const appendLog = useCallback(
   //   (message) => {
-  //     console.log("logs = ", logs);
+  // console.log("logs = ", logs);
   //     const newLogs = [...logs, message];
   //     setLogs(newLogs);
   //   },
@@ -22,17 +22,8 @@ export const Setting = () => {
     []
   );
 
-  const handleClick = useCallback((newContent: any) => {
-    console.log({ newContent });
-  }, []);
-
-  // useEffect(() => {
-  //   console.log("onChange = ", onChange);
-  // }, [onChange]);
-
   const onBlur = useCallback(
     (newContent: string) => {
-      // appendLog(`onBlur triggered with ${newContent}`);
       setContent(newContent);
     },
     [setContent]
@@ -63,9 +54,7 @@ export const Setting = () => {
             ))}
           </div> */}
         </div>
-        <PrimaryButton styles={{ width: "100%" }} onClick={handleClick}>
-          Save Changes
-        </PrimaryButton>
+        <PrimaryButton styles={{ width: "100%" }}>Save Changes</PrimaryButton>
       </div>
     </div>
   );

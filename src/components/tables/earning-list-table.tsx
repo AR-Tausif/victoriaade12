@@ -128,7 +128,7 @@ export const EarningListTable = () => {
   // ];
 
   const handleUserShow = (userData: any) => {
-    console.log(userData.record, "sss");
+    // console.log(userData.record, "sss");
     const users = earningData.find(
       (user: IEarningData) => user.key == userData.record.key
     );
@@ -137,7 +137,7 @@ export const EarningListTable = () => {
     }
     setModalShowUser(users);
     setOpenAccountDetail(true);
-    console.log({ users, modalShowUser });
+    // console.log({ users, modalShowUser });
   };
   
   const columns = [

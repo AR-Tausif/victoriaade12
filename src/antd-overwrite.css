@@ -1,4 +1,9 @@
 /* Ant design overwrite css styles here */
+
+/*-------------- layout content styles --------------- */
+.ant-layout-content{
+  padding: 0;
+}
 .ant-input {
     /* border-color: #a011ff; */
     padding: 10px !important;
@@ -35,3 +40,6 @@
   .ant-select-single{
     height: 44px;
   }
+  /* .user-table-container{
+    overflow: hidden !important;
+  } */

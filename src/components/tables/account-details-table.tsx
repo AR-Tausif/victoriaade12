@@ -57,7 +57,7 @@ export const AccountDetailsTable = () => {
   ];
 
   const handleUserShow = (userData: any) => {
-    console.log(userData.record, "sss");
+    // console.log(userData.record, "sss");
     const users = data.find(
       (user: any) => user.key == userData.record.key
     );
@@ -66,7 +66,7 @@ export const AccountDetailsTable = () => {
     }
     setModalShowUser(users);
     setOpenAccountDetail(true);
-    console.log({ users, modalShowUser });
+    // console.log({ users, modalShowUser });
   };
   // console.log(handleUserShow);
 
