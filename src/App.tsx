@@ -134,6 +134,9 @@ const App: React.FC = () => {
       key: "user-settings-link",
       label: "settings",
       icon: <SettingOutlined />,
+      onClick: () => {
+        navigate("/privacy-policy");
+      },
     },
     {
       type: "divider",

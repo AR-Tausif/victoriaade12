@@ -12,7 +12,7 @@ export const Notification = () => {
           borderRadius: 8,
           display: "flex",
           flexDirection: "column",
-          gap: 24,
+          gap: 8,
         }}
       >
         {/* notification card */}
