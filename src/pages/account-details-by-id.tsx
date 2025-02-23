@@ -1,6 +1,7 @@
 import "./styles/account-details.css";
 import { PostCard, ProfileDetailsViewCard } from "../components";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const AccountDetailsById = () => {
   const [user, setUser] = useState<any>();
