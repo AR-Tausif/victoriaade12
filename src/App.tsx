@@ -188,7 +188,7 @@ const App: React.FC = () => {
       </Sider>
 
       {/* Rest of your layout code remains the same */}
-      <Layout style={{ background: "#CACACA" }}>
+      <Layout>
         <Header
           style={{
             padding: "12px",
@@ -246,7 +246,7 @@ const App: React.FC = () => {
             padding: 24,
             minHeight: 280,
             background: "#CACACA",
-            borderRadius: 10,
+            borderTopLeftRadius: 10,
           }}
         >
           <Outlet />

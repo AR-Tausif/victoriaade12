@@ -1,6 +1,5 @@
-/* .ant-layout {
-  background: #fdfdfd !important;
-}
+
+/*
 .ant-layout-content {
   background: #000;
 }
@@ -45,6 +44,7 @@
 
 /* For Sider */
 .app-layout {
+  background: #fdfdfd !important;
   width: 100vw;
   overflow: hidden;
   min-height: 100vh;
@@ -73,7 +73,7 @@
   padding-top: 0px !important;
 }
 .myClass {
-  flex: 0 0 800px !important;
+  flex: 0 0 300px !important;
   max-width: 300px !important;
   padding: 0 20px;
 }
