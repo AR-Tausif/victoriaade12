@@ -8,8 +8,15 @@ import {
 import "./styles/dashboard.css";
 import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles/dashboard-tables.css";
+import { useGetAllUsersQuery } from "../redux/api";
 
 export const Dashboard = () => {
+  const { data, isError, error } = useGetAllUsersQuery("");
+  console.log({
+    data,
+    isError,
+    error,
+  });
   const handleChange = () => {};
   return (
     <Row
