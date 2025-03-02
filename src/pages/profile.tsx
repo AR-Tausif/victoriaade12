@@ -1,8 +1,11 @@
-import { Avatar, Badge, Tabs } from "antd";
+import { Tabs } from "antd";
 import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
-import { PenLine } from "lucide-react";
+import { PencilLine } from "lucide-react";
+import { useState } from "react";
 
 export const Profile = () => {
+  const [profile, setProfile] = useState<File>();
+  // const profileData = profileRes?.data || {};
   const tabsListArr = [
     {
       id: 1,
@@ -43,42 +46,59 @@ export const Profile = () => {
       ),
     },
   ];
+
   return (
-    <div
-      style={{
-        width: "80%",
-        minHeight: "80vh",
-        marginLeft: "auto",
-        marginRight: "auto",
-        background: "#fdfdfd",
-      }}
-    >
-      <div
+    <div className="w-[80%] min-h-[90vh] mx-auto bg-[#fdfdfd]">
+      <section
+        className="flex-center gap-x-3 bg-linear-to-r from-[#9D0DFE] via-[#AA7AD6] to-[#E6E6FA]"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 10,
-          padding: 40,
-          background: "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
-          color: "#FDFDFD",
+          padding: 10,
         }}
       >
-        <Badge count={<p style={{
-          
-          background:"#fff", padding:3,
-          borderRadius:"50%"
-        }}> <PenLine size={16} stroke="#000" /> </p>} offset={[-15, 50]}>
-          <Avatar
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXxfn1j1vKFy8yJeBGl2AS6Dcah-lKgHofg&s"
-            size={64}
+        <div className="relative w-max">
+          <img
+            src={
+              profile
+                ? URL.createObjectURL(profile)
+                : "https://cdn.dribbble.com/users/5534/screenshots/14230133/profile_4x.jpg"
+            }
+            alt="Admin avatar"
+            width={1200}
+            height={1200}
+            className="aspect-square h-auto w-[140px] rounded-full border-2 border-purple-400 p-1 object-cover"
           />
-        </Badge>
-        <div>
-          <h4>Victoria</h4>
-          <p>Admin</p>
+
+          {/* Edit button */}
+          <label
+            htmlFor="photo"
+            className="absolute bg-white rounded-full flex-center bottom-4 right-4 aspect-square text-white/95"
+            style={{
+              padding: 5,
+            }}
+          >
+            <PencilLine color="#000" size={20} />
+          </label>
+          <input
+            id="photo"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                console.log(file);
+                setProfile(file);
+              }
+            }}
+            type="file"
+            className="hidden w-full h-full"
+          />
         </div>
-      </div>
+
+        <div>
+          <h3 className="text-3xl !font-semibold text-white">
+            {"Tausif Ahmed"}
+          </h3>
+          <p className="mt-1 text-lg font-medium text-white">{"Admin"}</p>
+        </div>
+      </section>
 
       {/* tabs */}
       <Tabs
@@ -90,13 +110,7 @@ export const Profile = () => {
             label: list.text,
             key: id,
             children: (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <div className="flex justify-center items-center">
                 <div
                   style={{
                     maxWidth: 500,
