@@ -5,7 +5,7 @@ export const victoriaApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://159.223.184.53:5008/api/v1/seller" }),
   endpoints: (build) => ({
     getAllUsers: build.query({
-      query: (name) => `/`,
+      query: () => `/`,
     }),
   }),
 });
