@@ -9,6 +9,7 @@ import "./styles/dashboard.css";
 import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles/dashboard-tables.css";
 import { useGetAllUsersQuery } from "../redux/api";
+import UserManagementChart from "../components/charts/stacked-chart";
 
 export const Dashboard = () => {
   const { data, isError, error } = useGetAllUsersQuery("");
@@ -50,7 +51,7 @@ export const Dashboard = () => {
 
       {/* dashboard-chart-section */}
       <Col span={24}>
-        <Row gutter={[16, 16]} className="dashboard-chart-section">
+        {/* <Row gutter={[16, 16]} className="dashboard-chart-section">
           <Col xs={24} sm={24} md={24} lg={12} xl={12} span={12}>
             <Card
               style={{
@@ -132,7 +133,8 @@ export const Dashboard = () => {
               <DashboardColumnChart />
             </Card>
           </Col>
-        </Row>
+        </Row> */}
+        <UserManagementChart/>
       </Col>
 
       {/* dashboard-table-section */}
