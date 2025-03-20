@@ -29,7 +29,7 @@ export default function UserManagementChart() {
         // horizontal: false,
         columnWidth: "40%",
         columnHeight: "10%",
-        borderRadius: 8,
+        borderRadius: 1,
         background: "#000",
       },
     },

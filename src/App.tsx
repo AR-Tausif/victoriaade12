@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BellOutlined,
   CrownOutlined,
@@ -28,6 +28,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "./components";
 import "./App.css";
 import "./antd-overwrite.css";
+import { generateFCMToken } from "./utils";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -142,6 +143,22 @@ const App: React.FC = () => {
       type: "divider",
     },
   ];
+
+  const requestPermission = async () => {
+    console.log("Requesting permission...");
+    const permission = await Notification.requestPermission();
+    console.log({ permission });
+
+    if (permission === "granted") {
+      console.log("Notification permission granted.");
+    } else if (permission === "denied") {
+      alert("Notification permission denied!");
+    }
+  };
+
+  // useEffect(() => {
+  //   requestPermission();
+  // }, []);
 
   return (
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
