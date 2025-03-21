@@ -1,21 +1,11 @@
-import {  Col, Row } from "antd";
-import {
-  DashboardStatusCard,
-  DashboardTable,
-} from "../components";
+import { Col, Row } from "antd";
+import { DashboardStatusCard, DashboardTable } from "../components";
 import "./styles/dashboard.css";
 import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles/dashboard-tables.css";
-import { useGetAllUsersQuery } from "../redux/api";
 import UserManagementChart from "../components/charts/stacked-chart";
 
 export const Dashboard = () => {
-  const { data, isError, error } = useGetAllUsersQuery("");
-  console.log({
-    data,
-    isError,
-    error,
-  });
   // const handleChange = () => {};
   return (
     <Row
@@ -132,7 +122,7 @@ export const Dashboard = () => {
             </Card>
           </Col>
         </Row> */}
-        <UserManagementChart/>
+        <UserManagementChart />
       </Col>
 
       {/* dashboard-table-section */}

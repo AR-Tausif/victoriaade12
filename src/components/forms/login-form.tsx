@@ -8,9 +8,13 @@ import {
   message,
   notification,
 } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { useLoginMutation } from "../../redux/api/auth.api";
+import { generateFCMToken } from "../../utils";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser } from "../../redux/features/auth.slice";
+import { Loader2 } from "lucide-react";
 
 type TLoginInfo = {
   email: string;
@@ -24,6 +28,8 @@ export const LoginForm: React.FC = () => {
 
   const [login, { data, error, isLoading }] = useLoginMutation();
 
+  const navigate = useNavigate();
+
   const openNotification = async (msg: string) => {
     api.open({
       message: "Service Updated succesfully",
@@ -36,15 +42,32 @@ export const LoginForm: React.FC = () => {
     });
   };
   const onFinish = async (values: Record<string, unknown>) => {
-    const loginInfo: TLoginInfo = {
-      email: values.email as string,
-      password: values.password as string,
-      fcmToken: "kajsdkfjlskdjf.lkajsdlfkjsad",
-    };
+    try {
+      // generate fcm token here
+      const fcmToken = await generateFCMToken();
+      const loginInfo: TLoginInfo = {
+        email: values.email as string,
+        password: values.password as string,
+        fcmToken,
+      };
+      console.log(loginInfo);
 
-    const loginResponse: any = await login(loginInfo).unwrap();
-    console.log({ loginResponse });
-    openNotification("user login successfully!");
+      const loginResponse: any = await login(loginInfo).unwrap();
+      console.log(loginResponse);
+
+      openNotification(
+        loginResponse.message
+          ? loginResponse.message
+          : "user login successfully!"
+      );
+      navigate("/")
+    } catch (error: any) {
+      console.log(error);
+
+      openNotification(
+        error.data.message ? error.data.message : "Something wen wrong!"
+      );
+    }
     // console.log("Received values of form: ", values);
   };
 
@@ -102,13 +125,24 @@ export const LoginForm: React.FC = () => {
         </div>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ width: "100%", background: "#9D0DFE" }}
-          >
-            Submit
-          </Button>
+          {isLoading ? (
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "100%", background: "#9D0DFE" }}
+              disabled
+            >
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            </Button>
+          ) : (
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "100%", background: "#9D0DFE" }}
+            >
+              Submit
+            </Button>
+          )}
         </Form.Item>
       </Form>
     </>
