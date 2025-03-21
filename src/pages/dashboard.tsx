@@ -1,8 +1,6 @@
-import { Card, Col, Row, Select } from "antd";
+import {  Col, Row } from "antd";
 import {
   DashboardStatusCard,
-  DashboardAreaChart,
-  DashboardColumnChart,
   DashboardTable,
 } from "../components";
 import "./styles/dashboard.css";
@@ -18,7 +16,7 @@ export const Dashboard = () => {
     isError,
     error,
   });
-  const handleChange = () => {};
+  // const handleChange = () => {};
   return (
     <Row
       gutter={[0, 16]}

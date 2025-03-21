@@ -10,28 +10,41 @@ import {
 } from "antd";
 import { Link } from "react-router-dom";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
+import { useLoginMutation } from "../../redux/api/auth.api";
 
+type TLoginInfo = {
+  email: string;
+  password: string;
+  fcmToken: string;
+};
 export const LoginForm: React.FC = () => {
   const [form] = Form.useForm();
   const [showPass, setShowPass] = useState(false);
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotification = (data: Record<string, unknown>) => {
-    const b = {
-      ...data,
-    };
+  const [login, { data, error, isLoading }] = useLoginMutation();
+
+  const openNotification = async (msg: string) => {
     api.open({
       message: "Service Updated succesfully",
       description: (
         <pre>
-          <code>{JSON.stringify(b)}.</code>
+          <code>{msg}</code>
         </pre>
       ),
       duration: 2,
     });
   };
-  const onFinish = (values: Record<string, unknown>) => {
-    openNotification(values);
+  const onFinish = async (values: Record<string, unknown>) => {
+    const loginInfo: TLoginInfo = {
+      email: values.email as string,
+      password: values.password as string,
+      fcmToken: "kajsdkfjlskdjf.lkajsdlfkjsad",
+    };
+
+    const loginResponse: any = await login(loginInfo).unwrap();
+    console.log({ loginResponse });
+    openNotification("user login successfully!");
     // console.log("Received values of form: ", values);
   };
 
@@ -55,12 +68,8 @@ export const LoginForm: React.FC = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          name="email"
-          label="Email or Username"
-          rules={[{ type: "string", min: 3 }]}
-        >
-          <Input placeholder="Enter your email or username" />
+        <Form.Item name="email" label="Email or Username">
+          <Input type="email" placeholder="Enter your email or username" />
         </Form.Item>
         <Form.Item
           name="password"

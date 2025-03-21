@@ -1,13 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "../store";
 
-export const victoriaApi = createApi({
-  reducerPath: "victoriaApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://159.223.184.53:5008/api/v1/seller" }),
-  endpoints: (build) => ({
-    getAllUsers: build.query({
-      query: () => `/`,
-    }),
-  }),
+const baseURL = "http://159.223.184.53:1214/api/v1";
+const baseQuery = fetchBaseQuery({
+  baseUrl: baseURL,
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).victoriaApi;
+
+    // If we have a token set in state, let's assume that we should be passing it.
+    if (token) {
+      headers.set("authorization", `${token}`);
+    }
+
+    return headers;
+  },
+  credentials: "include",
 });
 
-export const { useGetAllUsersQuery } = victoriaApi;
+export const victoriaBaseApi = createApi({
+  reducerPath: "victoriaApi",
+  baseQuery,
+  endpoints: () => ({}),
+});

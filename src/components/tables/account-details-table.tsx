@@ -3,7 +3,7 @@ import { EyeOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
-
+import { Link } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -12,8 +12,16 @@ export const AccountDetailsTable = () => {
   const [deleteUser, setDeleteUser] = useState(false);
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [modalShowUser, setModalShowUser] = useState<any | null>(null);
-
-  const data = [
+  type TItem = {
+    key: number | string;
+    serial: string;
+    name: string;
+    email: string;
+    accountType: "User" | "Service Provider";
+    date: string;
+    avatar: string;
+  };
+  const data: TItem[] = [
     {
       key: "1",
       serial: "#01",
@@ -58,9 +66,7 @@ export const AccountDetailsTable = () => {
 
   const handleUserShow = (userData: any) => {
     // console.log(userData.record, "sss");
-    const users = data.find(
-      (user: any) => user.key == userData.record.key
-    );
+    const users = data.find((user: any) => user.key == userData.record.key);
     if (!users) {
       return;
     }
@@ -80,7 +86,7 @@ export const AccountDetailsTable = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text: string, record: Record<string, string>) => (
+      render: (text: string, record: TItem) => (
         <div className="name-cell">
           <Avatar src={record.avatar} size={32}>
             RF
@@ -118,12 +124,18 @@ export const AccountDetailsTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (text: string, record: any) => (
+      render: (text: string, record: TItem) => (
         <div className="action-buttons">
-          <EyeOutlined
-            className="view-icon"
-            onClick={() => handleUserShow({ text, record })}
-          />
+          {record.accountType.toLowerCase() === "user" ? (
+            <EyeOutlined
+              className="view-icon"
+              onClick={() => handleUserShow({ text, record })}
+            />
+          ) : (
+            <Link to="/account-details/12">
+              <EyeOutlined className="view-icon" />
+            </Link>
+          )}
 
           <UserDeleteOutlined
             onClick={() => setDeleteUser(true)}
