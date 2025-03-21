@@ -13,6 +13,9 @@ import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { useLoginMutation } from "../../redux/api/auth.api";
 import { generateFCMToken } from "../../utils";
 import { Loader2 } from "lucide-react";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser } from "../../redux/features/auth.slice";
+import { VerifyToken } from "../../utils/verify-token";
 
 type TLoginInfo = {
   email: string;
@@ -25,7 +28,7 @@ export const LoginForm: React.FC = () => {
   const [api, contextHolder] = notification.useNotification();
 
   const [login, { isLoading }] = useLoginMutation();
-
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const openNotification = async (msg: string) => {
@@ -52,13 +55,14 @@ export const LoginForm: React.FC = () => {
 
       const loginResponse: any = await login(loginInfo).unwrap();
       console.log(loginResponse);
-
+      const user = VerifyToken(loginResponse.data.accessToken);
+      dispatch(setUser({ user, token: loginResponse.data.accessToken }));
       openNotification(
         loginResponse.message
           ? loginResponse.message
           : "user login successfully!"
       );
-      navigate("/")
+      navigate("/");
     } catch (error: any) {
       console.log(error);
 
