@@ -12,8 +12,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { useLoginMutation } from "../../redux/api/auth.api";
 import { generateFCMToken } from "../../utils";
-import { useAppDispatch } from "../../redux/hooks";
-import { setUser } from "../../redux/features/auth.slice";
 import { Loader2 } from "lucide-react";
 
 type TLoginInfo = {
@@ -26,7 +24,7 @@ export const LoginForm: React.FC = () => {
   const [showPass, setShowPass] = useState(false);
   const [api, contextHolder] = notification.useNotification();
 
-  const [login, { data, error, isLoading }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const navigate = useNavigate();
 
