@@ -30,28 +30,28 @@ const sidebarItems: MenuItem[] = [
     icon: <ProductOutlined />,
     label: "Service",
   },
+  // {
+  //   key: "4",
+  //   icon: <DollarOutlined />,
+  //   label: "Earnings",
+  // },
+  // {
+  //   key: "5",
+  //   icon: <CrownOutlined />,
+  //   label: "Manage Subscription",
+  // },
   {
     key: "4",
-    icon: <DollarOutlined />,
-    label: "Earnings",
-  },
-  {
-    key: "5",
-    icon: <CrownOutlined />,
-    label: "Manage Subscription",
-  },
-  {
-    key: "6",
     icon: <FileDoneOutlined />,
     label: "Disputed Reviewws",
   },
   {
-    key: "7",
+    key: "5",
     icon: <SettingOutlined />,
     label: "Setting",
   },
   {
-    key: "8",
+    key: "6",
     icon: <LoginOutlined />,
     label: "Logout",
   },

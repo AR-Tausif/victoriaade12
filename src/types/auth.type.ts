@@ -12,3 +12,9 @@ export type TResetPassword = {
 export type TForgetPassword = {
   email: string;
 };
+
+export type TChangePassword = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};

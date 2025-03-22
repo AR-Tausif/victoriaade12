@@ -43,14 +43,6 @@ const router = createBrowserRouter([
         element: <Service />,
       },
       {
-        path: "/earning",
-        element: <Earning />,
-      },
-      {
-        path: "/manage-subscription",
-        element: <ManageSubscription />,
-      },
-      {
         path: "/disputed-reviews",
         element: <DisputedReview />,
       },

@@ -49,18 +49,18 @@ const sidebarItems = [
     label: "Service",
     path: "/service",
   },
-  {
-    key: "/earning",
-    icon: <DollarOutlined />,
-    label: "Earnings",
-    path: "/earning",
-  },
-  {
-    key: "/manage-subscription",
-    icon: <CrownOutlined />,
-    label: "Manage Subscription",
-    path: "/manage-subscription",
-  },
+  // {
+  //   key: "/earning",
+  //   icon: <DollarOutlined />,
+  //   label: "Earnings",
+  //   path: "/earning",
+  // },
+  // {
+  //   key: "/manage-subscription",
+  //   icon: <CrownOutlined />,
+  //   label: "Manage Subscription",
+  //   path: "/manage-subscription",
+  // },
   {
     key: "/disputed-reviews",
     icon: <FileDoneOutlined />,

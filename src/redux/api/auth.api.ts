@@ -1,5 +1,6 @@
 import { victoriaBaseApi } from ".";
 import {
+  TChangePassword,
   TForgetPassword,
   TLoginBody,
   TResetPassword,
@@ -28,6 +29,13 @@ const authApi = victoriaBaseApi.injectEndpoints({
         body: emailInfo,
       }),
     }),
+    changePassword: builder.mutation({
+      query: (emailInfo: TChangePassword) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        body: emailInfo,
+      }),
+    }),
 
     // TODO: need to remove this endpoint
     register: builder.mutation({
@@ -44,4 +52,5 @@ export const {
   useLoginMutation,
   useResetPasswordMutation,
   useForgetPasswordMutation,
+  useChangePasswordMutation,
 } = authApi;
