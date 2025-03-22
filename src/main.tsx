@@ -6,23 +6,24 @@ import router from "./routes/router.tsx";
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-
-    <ConfigProvider
-      theme={{
-        token: {
-          borderRadius:4
-          // colorPrimary: "#FDFDFD",
-          // colorBgContainer: "#A011FF",
-        },
-        hashed: false,
-      }}
+      <ConfigProvider
+        theme={{
+          token: {
+            borderRadius: 4,
+            // colorPrimary: "#FDFDFD",
+            // colorBgContainer: "#A011FF",
+          },
+          hashed: false,
+        }}
       >
-      <RouterProvider router={router} />
-    </ConfigProvider>
-      </Provider>
+        <Toaster position="top-center" richColors />
+        <RouterProvider router={router} />
+      </ConfigProvider>
+    </Provider>
   </StrictMode>
 );

@@ -16,6 +16,7 @@ import { Loader2 } from "lucide-react";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/features/auth.slice";
 import { VerifyToken } from "../../utils/verify-token";
+import { toast } from "sonner";
 
 type TLoginInfo = {
   email: string;
@@ -62,6 +63,7 @@ export const LoginForm: React.FC = () => {
           ? loginResponse.message
           : "user login successfully!"
       );
+      toast.success("Event has been created");
       navigate("/");
     } catch (error: any) {
       console.log(error);

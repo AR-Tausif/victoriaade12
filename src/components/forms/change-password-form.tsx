@@ -5,6 +5,7 @@ import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { TChangePassword } from "../../types/auth.type";
 import { useChangePasswordMutation } from "../../redux/api/auth.api";
 import { Loader2 } from "lucide-react";
+import { HandleLogOut } from "../../lib/handleLogout";
 
 export const ChangePasswordForm = () => {
   const [showPass, setShowPass] = useState(false);
@@ -15,6 +16,18 @@ export const ChangePasswordForm = () => {
 
   const [changePassword, { isLoading }] = useChangePasswordMutation();
 
+  // password show
+  const handleShwingPassword = () => {
+    setShowPass(!showPass);
+  };
+  const handleCurrPassword = () => {
+    setShowCurrPass(!showCurrPass);
+  };
+  const handleConfirmPassword = () => {
+    setShowConfirmPass(!showConfirmPass);
+  };
+
+  // run the function when onSubmit clicked
   const onFinish = async (values: Record<string, unknown>) => {
     console.log(values);
     try {
@@ -27,21 +40,11 @@ export const ChangePasswordForm = () => {
 
       const response: any = await changePassword(changePassInfo).unwrap();
       console.log(response);
+      // TODO: please add toast message while success
       console.log("successfully change the password");
     } catch (error: any) {
       console.log(error);
     }
-  };
-
-  // password show
-  const handleShwingPassword = () => {
-    setShowPass(!showPass);
-  };
-  const handleCurrPassword = () => {
-    setShowCurrPass(!showCurrPass);
-  };
-  const handleConfirmPassword = () => {
-    setShowConfirmPass(!showConfirmPass);
   };
   return (
     <>
@@ -91,9 +94,11 @@ export const ChangePasswordForm = () => {
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           </PrimaryButton>
         ) : (
-          <PrimaryButton type="submit" styles={{ width: "100%" }}>
-            update
-          </PrimaryButton>
+          <HandleLogOut>
+            <PrimaryButton type="submit" styles={{ width: "100%" }}>
+              update
+            </PrimaryButton>
+          </HandleLogOut>
         )}
       </Form>
     </>

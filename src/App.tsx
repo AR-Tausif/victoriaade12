@@ -162,7 +162,7 @@ const App: React.FC = () => {
   return (
     <Layout style={{ minHeight: "100vh" }} className="app-layout">
       <Sider
-        // collapsible
+        // collapsibles
         breakpoint="md"
         // width={320}
         collapsed={collapsed}
