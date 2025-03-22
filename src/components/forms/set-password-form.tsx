@@ -2,32 +2,52 @@ import { Form, Input, notification } from "antd";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { PrimaryButton } from "../primary-button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../redux/api/auth.api";
+import { VerifyToken } from "../../utils/verify-token";
+import { JwtPayload } from "jwt-decode";
+import { TResetPassword } from "../../types/auth.type";
 
-export const SetPasswordForm = () => {
+type TProps = {
+  token: string;
+};
+export const SetPasswordForm = ({ token }: TProps) => {
   const [form] = Form.useForm();
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+
+  const navigate = useNavigate();
   const handleCurrentPassword = () => {
     setShowCurrentPassword(!showCurrentPassword);
   };
+
   const handleShowNewPassword = () => {
     setShowNewPassword(!showNewPassword);
   };
-  const [api, contextHolder] = notification.useNotification();
 
-  const openNotification = (data: Record<string, unknown>) => {
-    const b = {
-      ...data,
+  const [api, contextHolder] = notification.useNotification();
+  const decodedToken = VerifyToken(token) as { email: string };
+  const openNotification = async (data: Record<string, unknown>) => {
+    const resetInfo: TResetPassword = {
+      email: decodedToken.email,
+      confirmPassword: data.confirmPassword as string,
+      newPassword: data.newPassword as string,
     };
+    // reseting password with api endpint
+    const loginResponse: any = await resetPassword(resetInfo).unwrap();
+
+    // TODO: replace the ant design notification to 'toast' notification
     api.open({
-      message: "Service Updated succesfully",
-      description: (
-        <pre>
-          <code>{JSON.stringify(b)}.</code>
-        </pre>
-      ),
+      message: loginResponse.data.message,
+      description: <h2>Password Changed</h2>,
       duration: 2,
     });
+
+    console.log({ resetInfo });
+
+    navigate("/login");
   };
   const onFinish = (values: Record<string, unknown>) => {
     openNotification(values);
@@ -39,14 +59,14 @@ export const SetPasswordForm = () => {
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
           label="New Password"
-          name="new_password"
+          name="newPassword"
           rules={[
             { message: "Please input the current new password of collection!" },
           ]}
         >
           <Input
             type={showCurrentPassword ? "text" : "password"}
-            placeholder="Enter Your Password"
+            placeholder="Enter new password"
             addonAfter={
               <EyeInvisibleOutlined onClick={() => handleCurrentPassword()} />
             }
@@ -54,7 +74,7 @@ export const SetPasswordForm = () => {
         </Form.Item>
         <Form.Item
           label="Confirm Password"
-          name="confirm_password"
+          name="confirmPassword"
           rules={[
             {
               message:
@@ -64,7 +84,7 @@ export const SetPasswordForm = () => {
         >
           <Input
             type={showNewPassword ? "text" : "password"}
-            placeholder="Enter Your Confirm Password"
+            placeholder="Enter confirm password"
             addonAfter={
               <EyeInvisibleOutlined onClick={() => handleShowNewPassword()} />
             }

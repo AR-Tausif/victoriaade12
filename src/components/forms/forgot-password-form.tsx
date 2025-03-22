@@ -1,31 +1,19 @@
 import { Form, Input, notification } from "antd";
 import { PrimaryButton } from "../primary-button";
-import { useNavigate } from "react-router-dom";
 
 export const ForgotPasswordForm = () => {
   const [form] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotification = (data: Record<string, unknown>) => {
-    const b = {
-      ...data,
-    };
+  const openNotification = (msg: string) => {
     api.open({
-      message: "Service Updated succesfully",
-      description: (
-        <pre>
-          <code>{JSON.stringify(b)}.</code>
-        </pre>
-      ),
+      message: msg,
       duration: 2,
     });
   };
-  const navigate = useNavigate();
-  const onFinish = (values: Record<string, unknown>) => {
-    // console.log(values);
-    openNotification(values);
-    // console.log("Received values of form: ", values);
-    navigate("/set-password");
+
+  const onFinish = async (values: Record<string, unknown>) => {
+    openNotification("sdfksj");
   };
   return (
     <>

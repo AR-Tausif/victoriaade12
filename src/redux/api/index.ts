@@ -5,7 +5,7 @@ const baseURL = "http://159.223.184.53:1214/api/v1";
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).victoriaApi;
+    const token = (getState() as RootState).auth.token;
 
     // If we have a token set in state, let's assume that we should be passing it.
     if (token) {

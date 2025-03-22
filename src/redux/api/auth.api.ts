@@ -1,10 +1,10 @@
 import { victoriaBaseApi } from ".";
+import {
+  TForgetPassword,
+  TLoginBody,
+  TResetPassword,
+} from "../../types/auth.type";
 
-type TLoginBody = {
-  email: string;
-  password: string;
-  fcmToken: string;
-};
 const authApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -12,6 +12,20 @@ const authApi = victoriaBaseApi.injectEndpoints({
         url: "/auth/login",
         method: "POST",
         body: userInfo,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (userInfo: TResetPassword) => ({
+        url: "/auth/reset-password",
+        method: "PATCH",
+        body: userInfo,
+      }),
+    }),
+    forgetPassword: builder.mutation({
+      query: (emailInfo: TForgetPassword) => ({
+        url: "/auth/forgot-password",
+        method: "POST",
+        body: emailInfo,
       }),
     }),
 
@@ -26,4 +40,8 @@ const authApi = victoriaBaseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const {
+  useLoginMutation,
+  useResetPasswordMutation,
+  useForgetPasswordMutation,
+} = authApi;
