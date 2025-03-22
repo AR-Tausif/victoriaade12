@@ -6,13 +6,13 @@ import { TChangePassword } from "../../types/auth.type";
 import { useChangePasswordMutation } from "../../redux/api/auth.api";
 import { Loader2 } from "lucide-react";
 import { HandleLogOut } from "../../lib/handleLogout";
+import { toast } from "sonner";
 
 export const ChangePasswordForm = () => {
   const [showPass, setShowPass] = useState(false);
   const [showCurrPass, setShowCurrPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [form] = Form.useForm();
-  const [api, contextHolder] = notification.useNotification();
 
   const [changePassword, { isLoading }] = useChangePasswordMutation();
 
@@ -41,14 +41,18 @@ export const ChangePasswordForm = () => {
       const response: any = await changePassword(changePassInfo).unwrap();
       console.log(response);
       // TODO: please add toast message while success
-      console.log("successfully change the password");
+      toast.success(
+        response.data.message ? response.data.message : "Password changed!"
+      );
     } catch (error: any) {
       console.log(error);
+      toast.error(
+        error.data.message ? error.data.message : "Something went wrong!"
+      );
     }
   };
   return (
     <>
-      {contextHolder}
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
           name="currentPassword"

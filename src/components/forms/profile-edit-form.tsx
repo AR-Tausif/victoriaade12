@@ -1,60 +1,58 @@
 import { Form, Input, notification } from "antd";
-import { DollarOutlined } from "@ant-design/icons";
-import TextArea from "antd/es/input/TextArea";
 import { PrimaryButton } from "../primary-button";
 import { TProfileEdit } from "../../types/profile.type";
 import { useEditProfileMutation } from "../../redux/api/profile.api";
-
-export const ProfileEditForm = () => {
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { EditProfileFormSkeleton } from "../skeletons";
+import { AdminProfile } from "../../types/profile";
+type TProps = {
+  adminProfile: AdminProfile;
+  profileLoading?: boolean;
+};
+export const ProfileEditForm = ({ adminProfile, profileLoading }: TProps) => {
   const [form] = Form.useForm();
-  const [api, contextHolder] = notification.useNotification();
 
+  // RTK: server profile edit mutation endpoind selection
   const [profileEdit, { isLoading }] = useEditProfileMutation();
 
-  // const openNotification = (data: Record<string, unknown>) => {
-  //   const b = {
-  //     ...data,
-  //   };
-  //   api.open({
-  //     message: "Service Updated succesfully",
-  //     description: (
-  //       <pre>
-  //         <code>{JSON.stringify(b)}.</code>
-  //       </pre>
-  //     ),
-  //     duration: 2,
-  //   });
-  // };
   const onFinish = async (values: Record<string, unknown>) => {
-    // openNotification(values);
-    // console.log("Received values of form: ", values);
-    console.log(values);
     try {
+      // store in object request body data to sending server
       const changePassInfo: TProfileEdit = {
         userName: values.username as string,
         contactNumber: values.contactNumber as string,
       };
-      console.log(changePassInfo);
 
+      // RTK: sending the request body to backend server with redux toolkit
       const response: any = await profileEdit(changePassInfo).unwrap();
-      console.log(response);
-      // TODO: please add toast message while success
-      console.log("successfully change the password");
+
+      // TOAST: popup the toast message when dont the work
+      toast.success(
+        response.data.message ? response.data.message : "Profile changed"
+      );
+
+      // Catch error while api stuck or anything
     } catch (error: any) {
       console.log(error);
+      toast.error(
+        error.data.message ? error.data.message : "Something wen wrong!"
+      );
     }
   };
 
   return (
     <>
-      {contextHolder}
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
           label="Username"
           name="username"
           rules={[{ message: "Please input the title of collection!" }]}
         >
-          <Input placeholder="@victoria" />
+          <Input
+            placeholder="@username"
+            defaultValue={adminProfile?.userName && adminProfile?.userName}
+          />
         </Form.Item>
 
         <Form.Item name="email" label="Email">
@@ -62,6 +60,7 @@ export const ProfileEditForm = () => {
             type="email"
             // addonAfter={<DollarOutlined />}
             placeholder="victoria@gmail.com"
+            defaultValue={adminProfile?.email && adminProfile?.email}
             disabled
           />
         </Form.Item>
@@ -70,11 +69,20 @@ export const ProfileEditForm = () => {
             type="number"
             // addonAfter={<DollarOutlined />}
             placeholder="+99007007007"
+            defaultValue={
+              adminProfile?.contactNumber && adminProfile?.contactNumber
+            }
           />
         </Form.Item>
-        <PrimaryButton type="submit" styles={{ width: "100%" }}>
-          Save
-        </PrimaryButton>
+        {isLoading ? (
+          <PrimaryButton type="submit" styles={{ width: "100%" }}>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          </PrimaryButton>
+        ) : (
+          <PrimaryButton type="submit" styles={{ width: "100%" }}>
+            Save
+          </PrimaryButton>
+        )}
       </Form>
     </>
   );

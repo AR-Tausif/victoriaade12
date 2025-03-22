@@ -2,9 +2,24 @@ import { Tabs } from "antd";
 import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
 import { PencilLine } from "lucide-react";
 import { useState } from "react";
+import { useAdminProfileQuery } from "../redux/api/profile.api";
+import { EditProfileFormSkeleton } from "../components";
+import ProflieSkeleton from "../components/skeletons/profile-skeleton";
 
 export const Profile = () => {
   const [profile, setProfile] = useState<File>();
+
+  // RTK: retrieved an admin profile data from database
+  const { data: adminProfile, isLoading } = useAdminProfileQuery("");
+  console.log(adminProfile);
+  if (isLoading) {
+    return (
+      <div className="">
+        <ProflieSkeleton />
+      </div>
+    );
+  }
+
   // const profileData = profileRes?.data || {};
   const tabsListArr = [
     {
@@ -22,7 +37,10 @@ export const Profile = () => {
           >
             Edit Your Profile
           </h5>
-          <ProfileEditForm />
+          <ProfileEditForm
+            adminProfile={adminProfile?.data}
+            profileLoading={isLoading}
+          />
         </div>
       ),
     },
@@ -60,7 +78,7 @@ export const Profile = () => {
             src={
               profile
                 ? URL.createObjectURL(profile)
-                : "https://cdn.dribbble.com/users/5534/screenshots/14230133/profile_4x.jpg"
+                : adminProfile?.data?.profileImage
             }
             alt="Admin avatar"
             width={1200}
@@ -94,9 +112,11 @@ export const Profile = () => {
 
         <div>
           <h3 className="text-3xl !font-semibold text-white">
-            {"Tausif Ahmed"}
+            {adminProfile?.data?.firstName}
           </h3>
-          <p className="mt-1 text-lg font-medium text-white">{"Admin"}</p>
+          <p className="mt-1 text-lg font-medium text-white">
+            {adminProfile?.data?.role}
+          </p>
         </div>
       </section>
 

@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Checkbox,
-  CheckboxProps,
-  Form,
-  Input,
-  message,
-  notification,
-} from "antd";
+import { Button, Checkbox, CheckboxProps, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { useLoginMutation } from "../../redux/api/auth.api";
@@ -17,37 +9,21 @@ import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/features/auth.slice";
 import { VerifyToken } from "../../utils/verify-token";
 import { toast } from "sonner";
+import { TLoginBody } from "../../types/auth.type";
 
-type TLoginInfo = {
-  email: string;
-  password: string;
-  fcmToken: string;
-};
 export const LoginForm: React.FC = () => {
   const [form] = Form.useForm();
   const [showPass, setShowPass] = useState(false);
-  const [api, contextHolder] = notification.useNotification();
 
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const openNotification = async (msg: string) => {
-    api.open({
-      message: "Service Updated succesfully",
-      description: (
-        <pre>
-          <code>{msg}</code>
-        </pre>
-      ),
-      duration: 2,
-    });
-  };
   const onFinish = async (values: Record<string, unknown>) => {
     try {
       // generate fcm token here
       const fcmToken = await generateFCMToken();
-      const loginInfo: TLoginInfo = {
+      const loginInfo: TLoginBody = {
         email: values.email as string,
         password: values.password as string,
         fcmToken,
@@ -58,17 +34,15 @@ export const LoginForm: React.FC = () => {
       console.log(loginResponse);
       const user = VerifyToken(loginResponse.data.accessToken);
       dispatch(setUser({ user, token: loginResponse.data.accessToken }));
-      openNotification(
-        loginResponse.message
-          ? loginResponse.message
-          : "user login successfully!"
+      toast.success(
+        loginResponse.data.message
+          ? loginResponse.data.message
+          : "successfully logged in"
       );
-      toast.success("Event has been created");
       navigate("/");
     } catch (error: any) {
       console.log(error);
-
-      openNotification(
+      toast.error(
         error.data.message ? error.data.message : "Something wen wrong!"
       );
     }
@@ -87,7 +61,6 @@ export const LoginForm: React.FC = () => {
 
   return (
     <>
-      {contextHolder}
       <Form
         form={form}
         layout="vertical"
