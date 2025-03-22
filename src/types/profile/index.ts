@@ -11,7 +11,7 @@ export type AdminProfile = {
   email: string;
   contactNumber: string;
   fcmToken: string;
-  role: "admin"; // Since this is specifically for an admin profile, we can make it a literal type
+  role: "admin" | "service provider" | "buyer" | "user"; // Since this is specifically for an admin profile, we can make it a literal type
   verification: {
     verified: boolean;
     _id: string;

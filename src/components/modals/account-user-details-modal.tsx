@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "antd";
-import { ProfileDetailsViewCard } from "../cards";
+import { AccountDetailsViewCard, ProfileDetailsViewCard } from "../cards";
 
 interface UserDetailsModalProps {
   open: boolean;
@@ -8,16 +8,14 @@ interface UserDetailsModalProps {
   user: any;
 }
 
-export const UserDetailsModal: React.FC<UserDetailsModalProps> = ({ open, onClose, user }) => {
+export const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
+  open,
+  onClose,
+  user,
+}) => {
   return (
-    <Modal
-      centered
-      open={open}
-      onOk={onClose}
-      onCancel={onClose}
-      footer={null}
-    >
-      <ProfileDetailsViewCard user={user as any} isNoneClose={true} />
+    <Modal centered open={open} onOk={onClose} onCancel={onClose} footer={null}>
+      <AccountDetailsViewCard user={user as any} isNoneClose={true} />
     </Modal>
   );
 };

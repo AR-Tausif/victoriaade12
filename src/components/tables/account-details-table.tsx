@@ -4,77 +4,39 @@ import { useState } from "react";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
 import { Link } from "react-router-dom";
+import { AdminProfile } from "../../types/profile";
 
 const { Option } = Select;
 
-export const AccountDetailsTable = () => {
+type TProps = {
+  data?: AdminProfile[]; // Make data optional to handle undefined case
+};
+
+export const AccountDetailsTable = ({ data = [] }: TProps) => {
+  // Provide default empty array
   const [accountTypeFilter, setAccountTypeFilter] = useState("all");
   const [deleteUser, setDeleteUser] = useState(false);
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
-  const [modalShowUser, setModalShowUser] = useState<any | null>(null);
-  type TItem = {
-    key: number | string;
-    serial: string;
-    name: string;
-    email: string;
-    accountType: "User" | "Service Provider";
-    date: string;
-    avatar: string;
-  };
-  const data: TItem[] = [
-    {
-      key: "1",
-      serial: "#01",
-      name: "Diana Doxy",
-      email: "diana@gmail.com",
-      accountType: "Service Provider",
-      date: "11 oct 2024",
-      avatar:
-        "https://www.perfocal.com/blog/content/images/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
-    },
-    {
-      key: "2",
-      serial: "#02",
-      name: "Robert Fox",
-      email: "robert.fox@gmail.com",
-      accountType: "User",
-      date: "11 oct 2024",
-      avatar:
-        "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
-    },
-    {
-      key: "3",
-      serial: "#03",
-      name: "Rian Bin Kashem",
-      email: "rian.kashem@gmail.com",
-      accountType: "Service Provider",
-      date: "11 oct 2024",
-      avatar:
-        "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture-Thumbnail.jpg",
-    },
-    {
-      key: "4",
-      serial: "#04",
-      name: "William Hanry",
-      email: "bilgates.personal@gmail.com",
-      accountType: "User",
-      date: "11 oct 2024",
-      avatar:
-        "https://www.shutterstock.com/image-photo/photo-beautiful-young-business-woman-260nw-1906641364.jpg",
-    },
-  ];
+  const [modalShowUser, setModalShowUser] = useState<AdminProfile | null>(null);
 
-  const handleUserShow = (userData: any) => {
-    // console.log(userData.record, "sss");
-    const users = data.find((user: any) => user.key == userData.record.key);
-    if (!users) {
-      return;
-    }
-    setModalShowUser(users);
+  // Transform the data for the table
+  const tableData = data?.map((item, index) => ({
+    key: item._id,
+    serial: `#${(index + 1).toString().padStart(2, "0")}`, // Format serial as #01, #02, etc.
+    firstName: `${item.firstName} ${item.surName}`,
+    email: item.email,
+    role: item.role, // Adjust based on your role logic
+    createdAt: new Date(item.createdAt).toLocaleDateString(),
+    avatar: item.profileImage,
+    record: item, // Pass the full record for use in render functions
+  }));
+
+  const handleUserShow = (record: (typeof tableData)[number]) => {
+    const user = data?.find((item) => item._id === record.key);
+    if (!user) return;
+    setModalShowUser(user);
     setOpenAccountDetail(true);
-    // console.log({ users, modalShowUser });
   };
-  // console.log(handleUserShow);
 
   const columns = [
     {
@@ -84,12 +46,15 @@ export const AccountDetailsTable = () => {
     },
     {
       title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (text: string, record: TItem) => (
-        <div className="name-cell">
+      dataIndex: "firstName",
+      key: "firstName",
+      render: (text: string, record: (typeof tableData)[number]) => (
+        <div
+          className="name-cell"
+          style={{ display: "flex", alignItems: "center", gap: "8px" }}
+        >
           <Avatar src={record.avatar} size={32}>
-            RF
+            {text.charAt(0).toUpperCase()}
           </Avatar>
           <span>{text}</span>
         </div>
@@ -108,50 +73,56 @@ export const AccountDetailsTable = () => {
             onChange={setAccountTypeFilter}
             className="account-type-filter"
           >
-            <Option value="service-provider">Service Provider</Option>
-            <Option value="user">User</Option>
+            <Option value="buyer">Buyer</Option>
+            <Option value="seller">Seller</Option>
+            <Option value="admin">Admin</Option>
           </Select>
         </div>
       ),
-      dataIndex: "accountType",
-      key: "accountType",
+      dataIndex: "role",
+      key: "role",
     },
     {
       title: "Date",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "createdAt",
+      key: "createdAt",
     },
     {
       title: "Action",
       key: "action",
-      render: (text: string, record: TItem) => (
-        <div className="action-buttons">
-          {record.accountType.toLowerCase() === "user" ? (
+      render: (_: any, record: (typeof tableData)[number]) => (
+        <div
+          className="action-buttons"
+          style={{ display: "flex", gap: "10px" }}
+        >
+          {["admin", "buyer"].includes(record.role.toLowerCase()) ? (
             <EyeOutlined
               className="view-icon"
-              onClick={() => handleUserShow({ text, record })}
+              onClick={() => handleUserShow(record)}
+              style={{ cursor: "pointer", color: "#1890ff" }}
             />
           ) : (
-            <Link to="/account-details/12">
-              <EyeOutlined className="view-icon" />
+            <Link to={`/account-details/${record.key}`}>
+              <EyeOutlined className="view-icon" style={{ color: "#1890ff" }} />
             </Link>
           )}
-
           <UserDeleteOutlined
             onClick={() => setDeleteUser(true)}
             className="delete-icon"
+            style={{ cursor: "pointer", color: "#ff4d4f" }}
           />
         </div>
       ),
     },
   ];
 
-  const filteredData = data.filter((item) =>
+  // Filter data based on account type
+  const filteredData = tableData.filter((item) =>
     accountTypeFilter === "all"
       ? true
-      : accountTypeFilter === "service-provider"
-      ? item.accountType === "Service Provider"
-      : item.accountType === "User"
+      : accountTypeFilter === "admin"
+      ? item.role.toLowerCase() === "buyer"
+      : item.role.toLowerCase() === "seller"
   );
 
   return (
@@ -159,7 +130,7 @@ export const AccountDetailsTable = () => {
       <Table
         columns={columns}
         dataSource={filteredData}
-        // pagination={false}
+        pagination={false}
         className="custom-table"
       />
       <UserDetailsModal
@@ -175,16 +146,3 @@ export const AccountDetailsTable = () => {
     </div>
   );
 };
-
-{
-  /* <div style={styles.actionContainer}>
-  <Link to="/account-details/12">
-    <p style={styles.actionIcon}>
-      <EyeInvisibleOutlined style={styles.icon} />
-    </p>
-  </Link>
-  <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-    <UserDeleteOutlined style={styles.deleteIcon} />
-  </p>
-</div> */
-}

@@ -1,16 +1,16 @@
-
 import { PostHeadIntroBox } from "../boxes/post-head-intro-box";
 
-export const PostCard = ({ photo, user }: { photo: string;user:any }) => {
+export const PostCard = ({ user, post }: { user: any; post: any }) => {
   return (
     <div
       style={{
         width: "100%",
         flex: "1 1 calc(50% - 16px)",
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        borderRadius:8,
-        padding:24,
-        maxWidth:"50%"
+        boxShadow:
+          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+        borderRadius: 8,
+        padding: 24,
+        maxWidth: "50%",
       }}
       role="post item"
     >
@@ -33,7 +33,7 @@ export const PostCard = ({ photo, user }: { photo: string;user:any }) => {
       {/* image section */}
       <div>
         <img
-          src={photo}
+          src={user?.profileImage}
           alt="post image"
           style={{
             width: "100%",

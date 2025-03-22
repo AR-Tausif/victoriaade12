@@ -1,7 +1,7 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Lists } from "../lists";
 import "./styles/profile-details-view-card.css";
-export const ProfileDetailsViewCard = ({
+export const AccountDetailsViewCard = ({
   isNoneClose = false,
   user,
 }: {
@@ -9,7 +9,7 @@ export const ProfileDetailsViewCard = ({
   isNoneClose?: boolean;
 }) => {
   const renderProperties = [
-    { prop: "Full Name", value: user.firstName },
+    { prop: "Full Name", value: user.businessName },
     { prop: "Username", value: user.userName },
     { prop: "Email", value: user.email },
     { prop: "Phone Number", value: user.contactNumber },
