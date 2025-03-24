@@ -1,6 +1,8 @@
 import { PostHeadIntroBox } from "../boxes/post-head-intro-box";
 
 export const PostCard = ({ user, post }: { user: any; post: any }) => {
+  console.log({ user, post });
+
   return (
     <div
       style={{

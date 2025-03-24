@@ -9,21 +9,22 @@ import {
 export const AccountDetailsById = () => {
   const { accountId } = useParams();
 
-  const { data, isLoading } = useSellerProfileQuery(accountId);
+  // Fetch seller profile data using accountId
+  const { data: profileData, isLoading: profileLoading } =
+    useSellerProfileQuery(accountId);
+
+  // Fetch seller posts using the user ID from profile data
   const { data: sellerPosts, isLoading: sellerPostLoading } =
-    useSellerPostQuery(data?.data?.user?._id);
-  console.log({ sellerPosts });
+    useSellerPostQuery(
+      profileData?.data?.user?._id,
+      { skip: !profileData?.data?.user?._id } // Skip query until user ID is available
+    );
 
-  const images = [
-    "https://andrewstuder.com/wp-content/uploads/2020/04/AF3I3830-scaled.jpg",
-    "https://andrewstuder.com/wp-content/uploads/2020/04/AF3I3830-scaled.jpg",
-  ];
-
-  console.log({ data:data?.data });
-
-  if (isLoading) {
+  // Loading state for profile
+  if (profileLoading) {
     return <div style={{ fontSize: 54 }}>Loading...</div>;
   }
+
   return (
     <div
       style={{
@@ -32,16 +33,12 @@ export const AccountDetailsById = () => {
         gap: 16,
       }}
     >
-      {/* profile details view */}
-
-      <div
-        style={{
-          width: "35%",
-        }}
-      >
-        <ProfileDetailsViewCard user={data?.data?.user} />
+      {/* Profile details view */}
+      <div style={{ width: "35%" }}>
+        <ProfileDetailsViewCard isNoneClose user={profileData?.data?.user} />
       </div>
-      {/* content section */}
+
+      {/* Content section */}
       <div
         style={{
           width: "64%",
@@ -51,40 +48,46 @@ export const AccountDetailsById = () => {
           borderRadius: 8,
         }}
       >
-        <h2
-          style={{
-            padding: "20px 0",
-          }}
-        >
-          Posts
-        </h2>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 16,
-            alignItems: "center",
-            padding: 16,
-            borderRadius: 8,
-          }}
-        >
-          {sellerPosts?.data.map((post:) => {
-            <PostCard user={data?.data} post={post} />;
-          })}
-        </div>
+        <h2 style={{ padding: "20px 0" }}>Posts</h2>
+        {sellerPostLoading ? (
+          <div>Loading posts...</div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 16,
+              alignItems: "center",
+              padding: 16,
+              borderRadius: 8,
+            }}
+          >
+            {sellerPosts?.data?.length > 0 ? (
+              sellerPosts.data.map((post: any) => (
+                <PostCard
+                  key={post._id}
+                  user={profileData?.data.user}
+                  post={post}
+                />
+              ))
+            ) : (
+              <div>No posts available</div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-const Post = ({ images }: { images: string[] }) => {
-  return (
-    <div className={`image-container ${images.length === 1 ? "single" : ""}`}>
-      {images.map((image: string, index: number) => (
-        <img key={index} src={image} alt={`post-img-${index}`} />
-      ))}
-    </div>
-  );
-};
+// const Post = ({ images }) => {
+//   return (
+//     <div className={`image-container ${images.length === 1 ? "single" : ""}`}>
+//       {images.map((image, index) => (
+//         <img key={index} src={image} alt={`post-img-${index}`} />
+//       ))}
+//     </div>
+//   );
+// };
 
-export default Post;
+// export default Post;
