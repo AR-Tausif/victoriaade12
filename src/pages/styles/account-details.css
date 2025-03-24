@@ -59,11 +59,4 @@
   color: #010101;
 }
 
-
-
 /* ANT design styels here  */
-
-.ant-input-group-addon{
-  background: var(--primary-color) !important ;
-}
-

@@ -1,12 +1,28 @@
 import { Col, Row } from "antd";
-import { DashboardStatusCard, DashboardTable } from "../components";
+import {
+  AccountDetailsTable,
+  DashboardStatusCard,
+  TableSkeleton,
+} from "../components";
 import "./styles/dashboard.css";
 import { DollarCircleOutlined, UserOutlined } from "@ant-design/icons";
 import "./styles/dashboard-tables.css";
 import UserManagementChart from "../components/charts/stacked-chart";
+import { useState } from "react";
+import { useUsersQuery } from "../redux/api/account-details";
 
 export const Dashboard = () => {
-  // const handleChange = () => {};
+  const [roleType, setRoleType] = useState("");
+
+  // RTK: retrieved an admin profile data from database
+  const { data, isLoading, isFetching } = useUsersQuery({
+    searchTerm: "",
+    roleType,
+  });
+
+  const handleAccountType = (e: string) => {
+    setRoleType(e.trim());
+  };
   return (
     <Row
       gutter={[0, 16]}
@@ -127,7 +143,14 @@ export const Dashboard = () => {
 
       {/* dashboard-table-section */}
       <Col span={24}>
-        <DashboardTable />
+        {isLoading || isFetching ? (
+          <TableSkeleton />
+        ) : (
+          <AccountDetailsTable
+            data={data?.data?.data}
+            handleAccountType={handleAccountType}
+          />
+        )}
       </Col>
     </Row>
   );

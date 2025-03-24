@@ -1,21 +1,31 @@
-"use client";
-
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
-
-// Dynamically import ApexCharts to avoid SSR issues
-// const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false })
+import { useGetChartDataQuery } from "../../redux/api/dashboard.api";
 
 export default function UserManagementChart() {
-  const [year, setYear] = useState("2024");
-  const [accountType, setAccountType] = useState("all");
-  const [accountTypeOpen, setAccountTypeOpen] = useState(false);
+  const [year, setYear] = useState("2025"); // Default to 2025 based on server data
+  const [accountType] = useState("all"); // Filter: all, user, provider
+
   const [yearOpen, setYearOpen] = useState(false);
 
-  // Sample data for the chart
-  const userData = [25, 10, 35, 35, 20, 18, 30, 10, 25, 10, 15, 15];
-  const serviceProviderData = [30, 40, 25, 30, 35, 35, 25, 40, 30, 40, 35, 35];
+  // Fetch chart data using RTK Query
+  const { data, isLoading, isFetching } = useGetChartDataQuery({ year });
 
+  // Extract chart data from server response
+  const chartData = data?.data?.chartData || [];
+  const buyersData = chartData.map((item: any) => item.buyers); // Users
+  const sellersData = chartData.map((item: any) => item.sellers); // Service Providers
+  const months = chartData.map((item: any) => item.month); // X-axis categories
+
+  // Determine max value for y-axis dynamically
+  const maxValue = Math.max(
+    ...buyersData,
+    ...sellersData,
+    10 // Minimum max value
+  );
+  const yAxisMax = Math.ceil(maxValue * 1.2); // Add 20% buffer
+
+  // Chart options
   const options = {
     chart: {
       type: "bar",
@@ -26,14 +36,11 @@ export default function UserManagementChart() {
     },
     plotOptions: {
       bar: {
-        // horizontal: false,
         columnWidth: "40%",
-        columnHeight: "10%",
         borderRadius: 1,
-        background: "#000",
       },
     },
-    colors: ["#a855f7", "#e9d5ff"],
+    colors: ["#a855f7", "#e9d5ff"], // Purple for sellers, light purple for buyers
     dataLabels: {
       enabled: false,
     },
@@ -43,20 +50,23 @@ export default function UserManagementChart() {
       colors: ["transparent"],
     },
     xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      categories:
+        months.length > 0
+          ? months
+          : [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ],
       axisBorder: {
         show: false,
       },
@@ -66,8 +76,8 @@ export default function UserManagementChart() {
     },
     yaxis: {
       min: 0,
-      max: 50,
-      tickAmount: 3,
+      max: yAxisMax,
+      tickAmount: 5, // Adjust based on max value
       labels: {
         formatter: (val: number) => val.toFixed(0),
       },
@@ -101,29 +111,33 @@ export default function UserManagementChart() {
     },
   };
 
+  // Filter series based on accountType
   const series = [
-    {
-      name: "Service Provider",
-      data: serviceProviderData,
-    },
-    {
-      name: "User",
-      data: userData,
-    },
+    ...(accountType === "all" || accountType === "provider"
+      ? [
+          {
+            name: "Sellers",
+            data: sellersData,
+          },
+        ]
+      : []),
+    ...(accountType === "all" || accountType === "user"
+      ? [
+          {
+            name: "Buyers",
+            data: buyersData,
+          },
+        ]
+      : []),
   ];
 
-  // Custom dropdown handler
+  // Dropdown handlers
   const handleYearChange = (selectedYear: string) => {
     setYear(selectedYear);
     setYearOpen(false);
   };
 
-  const handleAccountTypeChange = (selectedType: string) => {
-    setAccountType(selectedType);
-    setAccountTypeOpen(false);
-  };
-
-  // Inline styles
+  // Inline styles (unchanged)
   const styles = {
     card: {
       width: "100%",
@@ -195,9 +209,6 @@ export default function UserManagementChart() {
       fontSize: "14px",
       cursor: "pointer",
     },
-    dropdownItemHover: {
-      backgroundColor: "#f8f9fa",
-    },
     chartContainer: {
       height: "300px",
       width: "100%",
@@ -213,7 +224,7 @@ export default function UserManagementChart() {
         <h2 style={styles.cardTitle}>User Management</h2>
         <div style={styles.filterContainer}>
           {/* Account Type Dropdown */}
-          <div style={styles.dropdown}>
+          {/* <div style={styles.dropdown}>
             <button
               style={styles.dropdownButton}
               onClick={() => setAccountTypeOpen(!accountTypeOpen)}
@@ -221,8 +232,8 @@ export default function UserManagementChart() {
               {accountType === "all"
                 ? "Account Type"
                 : accountType === "user"
-                ? "User"
-                : "Service Provider"}
+                ? "buyers"
+                : "sellers"}
               <span>▼</span>
             </button>
             <div
@@ -265,7 +276,7 @@ export default function UserManagementChart() {
                 Service Provider
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Year Dropdown */}
           <div style={styles.dropdown}>
@@ -277,48 +288,32 @@ export default function UserManagementChart() {
               <span>▼</span>
             </button>
             <div style={yearOpen ? styles.dropdownContent : styles.hidden}>
-              <div
-                style={styles.dropdownItem}
-                onClick={() => handleYearChange("2022")}
-                onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.backgroundColor = "#f8f9fa")
-                }
-                onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.backgroundColor = "white")
-                }
-              >
-                2022
-              </div>
-              <div
-                style={styles.dropdownItem}
-                onClick={() => handleYearChange("2023")}
-                onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.backgroundColor = "#f8f9fa")
-                }
-                onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.backgroundColor = "white")
-                }
-              >
-                2023
-              </div>
-              <div
-                style={styles.dropdownItem}
-                onClick={() => handleYearChange("2024")}
-                onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.backgroundColor = "#f8f9fa")
-                }
-                onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.backgroundColor = "white")
-                }
-              >
-                2024
-              </div>
+              {["2022", "2023", "2024", "2025"].map((yr) => (
+                <div
+                  key={yr}
+                  style={styles.dropdownItem}
+                  onClick={() => handleYearChange(yr)}
+                  onMouseEnter={(e) =>
+                    ((e.target as HTMLElement).style.backgroundColor =
+                      "#f8f9fa")
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.target as HTMLElement).style.backgroundColor = "white")
+                  }
+                >
+                  {yr}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Chart Rendering */}
       <div style={styles.chartContainer}>
-        {typeof window !== "undefined" && (
+        {isLoading || isFetching ? (
+          <div>Loading chart data...</div>
+        ) : typeof window !== "undefined" && chartData.length > 0 ? (
           <ReactApexChart
             options={options as any}
             series={series}
@@ -326,6 +321,8 @@ export default function UserManagementChart() {
             height="100%"
             width="100%"
           />
+        ) : (
+          <div>No data available for {year}</div>
         )}
       </div>
     </div>
