@@ -10,11 +10,13 @@ const { Option } = Select;
 
 type TProps = {
   data?: AdminProfile[]; // Make data optional to handle undefined case
+  handleAccountType: any;
 };
 
-export const AccountDetailsTable = ({ data = [] }: TProps) => {
-  // Provide default empty array
-  const [accountTypeFilter, setAccountTypeFilter] = useState("all");
+export const AccountDetailsTable = ({
+  data = [],
+  handleAccountType,
+}: TProps) => {
   const [deleteUser, setDeleteUser] = useState(false);
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [modalShowUser, setModalShowUser] = useState<AdminProfile | null>(null);
@@ -70,7 +72,7 @@ export const AccountDetailsTable = ({ data = [] }: TProps) => {
         <div className="account-type-header">
           <span>Account Type</span>
           <Select
-            onChange={setAccountTypeFilter}
+            onChange={(e) => handleAccountType(e)}
             className="account-type-filter"
           >
             <Option value="buyer">Buyer</Option>
@@ -116,21 +118,12 @@ export const AccountDetailsTable = ({ data = [] }: TProps) => {
     },
   ];
 
-  // Filter data based on account type
-  const filteredData = tableData.filter((item) =>
-    accountTypeFilter === "all"
-      ? true
-      : accountTypeFilter === "admin"
-      ? item.role.toLowerCase() === "buyer"
-      : item.role.toLowerCase() === "seller"
-  );
-
   return (
     <div className="user-table-container">
       <Table
         columns={columns}
-        dataSource={filteredData}
-        pagination={false}
+        dataSource={tableData}
+        // pagination={true}
         className="custom-table"
       />
       <UserDetailsModal

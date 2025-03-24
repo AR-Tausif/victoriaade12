@@ -6,7 +6,6 @@ import {
   DisputedReview,
   DisputedReviewById,
   Login,
-  ManageSubscription,
   Notification,
   Profile,
   Service,
@@ -16,8 +15,6 @@ import {
   TermsOfUse,
 } from "../pages";
 import App from "../App";
-import { Earning } from "../pages/earning";
-
 import { AuthWrapper } from "../components/auth-wrapper";
 import Demo from "../pages/demo";
 

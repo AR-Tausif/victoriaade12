@@ -5,18 +5,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../redux/api/auth.api";
 import { VerifyToken } from "../../utils/verify-token";
-import { JwtPayload } from "jwt-decode";
 import { TResetPassword } from "../../types/auth.type";
 
 type TProps = {
-  token: string;
+  token?: string;
 };
 export const SetPasswordForm = ({ token }: TProps) => {
   const [form] = Form.useForm();
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const [resetPassword] = useResetPasswordMutation();
 
   const navigate = useNavigate();
   const handleCurrentPassword = () => {
@@ -28,7 +27,7 @@ export const SetPasswordForm = ({ token }: TProps) => {
   };
 
   const [api, contextHolder] = notification.useNotification();
-  const decodedToken = VerifyToken(token) as { email: string };
+  const decodedToken = VerifyToken(token!) as { email: string };
   const openNotification = async (data: Record<string, unknown>) => {
     const resetInfo: TResetPassword = {
       email: decodedToken.email,

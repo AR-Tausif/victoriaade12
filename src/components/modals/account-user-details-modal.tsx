@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "antd";
-import { AccountDetailsViewCard, ProfileDetailsViewCard } from "../cards";
+import { AccountDetailsViewCard } from "../cards";
 
 interface UserDetailsModalProps {
   open: boolean;

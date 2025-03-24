@@ -1,16 +1,15 @@
-import { Form, Input, notification } from "antd";
+import { Form, Input } from "antd";
 import { PrimaryButton } from "../primary-button";
 import { TProfileEdit } from "../../types/profile.type";
 import { useEditProfileMutation } from "../../redux/api/profile.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { EditProfileFormSkeleton } from "../skeletons";
 import { AdminProfile } from "../../types/profile";
 type TProps = {
   adminProfile: AdminProfile;
   profileLoading?: boolean;
 };
-export const ProfileEditForm = ({ adminProfile, profileLoading }: TProps) => {
+export const ProfileEditForm = ({ adminProfile }: TProps) => {
   const [form] = Form.useForm();
 
   // RTK: server profile edit mutation endpoind selection

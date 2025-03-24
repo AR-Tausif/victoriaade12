@@ -4,8 +4,16 @@ import { TProfileEdit } from "../../types/profile.type";
 const accountDetailsApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
     users: builder.query({
-      query: () => ({
-        url: `/account-details`,
+      query: ({
+        roleType,
+        searchTerm,
+      }: {
+        searchTerm: string;
+        roleType: string;
+      }) => ({
+        url: roleType
+          ? `/account-details?searchTerm=${searchTerm}&role=${roleType}`
+          : `/account-details?searchTerm=${searchTerm}`,
         method: "GET",
       }),
     }),

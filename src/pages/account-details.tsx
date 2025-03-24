@@ -1,17 +1,32 @@
 import { Form, Input, Select } from "antd";
-import { AccountDetailsTable } from "../components";
+import { AccountDetailsTable, TableSkeleton } from "../components";
 import { Option } from "antd/es/mentions";
 import { months } from "../assets/data";
 import { useUsersQuery } from "../redux/api/account-details";
+import { useState } from "react";
 
 export const AccountDetails = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleType, setRoleType] = useState("");
   const [form] = Form.useForm();
 
   // RTK: retrieved an admin profile data from database
-  const { data, isLoading } = useUsersQuery("");
+  const { data, isLoading, isFetching } = useUsersQuery({
+    searchTerm,
+    roleType,
+  });
 
   const onFinish = () => {};
+  // Handle search on blur
+  const onSearch = (e: any) => {
+    const value = e.target.value.trim(); // Get the input value
+    setSearchTerm(value); // Update search term state
+  };
+
   console.log(data);
+  const handleAccountType = (e: string) => {
+    setRoleType(e.trim());
+  };
 
   return (
     <div>
@@ -29,35 +44,21 @@ export const AccountDetails = () => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item
-          name="search_user"
-          style={{ width: " 100%" }}
-          className="success"
-        >
-          <Input placeholder="Search User" />
+        <Form.Item name="search_user" style={{ width: " 100%" }}>
+          <Input
+            placeholder="Search User"
+            onBlur={onSearch}
+            onPressEnter={onSearch}
+          />
         </Form.Item>
       </Form>
-      {isLoading ? (
-        <div className="animate-pulse">
-          <div className="h-10 bg-gray-200 mt-3 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-200 mb-6 rounded"></div>
-          <div className="h-10 bg-gray-300 mb-6 rounded"></div>
-        </div>
+      {isLoading || isFetching ? (
+        <TableSkeleton />
       ) : (
-        <AccountDetailsTable data={data?.data?.data} />
+        <AccountDetailsTable
+          data={data?.data?.data}
+          handleAccountType={handleAccountType}
+        />
       )}
     </div>
   );

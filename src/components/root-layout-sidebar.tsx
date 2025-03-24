@@ -2,8 +2,6 @@ import Sider from "antd/es/layout/Sider";
 import { Logo } from "./logo";
 import { Menu, MenuProps } from "antd";
 import {
-  CrownOutlined,
-  DollarOutlined,
   FileDoneOutlined,
   LoginOutlined,
   PieChartOutlined,

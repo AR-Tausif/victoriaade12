@@ -3,7 +3,6 @@ import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
 import { PencilLine } from "lucide-react";
 import { useState } from "react";
 import { useAdminProfileQuery } from "../redux/api/profile.api";
-import { EditProfileFormSkeleton } from "../components";
 import ProflieSkeleton from "../components/skeletons/profile-skeleton";
 
 export const Profile = () => {
