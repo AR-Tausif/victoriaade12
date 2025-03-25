@@ -1,5 +1,6 @@
 import { victoriaBaseApi } from ".";
 import { TCreateServiceBody } from "../../types/service";
+import { tagTypes } from "../tag.types";
 
 const derviceCategory = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,6 +9,7 @@ const derviceCategory = victoriaBaseApi.injectEndpoints({
         url: `/category`,
         method: "GET",
       }),
+      providesTags: [tagTypes.category],
     }),
     createService: builder.mutation({
       query: (serviceInfo: TCreateServiceBody) => ({
@@ -21,6 +23,7 @@ const derviceCategory = victoriaBaseApi.injectEndpoints({
         url: `/category/${serviceId}`,
         method: "DELETE",
       }),
+      invalidatesTags: [tagTypes.category],
     }),
   }),
 });

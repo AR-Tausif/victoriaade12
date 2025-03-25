@@ -4,6 +4,8 @@ import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { DataType } from "../../assets/data/data.account-details";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import ServiceItemViewCard from "../cards/service-item-view-card";
+import { useDeleteServiceByIdMutation } from "../../redux/api/service.api";
+import { toast } from "sonner";
 type TService = {
   _id: string;
   name: string;
@@ -32,6 +34,10 @@ export const ServiceListTable = ({
   setServiceId,
 }: TProps) => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
+  const [deleteServiceId, setDeleteServiceId] = useState("");
+
+  const [deleteService, { isLoading, isSuccess }] =
+    useDeleteServiceByIdMutation();
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -90,7 +96,10 @@ export const ServiceListTable = ({
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
           <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
-            <UserDeleteOutlined style={styles.iconDelete} />
+            <UserDeleteOutlined
+              style={styles.iconDelete}
+              onClick={() => setDeleteServiceId(_record.key.toString())}
+            />
           </p>
         </div>
       ),
@@ -116,6 +125,24 @@ export const ServiceListTable = ({
     setServiceId(_id);
   };
 
+  const handleDelete = async () => {
+    if (!deleteServiceId) return;
+    console.log({ deleteServiceId });
+
+    try {
+      const response = await deleteService(deleteServiceId).unwrap();
+      console.log(response);
+      toast.success(
+        response.data.message ? response.data.message : "successfully logged in"
+      );
+      setDeleteUser(false);
+    } catch (error: any) {
+      toast.error(
+        error.data.message ? error.data.message : "something went wrong!"
+      );
+      setDeleteUser(false);
+    }
+  };
   return (
     <>
       <Table<DataType>
@@ -137,6 +164,8 @@ export const ServiceListTable = ({
         open={deleteUser}
         onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
+        handleDelete={handleDelete}
+        isLoading={isLoading}
       />
     </>
   );
