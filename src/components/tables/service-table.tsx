@@ -1,13 +1,37 @@
 import { Modal, Table, TableColumnsType } from "antd";
 import { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import { serviceData, DataType } from "../../assets/data/data.account-details";
+import { DataType } from "../../assets/data/data.account-details";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import ServiceItemViewCard from "../cards/service-item-view-card";
+type TService = {
+  _id: string;
+  name: string;
+  image: string;
+  admin: string;
+  adminEmail: string;
+  description: string;
+  status: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
 
-export const ServiceListTable = () => {
+type TProps = {
+  deleteUser: any;
+  setDeleteUser: any;
+  serviceId: any;
+  setServiceId: any;
+  serviceData: TService[];
+};
+export const ServiceListTable = ({
+  serviceData,
+  deleteUser,
+  setDeleteUser,
+  serviceId,
+  setServiceId,
+}: TProps) => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
-  const [deleteUser, setDeleteUser] = useState(false);
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -22,7 +46,11 @@ export const ServiceListTable = () => {
       render: (_text: string, record: DataType) => (
         <div style={styles.imageContainer}>
           <img
-            src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
+            src={
+              _text
+                ? _text
+                : "https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
+            }
             alt={record.name}
             style={styles.image}
           />
@@ -57,7 +85,7 @@ export const ServiceListTable = () => {
         <div style={styles.actionContainer}>
           <p
             style={styles.actionIcon}
-            onClick={() => setOpenAccountDetail(true)}
+            onClick={() => handleShowService(_record.key.toString())}
           >
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
@@ -69,11 +97,30 @@ export const ServiceListTable = () => {
     },
   ];
 
+  const mappedServiceData = serviceData.map(
+    (service: TService, index: number) => ({
+      key: service._id,
+      serial: `#${index}`,
+      image: service.image,
+      serviceName: service.name,
+      status: service.status,
+      date: service.createdAt,
+      action: "Edit",
+    })
+  );
+
+  // handle functions here
+  const handleShowService = (_id: string) => {
+    setOpenAccountDetail(true);
+    console.log("_id when triggered button: " + _id);
+    setServiceId(_id);
+  };
+
   return (
     <>
       <Table<DataType>
         columns={columns}
-        dataSource={serviceData}
+        dataSource={mappedServiceData}
         size="middle"
         style={styles.table}
       />
@@ -84,7 +131,7 @@ export const ServiceListTable = () => {
         onCancel={() => setOpenAccountDetail(false)}
         footer={null}
       >
-       <ServiceItemViewCard/>
+        <ServiceItemViewCard />
       </Modal>
       <DeleteActionButtons
         open={deleteUser}

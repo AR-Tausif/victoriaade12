@@ -1,14 +1,21 @@
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { Form, Input, Modal, Select } from "antd";
-import { CreateServiceCard, ServiceListTable } from "../components";
+import {
+  CreateServiceCard,
+  ServiceListTable,
+  TableSkeleton,
+} from "../components";
 import { Option } from "antd/es/mentions";
 import { useState } from "react";
 import { months } from "../assets/data";
+import { useGetAllCategoriesQuery } from "../redux/api/service.api";
 
 export const Service = () => {
   const [openResponsive, setOpenResponsive] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
+  const [serviceId, setServiceId] = useState("");
   const [form] = Form.useForm();
-
+  const { data, isLoading } = useGetAllCategoriesQuery("");
   const onFinish = () => {};
 
   return (
@@ -40,7 +47,17 @@ export const Service = () => {
           </Form.Item>
         </Form>
       </div>
-      <ServiceListTable />
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <ServiceListTable
+          serviceData={data?.data?.result}
+          deleteUser={deleteUser}
+          setDeleteUser={setDeleteUser}
+          serviceId={serviceId}
+          setServiceId={setServiceId}
+        />
+      )}
       <Modal
         centered
         open={openResponsive}
