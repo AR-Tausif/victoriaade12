@@ -9,7 +9,7 @@ export const AccountDetailsViewCard = ({
   isNoneClose?: boolean;
 }) => {
   const renderProperties = [
-    { prop: "Full Name", value: user.businessName },
+    { prop: "Full Name", value: user.firstName },
     { prop: "Username", value: user.userName },
     { prop: "Email", value: user.email },
     { prop: "Phone Number", value: user.contactNumber },

@@ -7,3 +7,4 @@ export * from "./root-layout-header";
 export * from "./primary-button";
 export * from "./skeletons";
 export * from "./table-skeleton";
+export * from "./errors"

@@ -10,4 +10,4 @@ export const tagTypes = {
   product: "Product",
 };
 
-export const tagTypesList = [tagTypes.category];
+export const tagTypesList = [tagTypes.category, tagTypes.review];

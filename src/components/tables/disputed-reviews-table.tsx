@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
-import { data } from "../../assets/data/data.account-details";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
 import { Link } from "react-router-dom";
 import { titleCase } from "../../utils";
+import { useAllDisputedReviewsQuery } from "../../redux/api/disputed-review.api";
 
 export interface DisputedReviewDataType {
   key: React.Key;
@@ -17,10 +17,26 @@ export interface DisputedReviewDataType {
   status: string;
   action: string;
 }
+
+interface IDisputedReview {
+  _id: string;
+  seller: string;
+  reviewId: string;
+  reason: string;
+  photos: string[];
+  explanation: string;
+  status: string;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 export const DisputedReviewsTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
   const [modalShowUser] = useState<IUserDetails | null>(null);
+
+  // RTK: fetching data from server
+  const { data, isLoading } = useAllDisputedReviewsQuery("");
 
   // const handleUserShow = (data:any) => {
   //   const user = userArray.find(
@@ -40,7 +56,7 @@ export const DisputedReviewsTable = () => {
       align: "center",
       render: renderName,
     },
-    { title: "Privider", dataIndex: "provider", align: "center" },
+    { title: "Provider", dataIndex: "provider", align: "center" },
     { title: "Reason", dataIndex: "reason", align: "center" },
     {
       title: "Status",
@@ -62,15 +78,27 @@ export const DisputedReviewsTable = () => {
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: () => renderActions(),
+      render: (text, record) => renderActions(text, record),
     },
   ];
+
+  const mappedData = data?.data?.data.map(
+    (review: IDisputedReview, index: number) => ({
+      key: review._id,
+      serial: `#${index}`,
+      reviewBy: review.reviewId,
+      provider: review.seller,
+      reason: review.reason,
+      status: review.status,
+      action: "Edit",
+    })
+  );
 
   return (
     <>
       <Table<DisputedReviewDataType>
         columns={columns}
-        dataSource={data}
+        dataSource={mappedData}
         size="middle"
         style={styles.table}
       />
@@ -100,10 +128,12 @@ export const DisputedReviewsTable = () => {
     );
   }
 
-  function renderActions() {
+  function renderActions(text, record: DataType) {
+    console.log(text, record);
+
     return (
       <div style={styles.actionContainer}>
-        <Link to="/disputed-reviews/1">
+        <Link to={`/disputed-reviews/${record?.key}`}>
           <p style={styles.actionIcon}>
             <EyeInvisibleOutlined style={styles.icon} />
           </p>

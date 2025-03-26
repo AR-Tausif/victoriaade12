@@ -15,9 +15,9 @@ export const DisputedReviewCard = ({
     <div className="profile-details">
       {/* profile intro with name and email */}
       <div className="profile-intro">
-        <p className="close-button">
+        {/* <p className="close-button">
           <CloseOutlined />
-        </p>
+        </p> */}
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRXxfn1j1vKFy8yJeBGl2AS6Dcah-lKgHofg&s"
           alt="profile picture"
