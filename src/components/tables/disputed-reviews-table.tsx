@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, TableColumnsType } from "antd";
+import { Avatar, Table, TableColumnsType } from "antd";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { IUserDetails } from "../../types";
 import { DeleteActionButtons } from "../cards/delete-action-card";
@@ -7,6 +7,9 @@ import { UserDetailsModal } from "../modals";
 import { Link } from "react-router-dom";
 import { titleCase } from "../../utils";
 import { useAllDisputedReviewsQuery } from "../../redux/api/disputed-review.api";
+import { DataType } from "../../assets/data/data.account-details";
+import { TableSkeleton } from "../table-skeleton";
+import { TReview, TUser } from "../../types/disputed-review";
 
 export interface DisputedReviewDataType {
   key: React.Key;
@@ -18,18 +21,6 @@ export interface DisputedReviewDataType {
   action: string;
 }
 
-interface IDisputedReview {
-  _id: string;
-  seller: string;
-  reviewId: string;
-  reason: string;
-  photos: string[];
-  explanation: string;
-  status: string;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
 export const DisputedReviewsTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
@@ -47,6 +38,36 @@ export const DisputedReviewsTable = () => {
   //     setOpenAccountDetail(true);
   //   }
   // };
+  type TMappedData = {
+    key: string;
+    serial: number;
+    reviewBy: TUser;
+    provider: TUser;
+    reason: string;
+    status: string; // approve and pending
+    action: string;
+    providerName?: string;
+    providerProfile?: string;
+    reviewerName?: string;
+    reviewerProfile?: string;
+  };
+  const mappedData: TMappedData = data?.data?.data.map(
+    (review: TReview, index: number) => ({
+      key: review._id,
+      serial: `#${index}`,
+      reviewBy: "review.reviewBy",
+      provider: "review.provider",
+      reason: review.reason,
+      status: review.status,
+      providerName: review.provider.name,
+      providerProfile: review.provider.photo,
+      reviewerName: review.reviewBy.name,
+      reviewerProfile: review.reviewBy.photo,
+      action: "Edit",
+    })
+  );
+
+  console.log({ mappedData });
 
   const columns: TableColumnsType<DisputedReviewDataType> = [
     { title: "Serial", dataIndex: "serial", align: "center" },
@@ -54,9 +75,48 @@ export const DisputedReviewsTable = () => {
       title: "Review by",
       dataIndex: "reviewBy",
       align: "center",
-      render: renderName,
+      render: (text: string, record: TMappedData) => (
+        <div
+          className="name-cell"
+          style={{ display: "flex", alignItems: "center", gap: "8px" }}
+        >
+          <Avatar
+            src={
+              record?.reviewerProfile
+                ? record.reviewerProfile
+                : "https://res.cloudinary.com/dyalzfwd4/image/upload/v1738207704/user_wwrref.png"
+            }
+            size={32}
+          >
+            {"CN"}
+          </Avatar>
+          <span>{record?.reviewerName}</span>
+        </div>
+      ),
     },
-    { title: "Provider", dataIndex: "provider", align: "center" },
+    {
+      title: "Provider",
+      dataIndex: "provider",
+      align: "center",
+      render: (text: string, record: TMappedData) => (
+        <div
+          className="name-cell"
+          style={{ display: "flex", alignItems: "center", gap: "8px" }}
+        >
+          <Avatar
+            src={
+              record?.providerProfile
+                ? record.providerProfile
+                : "https://res.cloudinary.com/dyalzfwd4/image/upload/v1738207704/user_wwrref.png"
+            }
+            size={32}
+          >
+            {"CN"}
+          </Avatar>
+          <span>{record?.providerName}</span>
+        </div>
+      ),
+    },
     { title: "Reason", dataIndex: "reason", align: "center" },
     {
       title: "Status",
@@ -82,26 +142,18 @@ export const DisputedReviewsTable = () => {
     },
   ];
 
-  const mappedData = data?.data?.data.map(
-    (review: IDisputedReview, index: number) => ({
-      key: review._id,
-      serial: `#${index}`,
-      reviewBy: review.reviewId,
-      provider: review.seller,
-      reason: review.reason,
-      status: review.status,
-      action: "Edit",
-    })
-  );
-
   return (
     <>
-      <Table<DisputedReviewDataType>
-        columns={columns}
-        dataSource={mappedData}
-        size="middle"
-        style={styles.table}
-      />
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <Table<DisputedReviewDataType>
+          columns={columns}
+          dataSource={mappedData}
+          size="middle"
+          style={styles.table}
+        />
+      )}
       <UserDetailsModal
         open={openAccountDetail}
         onClose={() => setOpenAccountDetail(false)}
@@ -115,15 +167,15 @@ export const DisputedReviewsTable = () => {
     </>
   );
 
-  function renderName(_text: string, record: DisputedReviewDataType) {
+  function renderName(_text: string, record: TMappedData) {
     return (
       <div style={styles.flexCenter}>
         <img
           src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
-          alt={record.provider}
+          alt={"record.provider"}
           style={styles.avatar}
         />
-        <h4 style={styles.name}>{record.provider}</h4>
+        <h4 style={styles.name}>{"record.provider"}</h4>
       </div>
     );
   }
