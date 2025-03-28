@@ -66,7 +66,7 @@ export const Service = () => {
         width={styles.modalWidth}
         footer={null}
       >
-        <CreateServiceCard />
+        <CreateServiceCard onClose={setOpenResponsive} />
       </Modal>
     </div>
   );

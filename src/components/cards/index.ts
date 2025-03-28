@@ -6,3 +6,4 @@ export { DisputedReviewCard } from "./disputed-review-card";
 export { NotificationCard } from "./notification-card";
 export { PostCard } from "./post-card";
 export { AccountDetailsViewCard } from "./account-details-card";
+export { ReviewByDetailsReviewCard } from "./review-details-by-review-card";

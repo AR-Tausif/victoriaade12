@@ -6,18 +6,7 @@ import { DeleteActionButtons } from "../cards/delete-action-card";
 import ServiceItemViewCard from "../cards/service-item-view-card";
 import { useDeleteServiceByIdMutation } from "../../redux/api/service.api";
 import { toast } from "sonner";
-type TService = {
-  _id: string;
-  name: string;
-  image: string;
-  admin: string;
-  adminEmail: string;
-  description: string;
-  status: string;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
+import { TService } from "../../types/service";
 
 type TProps = {
   deleteUser: any;
@@ -35,6 +24,7 @@ export const ServiceListTable = ({
 }: TProps) => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteServiceId, setDeleteServiceId] = useState("");
+  const [selectedService, setSelectedService] = useState<TService | null>(null);
 
   const [deleteService, { isLoading, isSuccess }] =
     useDeleteServiceByIdMutation();
@@ -150,7 +140,17 @@ export const ServiceListTable = ({
         dataSource={mappedServiceData}
         size="middle"
         style={styles.table}
+        onRow={(record) => ({
+          onClick: () => {
+            const clickedService = serviceData.find(
+              (s) => s._id === record.key
+            );
+            setSelectedService(clickedService || null);
+            setOpenAccountDetail(true);
+          },
+        })}
       />
+
       <Modal
         centered
         open={openAccountDetail}
@@ -158,7 +158,7 @@ export const ServiceListTable = ({
         onCancel={() => setOpenAccountDetail(false)}
         footer={null}
       >
-        <ServiceItemViewCard />
+        <ServiceItemViewCard serviceItem={selectedService!} />
       </Modal>
       <DeleteActionButtons
         open={deleteUser}

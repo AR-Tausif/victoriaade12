@@ -12,7 +12,7 @@ const derviceCategory = victoriaBaseApi.injectEndpoints({
       providesTags: [tagTypes.category],
     }),
     createService: builder.mutation({
-      query: (serviceInfo: TCreateServiceBody) => ({
+      query: (serviceInfo: FormData) => ({
         url: "/category/create",
         method: "POST",
         body: serviceInfo,
@@ -25,6 +25,20 @@ const derviceCategory = victoriaBaseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.category],
     }),
+    updateServiceById: builder.mutation({
+      query: ({
+        serviceId,
+        serviceInfo,
+      }: {
+        serviceId: string;
+        serviceInfo: FormData;
+      }) => ({
+        url: `/category/update/${serviceId}`,
+        method: "PUT",
+        body: serviceInfo,
+      }),
+      invalidatesTags: [tagTypes.category],
+    }),
   }),
 });
 
@@ -32,4 +46,5 @@ export const {
   useGetAllCategoriesQuery,
   useCreateServiceMutation,
   useDeleteServiceByIdMutation,
+  useUpdateServiceByIdMutation,
 } = derviceCategory;

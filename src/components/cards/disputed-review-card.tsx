@@ -1,4 +1,3 @@
-import { CloseOutlined } from "@ant-design/icons";
 import { Lists } from "../lists";
 import { IUserDetails } from "../../types";
 
@@ -29,7 +28,7 @@ export const DisputedReviewCard = ({
 
       <div className="lists-container">
         <Lists
-          key={title }
+          key={title}
           title={title}
           user={userDetails}
           renderedProperties={renderProperties}

@@ -1,33 +1,42 @@
 import { Button, Form, Input, notification, Select } from "antd";
 import { Option } from "antd/es/mentions";
+import { TService } from "../../types/service";
+import { useUpdateServiceByIdMutation } from "../../redux/api/service.api";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export const ServiceViewForm = ({
-  serviceName,
-  status,
+  serviceViewContent,
 }: {
-  serviceName: string;
-  status: string;
-  image?: string;
+  serviceViewContent: TService;
 }) => {
   const [form] = Form.useForm();
-  const [api, contextHolder] = notification.useNotification();
+  // RTK: update service item mutation
+  const [updateServiceById, { isLoading }] = useUpdateServiceByIdMutation();
+  const { name, status } = serviceViewContent;
 
-  const openNotification = (data: Record<string, unknown>) => {
-    const b = {
-      ...data,
-    };
-    api.open({
-      message: "Service Updated succesfully",
-      description: (
-        <pre>
-          <code>{JSON.stringify(b)}.</code>
-        </pre>
-      ),
-      duration: 2,
-    });
-  };
-  const onFinish = (values: Record<string, unknown>) => {
-    openNotification(values);
+  const onFinish = async (values: Record<string, unknown>) => {
+    console.log(values);
+
+    try {
+      const forms = new FormData();
+
+      forms?.append(
+        "data",
+        JSON.stringify({ name: values.serviceName, status: values.status })
+      );
+      // forms?.append("image", exactFile);
+      const response = await updateServiceById({
+        serviceId: serviceViewContent._id,
+        serviceInfo: forms,
+      });
+      console.log(response, "response");
+
+      toast.success("service updated");
+    } catch (error: any) {
+      toast.error(error.message ? error.message : "something went wrong");
+      console.log(error);
+    }
     // console.log("Received values of form: ", values);
   };
 
@@ -37,7 +46,6 @@ export const ServiceViewForm = ({
 
   return (
     <>
-      {contextHolder}
       <Form
         form={form}
         layout="vertical"
@@ -50,7 +58,7 @@ export const ServiceViewForm = ({
           label="Service Name"
           rules={[{ type: "string", min: 6 }]}
         >
-          <Input placeholder="input placeholder" defaultValue={serviceName} />
+          <Input placeholder="input placeholder" defaultValue={name} />
         </Form.Item>
         <Form.Item
           name="status"
@@ -71,17 +79,31 @@ export const ServiceViewForm = ({
           }}
         >
           <Form.Item style={{ width: "100%" }}>
-            <Button
-              htmlType="submit"
-              style={{
-                width: "100%",
-                background:
-                  "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
-                color: "#FDFDFD",
-              }}
-            >
-              Update
-            </Button>
+            {isLoading ? (
+              <Button
+                style={{
+                  width: "100%",
+                  background:
+                    "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
+                  color: "#FDFDFD",
+                }}
+                disabled
+              >
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              </Button>
+            ) : (
+              <Button
+                htmlType="submit"
+                style={{
+                  width: "100%",
+                  background:
+                    "linear-gradient(to right, #9D0DFE , #AA7AD6,  #E6E6FA)",
+                  color: "#FDFDFD",
+                }}
+              >
+                Update
+              </Button>
+            )}
           </Form.Item>
           <Form.Item style={{ width: "100%" }}>
             <Button style={{ width: "100%" }}>Delete</Button>

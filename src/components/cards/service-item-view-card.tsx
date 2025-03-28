@@ -1,6 +1,13 @@
+import { TService } from "../../types/service";
 import { ServiceViewForm } from "../forms/service-view-form";
 
-export default function ServiceItemViewCard() {
+export default function ServiceItemViewCard({
+  serviceItem,
+}: {
+  serviceItem: TService;
+}) {
+  console.log(serviceItem, "serviceItem");
+
   return (
     <div
       style={{
@@ -15,7 +22,11 @@ export default function ServiceItemViewCard() {
     >
       <div>
         <img
-          src="https://media.istockphoto.com/id/482679574/photo/making-a-change-of-look.jpg?s=612x612&w=0&k=20&c=Tr20-tCvPHLKh_W5pNUCymEGRUD_OfOJht97x35i8-o="
+          src={
+            serviceItem.image
+              ? serviceItem.image
+              : "https://moh.gov.om/images/Image_not_available.png"
+          }
           alt="service image"
           width={"100%"}
           style={{
@@ -23,11 +34,7 @@ export default function ServiceItemViewCard() {
           }}
         />
       </div>
-      <ServiceViewForm
-        serviceName="Hair Service"
-        status="Active"
-        image="https://media.istockphoto.com/id/482679574/photo/making-a-change-of-look.jpg?s=612x612&w=0&k=20&c=Tr20-tCvPHLKh_W5pNUCymEGRUD_OfOJht97x35i8-o="
-      />
+      <ServiceViewForm serviceViewContent={serviceItem} />
     </div>
   );
 }

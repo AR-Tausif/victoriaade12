@@ -1,7 +1,6 @@
-import { ServiceUploadBox } from "../boxes/service-upload-box";
 import { ServiceUploadForm } from "../forms/service-upload-form";
 
-export const CreateServiceCard = () => {
+export const CreateServiceCard = ({ onClose }: { onClose: any }) => {
   return (
     <div
       style={{
@@ -14,8 +13,8 @@ export const CreateServiceCard = () => {
         gap: 25,
       }}
     >
-      <ServiceUploadBox />
-      <ServiceUploadForm />
+      {/* <ServiceUploadBox /> */}
+      <ServiceUploadForm onClose={onClose} />
     </div>
   );
 };

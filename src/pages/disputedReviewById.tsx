@@ -1,5 +1,10 @@
 import { Checkbox, CheckboxProps, Col, Row, message } from "antd";
-import { DisputedReviewCard, NotFoundItem, PrimaryButton } from "../components";
+import {
+  DisputedReviewCard,
+  NotFoundItem,
+  PrimaryButton,
+  ReviewByDetailsReviewCard,
+} from "../components";
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
@@ -8,6 +13,7 @@ import {
   useObserveDisputedQuery,
 } from "../redux/api/disputed-review.api";
 import { toast } from "sonner";
+import { ReviewDetailsProviderDisputedCard } from "../components/cards/review-details-provider-disputed-card";
 
 export const DisputedReviewById = () => {
   const [selected, setSelected] = useState<"approve" | "remove" | "">("");
@@ -15,6 +21,7 @@ export const DisputedReviewById = () => {
   const [resolveDispute, { isLoading }] = useDisputeResolveMutation(); // RTK Query mutation
   const { data: observeData, isLoading: observeLoading } =
     useObserveDisputedQuery(id as string);
+
   if (observeLoading) {
     return (
       <div className="relative">
@@ -43,6 +50,7 @@ export const DisputedReviewById = () => {
       </div>
     );
   }
+
   if (!id) {
     return <NotFoundItem />;
   }
@@ -62,35 +70,6 @@ export const DisputedReviewById = () => {
     overallRating: "string",
     valueForMoney: "string",
   };
-
-  const renderPropertiesOne = [
-    { prop: "Full Name", value: "Anna Suraiya" },
-    {
-      prop: "Review Text",
-      value: "The artist was late and unprepared. Very disappointed.",
-    },
-    { prop: "Rating", value: "1/5" },
-    {
-      prop: "Photo",
-      value:
-        "https://elements-resized.envatousercontent.com/elements-cover-images/a6724af2-eb37-4a65-b962-f7905dd31c03?w=433&cf_fit=scale-down&q=85&format=auto&s=8a899a3d9d2b9effa4f27f249d321d2e2066e999a445a9b52ddc7f522c5f94ad",
-    },
-  ];
-
-  const renderPropertiesTwo = [
-    { prop: "Full Name", value: "Anna Suraiya" },
-    { prop: "Reason", value: "Miscommunication" },
-    {
-      prop: "Explanation",
-      value:
-        "The user was notified of a delay 30 minutes before the appointment",
-    },
-    {
-      prop: "Photo",
-      value:
-        "https://elements-resized.envatousercontent.com/elements-cover-images/a6724af2-eb37-4a65-b962-f7905dd31c03?w=433&cf_fit=scale-down&q=85&format=auto&s=8a899a3d9d2b9effa4f27f249d321d2e2066e999a445a9b52ddc7f522c5f94ad",
-    },
-  ];
 
   const handleChange = (checkbox: "approve" | "remove") => {
     setSelected(selected === checkbox ? "" : checkbox);
@@ -125,7 +104,7 @@ export const DisputedReviewById = () => {
     >
       <h3 style={{ textAlign: "center", fontWeight: 700 }}>Status</h3>
 
-      {observeData?.data?.status === 'resolved' ? (
+      {observeData?.data?.status === "resolved" ? (
         <p className="text-xl font-bold text-center">
           Disputed Review Already Resolved!
         </p>
@@ -164,17 +143,15 @@ export const DisputedReviewById = () => {
 
       <Row gutter={24}>
         <Col span={12}>
-          <DisputedReviewCard
+          <ReviewByDetailsReviewCard
             title="Review By"
-            renderProperties={renderPropertiesOne}
-            userDetails={userDetails}
+            reviewBy={observeData?.data?.reviewBy}
           />
         </Col>
         <Col span={12}>
-          <DisputedReviewCard
+          <ReviewDetailsProviderDisputedCard
             title="Provider's Dispute"
-            renderProperties={renderPropertiesTwo}
-            userDetails={userDetails}
+            providerDispute={observeData?.data?.providersDispute}
           />
         </Col>
       </Row>
