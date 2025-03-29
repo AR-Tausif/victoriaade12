@@ -22,12 +22,7 @@ export const NotificationCard = ({
           <BellOutlined />
         </div>
         <div className="">
-          <p
-            style={{
-              fontSize: 16,
-              marginBottom: 4,
-            }}
-          >
+          <p className="text-[18px] mb-1 font-bold">
             {
               // notificationItem.title.length > 20
               //   ? `${notificationItem.title.slice(0, 20)}...`

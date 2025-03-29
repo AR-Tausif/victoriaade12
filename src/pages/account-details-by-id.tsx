@@ -1,5 +1,10 @@
 import "./styles/account-details.css";
-import { PostCard, ProfileDetailsViewCard } from "../components";
+import {
+  AccountDetailsCardSkeleton,
+  PostCard,
+  PostSkeleton,
+  ProfileDetailsViewCard,
+} from "../components";
 import { useParams } from "react-router-dom";
 import {
   useSellerPostQuery,
@@ -22,17 +27,31 @@ export const AccountDetailsById = () => {
 
   // Loading state for profile
   if (profileLoading) {
-    return <div style={{ fontSize: 54 }}>Loading...</div>;
+    return (
+      <div className="flex justify-between gap-4">
+        <div style={{ width: "35%" }}>
+          <AccountDetailsCardSkeleton />
+        </div>
+        {/* Content section */}
+        <div
+          className="flex flex-col gap-4"
+          style={{
+            width: "64%",
+            minHeight: "100vh",
+            background: "#fdfdfd",
+            padding: 24,
+            borderRadius: 8,
+          }}
+        >
+          <PostSkeleton />
+          <PostSkeleton />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        gap: 16,
-      }}
-    >
+    <div className="flex justify-between gap-4">
       {/* Profile details view */}
       <div style={{ width: "35%" }}>
         <ProfileDetailsViewCard isNoneClose user={profileData?.data?.user} />
