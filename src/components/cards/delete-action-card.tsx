@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Modal } from "antd";
 import { PrimaryButton } from "../primary-button";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface ActionButtonsProps {
   open: boolean;
@@ -18,10 +19,18 @@ export const DeleteActionButtons: React.FC<ActionButtonsProps> = ({
   handleDelete,
   isLoading,
 }) => {
-  const deleteAction = () => {
-    handleDelete();
-
-    onConfirm(); // Close the modal after confirming
+  const deleteAction = async () => {
+    try {
+      await handleDelete();
+      onConfirm();
+    } catch (error: any) {
+      console.error("Error deleting user:", error);
+      toast.error(
+        error.data.message
+          ? error.data.message
+          : "Failed to delete user. Please try again."
+      );
+    }
   };
 
   return (

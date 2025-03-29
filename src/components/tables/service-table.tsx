@@ -25,8 +25,7 @@ export const ServiceListTable = ({
   const [selectedService, setSelectedService] =
     useState<TServiceMappedData | null>(null);
 
-  const [deleteService, { isLoading, isSuccess }] =
-    useDeleteServiceByIdMutation();
+  const [deleteService, { isLoading }] = useDeleteServiceByIdMutation();
 
   const columns: TableColumnsType<TServiceMappedData> = [
     {
@@ -84,10 +83,13 @@ export const ServiceListTable = ({
           >
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
-          <p style={styles.actionIcon} onClick={() => setDeleteUser(true)}>
+          <p style={styles.actionIcon}>
             <UserDeleteOutlined
               style={styles.iconDelete}
-              onClick={() => setDeleteServiceId(_record.key.toString())}
+              onClick={() => {
+                setDeleteUser(true);
+                setDeleteServiceId(_record.key);
+              }}
             />
           </p>
         </div>
