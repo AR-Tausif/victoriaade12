@@ -132,6 +132,7 @@ export const AccountDetailsTable = ({
         user={modalShowUser}
       />
       <DeleteActionButtons
+        handleDelete={() => {}}
         open={deleteUser}
         onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
