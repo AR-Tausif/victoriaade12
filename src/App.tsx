@@ -26,6 +26,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "./components";
 import "./App.css";
 import "./antd-overwrite.css";
+import { HandleLogOut } from "./lib";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -85,10 +86,11 @@ const sidebarItems = [
     ],
   },
   {
-    key: "/login",
+    key: "logout",
     icon: <LoginOutlined />,
     label: "Logout",
-    path: "/login",
+    path: "",
+    onClick: HandleLogOut,
   },
 ];
 

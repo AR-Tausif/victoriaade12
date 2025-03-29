@@ -17,11 +17,17 @@ import {
 import App from "../App";
 import { AuthWrapper } from "../components/auth-wrapper";
 import Demo from "../pages/demo";
+import { PrivateRoute } from "../components";
+import { PublicRoute } from "../components/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/",
@@ -72,9 +78,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: (
-      <AuthWrapper>
-        <Login />,
-      </AuthWrapper>
+      <PublicRoute>
+        <AuthWrapper>
+          <Login />,
+        </AuthWrapper>
+      </PublicRoute>
     ),
   },
   {
