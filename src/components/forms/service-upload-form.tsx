@@ -1,4 +1,3 @@
-import React from "react";
 import { Form, Input, message, Select } from "antd";
 import { Option } from "antd/es/mentions";
 import { PrimaryButton } from "../primary-button";
@@ -9,6 +8,12 @@ import { useCreateServiceMutation } from "../../redux/api/service.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 // import "./styles/service-upload-box.css";
+interface ServiceFormValues {
+  service_name: string;
+  status: "active" | "inactive";
+  file?: { originFileObj: File }[]; // Optional because the file upload is not required
+}
+
 const { Dragger } = Upload;
 
 export const ServiceUploadForm = ({ onClose }: { onClose: any }) => {
@@ -16,7 +21,7 @@ export const ServiceUploadForm = ({ onClose }: { onClose: any }) => {
 
   const [createService, { isLoading }] = useCreateServiceMutation();
 
-  const onFinish = async (values: Record<string, unknown>) => {
+  const onFinish = async (values: ServiceFormValues) => {
     try {
       const fileList = form.getFieldValue("file");
 
@@ -26,10 +31,16 @@ export const ServiceUploadForm = ({ onClose }: { onClose: any }) => {
         "data",
         JSON.stringify({ name: values.service_name, status: values.status })
       );
-      if (fileList?.length) {
-        const exactFile = fileList[fileList.length - 1];
-        forms.append("image", exactFile);
+
+      const exactFile = values.file![0].originFileObj as File;
+
+      if (!exactFile) {
+        toast.error("Please upload a file!");
+        return;
       }
+
+      forms.append("image", exactFile);
+
       // log the FormData
       // console.log("FormData content:");
       // for (const pair of forms.entries()) {
@@ -39,9 +50,13 @@ export const ServiceUploadForm = ({ onClose }: { onClose: any }) => {
       const response = await createService(forms).unwrap();
 
       if (!response.success) {
-        toast.error(response.message || "something went wrong");
+        toast.error(response.message || "Something went wrong");
+        return;
       }
-      toast.success(response.message ? response.message : "service updated");
+
+      toast.success(response.message || "Service created successfully");
+      form.resetFields(); // Reset form after successful submission
+      onClose(false);
     } catch (error: any) {
       toast.error(error.message ? error.message : "something went wrong");
       console.log(error);
@@ -67,12 +82,22 @@ export const ServiceUploadForm = ({ onClose }: { onClose: any }) => {
           name="file"
           valuePropName="fileList"
           getValueFromEvent={(e) => e.fileList}
+          rules={[{ required: true, message: "Service photo is required!" }]}
         >
           <Dragger
             name="file"
             multiple={false}
-            beforeUpload={() => false} // Prevent auto-upload
             maxCount={1}
+            beforeUpload={(file) => {
+              const maxSize = 4 * 1024 * 1024; // 4MB limit
+
+              if (file.size > maxSize) {
+                toast.error("File size must be less than 4MB");
+                return Upload.LIST_IGNORE; // Prevents the file from being added
+              }
+
+              return false; // Prevents auto-upload
+            }}
             style={{ height: "52px", background: "#A011FF", color: "#FDFDFD" }}
           >
             <div

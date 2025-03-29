@@ -122,15 +122,14 @@ export const ServiceListTable = ({
     try {
       const response = await deleteService(deleteServiceId).unwrap();
       console.log(response);
+
       toast.success(
-        response.data.message ? response.data.message : "successfully logged in"
+        response.message ? response.message : "Deleted category service"
       );
-      setDeleteUser(false);
     } catch (error: any) {
       toast.error(
         error.data.message ? error.data.message : "something went wrong!"
       );
-      setDeleteUser(false);
     }
   };
   return (
@@ -140,15 +139,6 @@ export const ServiceListTable = ({
         dataSource={mappedServiceData}
         size="middle"
         style={styles.table}
-        onRow={(record) => ({
-          onClick: () => {
-            const clickedService = serviceData.find(
-              (s) => s._id === record.key
-            );
-            setSelectedService(clickedService || null);
-            setOpenAccountDetail(true);
-          },
-        })}
       />
 
       <Modal

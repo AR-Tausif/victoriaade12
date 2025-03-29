@@ -1,5 +1,4 @@
 import { victoriaBaseApi } from ".";
-import { TCreateServiceBody } from "../../types/service";
 import { tagTypes } from "../tag.types";
 
 const derviceCategory = victoriaBaseApi.injectEndpoints({
@@ -17,6 +16,7 @@ const derviceCategory = victoriaBaseApi.injectEndpoints({
         method: "POST",
         body: serviceInfo,
       }),
+      invalidatesTags: [tagTypes.category],
     }),
     deleteServiceById: builder.mutation({
       query: (serviceId: string) => ({
