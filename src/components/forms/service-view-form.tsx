@@ -1,6 +1,6 @@
-import { Button, Form, Input, notification, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { Option } from "antd/es/mentions";
-import { TService } from "../../types/service";
+import { TServiceMappedData } from "../../types/service";
 import { useUpdateServiceByIdMutation } from "../../redux/api/service.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -8,12 +8,12 @@ import { Loader2 } from "lucide-react";
 export const ServiceViewForm = ({
   serviceViewContent,
 }: {
-  serviceViewContent: TService;
+  serviceViewContent: TServiceMappedData;
 }) => {
   const [form] = Form.useForm();
   // RTK: update service item mutation
   const [updateServiceById, { isLoading }] = useUpdateServiceByIdMutation();
-  const { name, status } = serviceViewContent;
+  const { serviceName, status } = serviceViewContent;
 
   const onFinish = async (values: Record<string, unknown>) => {
     console.log(values);
@@ -27,7 +27,7 @@ export const ServiceViewForm = ({
       );
       // forms?.append("image", exactFile);
       const response = await updateServiceById({
-        serviceId: serviceViewContent._id,
+        serviceId: serviceViewContent.key,
         serviceInfo: forms,
       });
       console.log(response, "response");
@@ -58,7 +58,7 @@ export const ServiceViewForm = ({
           label="Service Name"
           rules={[{ type: "string", min: 6 }]}
         >
-          <Input placeholder="input placeholder" defaultValue={name} />
+          <Input placeholder="input placeholder" defaultValue={serviceName} />
         </Form.Item>
         <Form.Item
           name="status"

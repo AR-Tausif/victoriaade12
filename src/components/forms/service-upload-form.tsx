@@ -23,7 +23,6 @@ export const ServiceUploadForm = ({ onClose }: { onClose: any }) => {
 
   const onFinish = async (values: ServiceFormValues) => {
     try {
-      const fileList = form.getFieldValue("file");
 
       const forms = new FormData();
 

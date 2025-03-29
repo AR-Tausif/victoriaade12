@@ -1,15 +1,14 @@
 import { Modal, Table, TableColumnsType } from "antd";
 import { useState } from "react";
 import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
-import { DataType } from "../../assets/data/data.account-details";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import ServiceItemViewCard from "../cards/service-item-view-card";
 import { useDeleteServiceByIdMutation } from "../../redux/api/service.api";
 import { toast } from "sonner";
-import { TService } from "../../types/service";
+import { TService, TServiceMappedData } from "../../types/service";
 
 type TProps = {
-  deleteUser: any;
+  deleteUser: boolean;
   setDeleteUser: any;
   serviceId: any;
   setServiceId: any;
@@ -19,17 +18,17 @@ export const ServiceListTable = ({
   serviceData,
   deleteUser,
   setDeleteUser,
-  serviceId,
   setServiceId,
 }: TProps) => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [deleteServiceId, setDeleteServiceId] = useState("");
-  const [selectedService, setSelectedService] = useState<TService | null>(null);
+  const [selectedService, setSelectedService] =
+    useState<TServiceMappedData | null>(null);
 
   const [deleteService, { isLoading, isSuccess }] =
     useDeleteServiceByIdMutation();
 
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<TServiceMappedData> = [
     {
       title: "Serial",
       dataIndex: "serial",
@@ -39,7 +38,7 @@ export const ServiceListTable = ({
       title: "Image",
       dataIndex: "image",
       align: "center",
-      render: (_text: string, record: DataType) => (
+      render: (_text: string, record: TServiceMappedData) => (
         <div style={styles.imageContainer}>
           <img
             src={
@@ -47,7 +46,7 @@ export const ServiceListTable = ({
                 ? _text
                 : "https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
             }
-            alt={record.name}
+            alt={record.serviceName}
             style={styles.image}
           />
         </div>
@@ -77,11 +76,11 @@ export const ServiceListTable = ({
       title: "Action",
       dataIndex: "action",
       align: "center",
-      render: (_text: string, _record: DataType) => (
+      render: (_text: string, _record: TServiceMappedData) => (
         <div style={styles.actionContainer}>
           <p
             style={styles.actionIcon}
-            onClick={() => handleShowService(_record.key.toString())}
+            onClick={() => handleShowService(_record)}
           >
             <EyeInvisibleOutlined style={styles.icon} />
           </p>
@@ -96,7 +95,7 @@ export const ServiceListTable = ({
     },
   ];
 
-  const mappedServiceData = serviceData.map(
+  const mappedServiceData: TServiceMappedData[] = serviceData.map(
     (service: TService, index: number) => ({
       key: service._id,
       serial: `#${index}`,
@@ -109,10 +108,11 @@ export const ServiceListTable = ({
   );
 
   // handle functions here
-  const handleShowService = (_id: string) => {
+  const handleShowService = (recordItem: TServiceMappedData) => {
     setOpenAccountDetail(true);
-    console.log("_id when triggered button: " + _id);
-    setServiceId(_id);
+    console.log("_id when triggered button: " + recordItem.key);
+    setServiceId(recordItem.key);
+    setSelectedService(recordItem);
   };
 
   const handleDelete = async () => {
@@ -134,7 +134,7 @@ export const ServiceListTable = ({
   };
   return (
     <>
-      <Table<DataType>
+      <Table<TServiceMappedData>
         columns={columns}
         dataSource={mappedServiceData}
         size="middle"

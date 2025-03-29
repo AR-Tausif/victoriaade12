@@ -1,10 +1,10 @@
-import { TService } from "../../types/service";
+import { TService, TServiceMappedData } from "../../types/service";
 import { ServiceViewForm } from "../forms/service-view-form";
 
 export default function ServiceItemViewCard({
   serviceItem,
 }: {
-  serviceItem: TService;
+  serviceItem: TServiceMappedData;
 }) {
   console.log(serviceItem, "serviceItem");
 
