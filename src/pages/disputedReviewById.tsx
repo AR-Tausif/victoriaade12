@@ -1,6 +1,5 @@
-import { Checkbox, CheckboxProps, Col, Row, message } from "antd";
+import { Checkbox, Col, Row, message } from "antd";
 import {
-  DisputedReviewCard,
   NotFoundItem,
   PrimaryButton,
   ReviewByDetailsReviewCard,
@@ -54,22 +53,6 @@ export const DisputedReviewById = () => {
   if (!id) {
     return <NotFoundItem />;
   }
-  // const onChange: CheckboxProps["onChange"] = () => {};
-
-  const userDetails = {
-    fullName: "Anika Tabassum",
-    userName: "tausif",
-    email: "string@gmail.com",
-    phoneNumber: "01823771127",
-    photo: "string",
-    location: "string",
-    accountType: "string",
-    subscriptionType: "string",
-    services: "string",
-    businessName: "string",
-    overallRating: "string",
-    valueForMoney: "string",
-  };
 
   const handleChange = (checkbox: "approve" | "remove") => {
     setSelected(selected === checkbox ? "" : checkbox);
@@ -83,11 +66,18 @@ export const DisputedReviewById = () => {
 
     try {
       const response = await resolveDispute(id).unwrap();
-      message.success(`Dispute marked as resolved: ${selected}`);
+      message.success(
+        response.message
+          ? response.message
+          : `Dispute marked as resolved: ${selected}`
+      );
       toast.success("Disputed review mark as resolved");
-    } catch (error) {
-      message.error("Failed to resolve dispute. Please try again.");
-      toast.error("Failed to resolve dispute. Please try again.");
+    } catch (error: any) {
+      toast.error(
+        error.data.message
+          ? error.data.message
+          : "Failed to resolve dispute. Please try again."
+      );
     }
   };
 

@@ -10,7 +10,7 @@ import { Loader2 } from "lucide-react";
 
 export const Setting = () => {
   const [createPrivacy, { isLoading }] = useCreatePrivacyMutation();
-  const { data: privacyData, isLoading: getPrivacyLoading } =
+  const { data: privacyData } =
     useGetPrivacyQuery();
   const [content, setContent] = useState(privacyData?.data?.body || "");
 

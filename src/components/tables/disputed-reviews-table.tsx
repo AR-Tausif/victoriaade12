@@ -7,7 +7,6 @@ import { UserDetailsModal } from "../modals";
 import { Link } from "react-router-dom";
 import { titleCase } from "../../utils";
 import { useAllDisputedReviewsQuery } from "../../redux/api/disputed-review.api";
-import { DataType } from "../../assets/data/data.account-details";
 import { TableSkeleton } from "../table-skeleton";
 import { TReview, TUser } from "../../types/disputed-review";
 
@@ -20,6 +19,20 @@ export interface DisputedReviewDataType {
   status: string;
   action: string;
 }
+
+export type TMappedData = {
+  key: string;
+  serial: number;
+  reviewBy: TUser;
+  provider: TUser;
+  reason: string;
+  status: string; // approve and pending
+  action: string;
+  providerName?: string;
+  providerProfile?: string;
+  reviewerName?: string;
+  reviewerProfile?: string;
+};
 
 export const DisputedReviewsTable = () => {
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
@@ -38,20 +51,8 @@ export const DisputedReviewsTable = () => {
   //     setOpenAccountDetail(true);
   //   }
   // };
-  type TMappedData = {
-    key: string;
-    serial: number;
-    reviewBy: TUser;
-    provider: TUser;
-    reason: string;
-    status: string; // approve and pending
-    action: string;
-    providerName?: string;
-    providerProfile?: string;
-    reviewerName?: string;
-    reviewerProfile?: string;
-  };
-  const mappedData: TMappedData = data?.data?.data.map(
+
+  const mappedData: any = data?.data?.data.map(
     (review: TReview, index: number) => ({
       key: review._id,
       serial: `#${index}`,
@@ -75,7 +76,7 @@ export const DisputedReviewsTable = () => {
       title: "Review by",
       dataIndex: "reviewBy",
       align: "center",
-      render: (text: string, record: TMappedData) => (
+      render: (_: string, record: any) => (
         <div
           className="name-cell"
           style={{ display: "flex", alignItems: "center", gap: "8px" }}
@@ -98,7 +99,7 @@ export const DisputedReviewsTable = () => {
       title: "Provider",
       dataIndex: "provider",
       align: "center",
-      render: (text: string, record: TMappedData) => (
+      render: (_: string, record: any) => (
         <div
           className="name-cell"
           style={{ display: "flex", alignItems: "center", gap: "8px" }}
@@ -122,7 +123,7 @@ export const DisputedReviewsTable = () => {
       title: "Status",
       dataIndex: "status",
       align: "center",
-      render: (text: string, _record) =>
+      render: (text: string) =>
         text.toLowerCase() == "approved" ? (
           <p style={{ fontWeight: 600, color: "#A011FF" }}>
             {titleCase(text)}{" "}
@@ -160,6 +161,7 @@ export const DisputedReviewsTable = () => {
         user={modalShowUser}
       />
       <DeleteActionButtons
+        handleDelete={() => {}}
         open={deleteUser}
         onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}
@@ -167,22 +169,7 @@ export const DisputedReviewsTable = () => {
     </>
   );
 
-  function renderName(_text: string, record: TMappedData) {
-    return (
-      <div style={styles.flexCenter}>
-        <img
-          src="https://digitalreach.asia/wp-content/uploads/2021/11/placeholder-image.png"
-          alt={"record.provider"}
-          style={styles.avatar}
-        />
-        <h4 style={styles.name}>{"record.provider"}</h4>
-      </div>
-    );
-  }
-
-  function renderActions(text, record: DataType) {
-    console.log(text, record);
-
+  function renderActions(__: any, record: any) {
     return (
       <div style={styles.actionContainer}>
         <Link to={`/disputed-reviews/${record?.key}`}>

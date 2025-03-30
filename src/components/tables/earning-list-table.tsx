@@ -139,7 +139,7 @@ export const EarningListTable = () => {
     setOpenAccountDetail(true);
     // console.log({ users, modalShowUser });
   };
-  
+
   const columns = [
     {
       title: "Serial",
@@ -183,7 +183,7 @@ export const EarningListTable = () => {
     {
       title: "Action",
       key: "action",
-      render: (value: string, record: any,) => (
+      render: (value: string, record: any) => (
         <div className="action-buttons">
           <EyeOutlined
             className="view-icon"
@@ -197,7 +197,7 @@ export const EarningListTable = () => {
       ),
     },
   ];
-  
+
   const filteredData = earningData.filter((item) =>
     accountTypeFilter === "all"
       ? true
@@ -215,6 +215,7 @@ export const EarningListTable = () => {
         className="custom-table"
       />
       <DeleteActionButtons
+        handleDelete={() => {}}
         open={deleteUser}
         onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}

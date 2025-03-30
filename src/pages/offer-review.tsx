@@ -1,5 +1,5 @@
 import { Button, Modal, Popconfirm } from "antd";
-import { ChevronDown, Eye, Loader2, Search } from "lucide-react";
+import { ChevronDown, Eye, Search } from "lucide-react";
 import { useState } from "react";
 import { OfferReviewTextField } from "../components/boxes/offer-review-text-field";
 import { OfferReviewType } from "../types/offer-review";
@@ -9,7 +9,7 @@ import {
   useRejectOfferMutation,
 } from "../redux/api/offer-review.api";
 import { toast } from "sonner";
-import { OfferReviewTableSkeleton, TableSkeleton } from "../components";
+import { OfferReviewTableSkeleton } from "../components";
 
 export const OfferReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
