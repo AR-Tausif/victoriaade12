@@ -13,6 +13,7 @@ import {
   ForgotPassword,
   SetPassword,
   TermsOfUse,
+  OfferReview,
 } from "../pages";
 import App from "../App";
 import { AuthWrapper } from "../components/auth-wrapper";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/service",
         element: <Service />,
+      },
+      {
+        path: "/offer-review",
+        element: <OfferReview />,
       },
       {
         path: "/disputed-reviews",

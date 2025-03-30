@@ -1,22 +1,18 @@
 import JoditEditor from "jodit-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
-import { useCreatePrivacyMutation } from "../redux/api/pat.api";
+import {
+  useCreatePrivacyMutation,
+  useGetPrivacyQuery,
+} from "../redux/api/pat.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 export const Setting = () => {
-  const [content, setContent] = useState("");
-  // const appendLog = useCallback(
-  //   (message) => {
-  // console.log("logs = ", logs);
-  //     const newLogs = [...logs, message];
-  //     setLogs(newLogs);
-  //   },
-  //   [logs, setLogs]
-  // );
-
   const [createPrivacy, { isLoading }] = useCreatePrivacyMutation();
+  const { data: privacyData, isLoading: getPrivacyLoading } =
+    useGetPrivacyQuery();
+  const [content, setContent] = useState(privacyData?.data?.body || "");
 
   const config = useMemo(
     () => ({
@@ -36,7 +32,7 @@ export const Setting = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await createPrivacy({body : content}).unwrap();
+      const response = await createPrivacy({ body: content }).unwrap();
       console.log("response = ", response);
       toast.success(
         response.message ? response.message : "Privacy created successfully"
@@ -49,6 +45,11 @@ export const Setting = () => {
       );
     }
   };
+  useEffect(() => {
+    if (privacyData?.data?.body) {
+      setContent(privacyData?.data?.body);
+    }
+  }, [privacyData]);
   return (
     <div>
       <h3>Privacy Policy</h3>
@@ -66,14 +67,7 @@ export const Setting = () => {
             config={config}
             tabIndex={1}
             onBlur={onBlur}
-            // onChange={onChange}
           />
-          {/* <h3>Logs</h3>
-          <div>
-            {logs.map((log, index) => (
-              <p key={index}>{log}</p>
-            ))}
-          </div> */}
         </div>
         {isLoading ? (
           <PrimaryButton styles={{ width: "100%" }} disabled>

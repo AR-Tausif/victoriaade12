@@ -27,6 +27,7 @@ import { Logo } from "./components";
 import "./App.css";
 import "./antd-overwrite.css";
 import { HandleLogOut } from "./lib";
+import { BadgePercent } from "lucide-react";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -47,6 +48,12 @@ const sidebarItems = [
     icon: <ProductOutlined />,
     label: "Service",
     path: "/service",
+  },
+  {
+    key: "/offer-review",
+    icon: <BadgePercent className="text-sm" />,
+    label: "Offer Review",
+    path: "/offer-review",
   },
   // {
   //   key: "/earning",
