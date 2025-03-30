@@ -1,6 +1,9 @@
 import JoditEditor from "jodit-react";
 import { useCallback, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
+import { useCreatePrivacyMutation } from "../redux/api/pat.api";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export const Setting = () => {
   const [content, setContent] = useState("");
@@ -12,6 +15,8 @@ export const Setting = () => {
   //   },
   //   [logs, setLogs]
   // );
+
+  const [createPrivacy, { isLoading }] = useCreatePrivacyMutation();
 
   const config = useMemo(
     () => ({
@@ -28,6 +33,22 @@ export const Setting = () => {
     },
     [setContent]
   );
+
+  const handleSubmit = async () => {
+    try {
+      const response = await createPrivacy({body : content}).unwrap();
+      console.log("response = ", response);
+      toast.success(
+        response.message ? response.message : "Privacy created successfully"
+      );
+    } catch (error: any) {
+      toast.error(
+        error.data.message
+          ? error.data.message
+          : "Something went wrong to create privacy"
+      );
+    }
+  };
   return (
     <div>
       <h3>Privacy Policy</h3>
@@ -54,7 +75,15 @@ export const Setting = () => {
             ))}
           </div> */}
         </div>
-        <PrimaryButton styles={{ width: "100%" }}>Save Changes</PrimaryButton>
+        {isLoading ? (
+          <PrimaryButton styles={{ width: "100%" }} disabled>
+            Saving... <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          </PrimaryButton>
+        ) : (
+          <PrimaryButton styles={{ width: "100%" }} onClick={handleSubmit}>
+            Save Changes
+          </PrimaryButton>
+        )}
       </div>
     </div>
   );

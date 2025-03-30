@@ -8,6 +8,8 @@ export const tagTypes = {
   products: "Products",
   newProducts: "NewProducts",
   product: "Product",
+  privacy : "Privacy",	
+  terms: "Terms",
 };
 
-export const tagTypesList = [tagTypes.category, tagTypes.review];
+export const tagTypesList = [tagTypes.category, tagTypes.review, tagTypes.privacy];

@@ -1,16 +1,18 @@
 import JoditEditor from "jodit-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
+import {
+  useCreateTermsMutation,
+  useGetPrivacyQuery,
+} from "../redux/api/pat.api";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 export const TermsOfUse = () => {
-  const [content, setContent] = useState("");
-  // const appendLog = useCallback(
-  //   (message) => {
-  //     const newLogs = [...logs, message];
-  //     setLogs(newLogs);
-  //   },
-  //   [logs, setLogs]
-  // );
+  const { data, isLoading: getTermsLoading } = useGetPrivacyQuery();
+  const [createTerms, { isLoading }] = useCreateTermsMutation();
+
+  const [content, setContent] = useState(data?.data?.body || "");
 
   const config = useMemo(
     () => ({
@@ -23,11 +25,36 @@ export const TermsOfUse = () => {
 
   const onBlur = useCallback(
     (newContent: string) => {
-      // appendLog(`onBlur triggered with ${newContent}`);
       setContent(newContent);
     },
     [setContent]
   );
+
+  useEffect(() => {
+    if (data?.data?.body) {
+      setContent(data?.data?.body);
+    }
+  }, [data]);
+  if (getTermsLoading) return <Loader2 className="h-12 w-12 animate-spin" />;
+
+  const handleSubmit = async () => {
+    try {
+      const response = await createTerms({ body: content }).unwrap();
+      console.log("response = ", response);
+      toast.success(
+        response.message ? response.message : "Terms created successfully"
+      );
+    } catch (error: any) {
+      toast.error(
+        error.data.message
+          ? error.data.message
+          : "Something went wrong to create terms"
+      );
+    }
+  };
+
+  console.log("data = ", data);
+
   return (
     <div>
       <h3>Terms Of Use</h3>
@@ -45,16 +72,17 @@ export const TermsOfUse = () => {
             config={config}
             tabIndex={1}
             onBlur={onBlur}
-            // onChange={onChange}
           />
-          {/* <h3>Logs</h3>
-          <div>
-            {logs.map((log, index) => (
-              <p key={index}>{log}</p>
-            ))}
-          </div> */}
         </div>
-        <PrimaryButton styles={{ width: "100%" }}>Save Changes</PrimaryButton>
+        {isLoading ? (
+          <PrimaryButton styles={{ width: "100%" }} disabled>
+            Saving... <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          </PrimaryButton>
+        ) : (
+          <PrimaryButton styles={{ width: "100%" }} onClick={handleSubmit}>
+            Save Changes
+          </PrimaryButton>
+        )}
       </div>
     </div>
   );
