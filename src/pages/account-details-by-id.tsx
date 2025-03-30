@@ -69,7 +69,7 @@ export const AccountDetailsById = () => {
       >
         <h2 style={{ padding: "20px 0" }}>Posts</h2>
         {sellerPostLoading ? (
-          <div>Loading posts...</div>
+          <PostSkeleton />
         ) : (
           <div
             style={{

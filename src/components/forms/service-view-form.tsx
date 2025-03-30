@@ -56,7 +56,7 @@ export const ServiceViewForm = ({
         <Form.Item
           name="serviceName"
           label="Service Name"
-          rules={[{ type: "string", min: 6 }]}
+          rules={[{ type: "string" }]}
         >
           <Input placeholder="input placeholder" defaultValue={serviceName} />
         </Form.Item>
