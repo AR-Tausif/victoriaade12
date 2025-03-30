@@ -1,10 +1,7 @@
 import JoditEditor from "jodit-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { PrimaryButton } from "../components";
-import {
-  useCreateTermsMutation,
-  useGetTermsQuery,
-} from "../redux/api/pat.api";
+import { CircledSpinner, PrimaryButton } from "../components";
+import { useCreateTermsMutation, useGetTermsQuery } from "../redux/api/pat.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
@@ -35,7 +32,14 @@ export const TermsOfUse = () => {
       setContent(data?.data?.body);
     }
   }, [data]);
-  if (getTermsLoading) return <Loader2 className="h-12 w-12 animate-spin" />;
+  if (getTermsLoading)
+    return (
+      <div className="w-full flex justify-center items-center">
+        <div className="">
+          <CircledSpinner />
+        </div>
+      </div>
+    );
 
   const handleSubmit = async () => {
     try {

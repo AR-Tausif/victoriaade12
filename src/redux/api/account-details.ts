@@ -31,6 +31,14 @@ const accountDetailsApi = victoriaBaseApi.injectEndpoints({
         url: `/account-details/seller-posts/${sellerId}`,
         method: "GET",
       }),
+      providesTags: [tagTypes.post],
+    }),
+    deleteSellerPost: builder.mutation({
+      query: (postId: string) => ({
+        url: `/account-details/delete-post/${postId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.post], // invalidate the users api after deleting a user
     }),
     editProfile: builder.mutation({
       query: (userInfo: TProfileEdit) => ({
@@ -54,5 +62,6 @@ export const {
   useUsersQuery,
   useSellerProfileQuery,
   useSellerPostQuery,
+  useDeleteSellerPostMutation,
   useDeleteProfileMutation,
 } = accountDetailsApi;

@@ -21,10 +21,6 @@
   align-items: center;
 }
 
-.user-info {
-  display: flex;
-  gap: 10px;
-}
 
 .user-image {
   width: 37px;
@@ -33,30 +29,5 @@
   object-fit: cover;
 }
 
-.user-details .studio-name {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.location {
-  display: flex;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #727272;
-}
-
-.map-icon {
-  margin-top: 3px;
-}
-
-.address {
-  font-weight: 700;
-}
-
-.delete-icon {
-  font-size: 16px;
-  color: #010101;
-}
 
 /* ANT design styels here  */

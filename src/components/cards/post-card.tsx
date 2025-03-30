@@ -1,8 +1,23 @@
+import { toast } from "sonner";
+import { useDeleteSellerPostMutation } from "../../redux/api/account-details";
 import { PostHeadIntroBox } from "../boxes/post-head-intro-box";
+import { useState } from "react";
 
 export const PostCard = ({ user, post }: { user: any; post: any }) => {
-  console.log({ user, post });
+  const [open, setOpen] = useState(false);
+  const [deleteSellerPost, { isLoading }] = useDeleteSellerPostMutation();
 
+  const handleDeletepost = async () => {
+    try {
+      const response = await deleteSellerPost(post._id).unwrap();
+      toast.success(response.message || "Post deleted successfully");
+      setOpen(false);
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Something went wrong to delete post"
+      );
+    }
+  };
   return (
     <div
       style={{
@@ -16,7 +31,13 @@ export const PostCard = ({ user, post }: { user: any; post: any }) => {
       }}
       role="post item"
     >
-      <PostHeadIntroBox user={user} />
+      <PostHeadIntroBox
+        isLoading={isLoading}
+        handleDeletepost={handleDeletepost}
+        user={user}
+        open={open}
+        setOpen={setOpen}
+      />
       {/* text section */}
       <div
         style={{
