@@ -4,12 +4,19 @@ export const tagTypes = {
   otp: "Otp",
   wishlist: "Wishlist",
   category: "Category",
+  advertise: "Advertise",
   review: "Review",
   products: "Products",
   newProducts: "NewProducts",
   product: "Product",
-  privacy : "Privacy",	
+  privacy: "Privacy",
   terms: "Terms",
 };
 
-export const tagTypesList = [tagTypes.category, tagTypes.review, tagTypes.privacy];
+export const tagTypesList = [
+  tagTypes.category,
+  tagTypes.review,
+  tagTypes.privacy,
+  tagTypes.terms,
+  tagTypes.advertise,
+];

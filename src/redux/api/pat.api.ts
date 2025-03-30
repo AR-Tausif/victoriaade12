@@ -32,9 +32,16 @@ const patApi = victoriaBaseApi.injectEndpoints({
           url: "/pat/privacy",
           method: "GET",
         }),
-        providesTags: [tagTypes.privacy],
+        providesTags: [tagTypes.privacy, tagTypes.terms],
       }
     ),
+    getTerms: builder.query<{ success: boolean; data: staticdataType }, void>({
+      query: () => ({
+        url: "/pat/terms",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.terms],
+    }),
   }),
 });
 
@@ -42,4 +49,5 @@ export const {
   useCreateTermsMutation,
   useCreatePrivacyMutation,
   useGetPrivacyQuery,
+  useGetTermsQuery
 } = patApi;

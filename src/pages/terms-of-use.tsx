@@ -3,13 +3,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { PrimaryButton } from "../components";
 import {
   useCreateTermsMutation,
-  useGetPrivacyQuery,
+  useGetTermsQuery,
 } from "../redux/api/pat.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 export const TermsOfUse = () => {
-  const { data, isLoading: getTermsLoading } = useGetPrivacyQuery();
+  const { data, isLoading: getTermsLoading } = useGetTermsQuery();
   const [createTerms, { isLoading }] = useCreateTermsMutation();
 
   const [content, setContent] = useState(data?.data?.body || "");

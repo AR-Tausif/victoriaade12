@@ -70,14 +70,7 @@ export const ServiceViewForm = ({
             <Option value="inactive">In Active</Option>
           </Select>
         </Form.Item>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 8,
-            //   alignItems: "center",
-          }}
-        >
+        <div className="flex justify-center gap-2">
           <Form.Item style={{ width: "100%" }}>
             {isLoading ? (
               <Button
