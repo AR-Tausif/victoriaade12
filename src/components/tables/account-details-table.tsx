@@ -5,6 +5,8 @@ import { DeleteActionButtons } from "../cards/delete-action-card";
 import { UserDetailsModal } from "../modals";
 import { Link } from "react-router-dom";
 import { AdminProfile } from "../../types/profile";
+import { useDeleteProfileMutation } from "../../redux/api/account-details";
+import { toast } from "sonner";
 
 const { Option } = Select;
 
@@ -20,6 +22,9 @@ export const AccountDetailsTable = ({
   const [deleteUser, setDeleteUser] = useState(false);
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
   const [modalShowUser, setModalShowUser] = useState<AdminProfile | null>(null);
+  const [deleteServiceId, setDeleteServiceId] = useState("");
+
+  const [deleteProfile, { isLoading }] = useDeleteProfileMutation();
 
   // Transform the data for the table
   const tableData = data?.map((item, index) => ({
@@ -109,14 +114,36 @@ export const AccountDetailsTable = ({
             </Link>
           )}
           <UserDeleteOutlined
-            onClick={() => setDeleteUser(true)}
             className="delete-icon"
             style={{ cursor: "pointer", color: "#ff4d4f" }}
+            // onClick={() => setDeleteUser(true)}
+            onClick={() => {
+              setDeleteUser(true);
+              setDeleteServiceId(record.key);
+            }}
           />
         </div>
       ),
     },
   ];
+
+  const handleDelete = async () => {
+    if (!deleteServiceId) return;
+    console.log({ deleteServiceId });
+
+    try {
+      const response = await deleteProfile(deleteServiceId).unwrap();
+      console.log(response);
+
+      toast.success(
+        response.message ? response.message : "Deleted category service"
+      );
+    } catch (error: any) {
+      toast.error(
+        error.data.message ? error.data.message : "something went wrong!"
+      );
+    }
+  };
 
   return (
     <div className="user-table-container">
@@ -132,7 +159,8 @@ export const AccountDetailsTable = ({
         user={modalShowUser}
       />
       <DeleteActionButtons
-        handleDelete={() => {}}
+        handleDelete={handleDelete}
+        isLoading={isLoading}
         open={deleteUser}
         onConfirm={() => setDeleteUser(false)}
         onCancel={() => setDeleteUser(false)}

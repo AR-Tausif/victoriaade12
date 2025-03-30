@@ -1,5 +1,6 @@
 import { victoriaBaseApi } from ".";
 import { TProfileEdit } from "../../types/profile.type";
+import { tagTypes } from "../tag.types";
 
 const accountDetailsApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -16,12 +17,14 @@ const accountDetailsApi = victoriaBaseApi.injectEndpoints({
           : `/account-details?searchTerm=${searchTerm}`,
         method: "GET",
       }),
+      providesTags: [tagTypes.user],
     }),
     sellerProfile: builder.query({
       query: (serllerProfileId) => ({
         url: `account-details/seller-profile/${serllerProfileId}`,
         method: "GET",
       }),
+      providesTags: [tagTypes.user], // provide the users api with the user tag
     }),
     sellerPost: builder.query({
       query: (sellerId) => ({
@@ -35,9 +38,21 @@ const accountDetailsApi = victoriaBaseApi.injectEndpoints({
         method: "PUT",
         body: userInfo,
       }),
+      invalidatesTags: [tagTypes.user], // invalidate the users api after editing a user
+    }),
+    deleteProfile: builder.mutation({
+      query: (accountId: string) => ({
+        url: `/account-details/delete-user/${accountId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.user], // invalidate the users api after deleting a user
     }),
   }),
 });
 
-export const { useUsersQuery, useSellerProfileQuery, useSellerPostQuery } =
-  accountDetailsApi;
+export const {
+  useUsersQuery,
+  useSellerProfileQuery,
+  useSellerPostQuery,
+  useDeleteProfileMutation,
+} = accountDetailsApi;
