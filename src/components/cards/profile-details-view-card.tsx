@@ -10,7 +10,7 @@ export const ProfileDetailsViewCard = ({
 }) => {
   const renderProperties = [
     { prop: "Full Name", value: user.firstName },
-    { prop: "Username", value: user.userName },
+    // { prop: "Username", value: user.userName },
     { prop: "Email", value: user.email },
     { prop: "Phone Number", value: user.contactNumber },
     { prop: "Location", value: user.location?.type },
