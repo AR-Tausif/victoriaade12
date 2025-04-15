@@ -7,7 +7,7 @@ export const generateFCMToken = async () => {
       "BLoTpmU-iFcBLTvjxuaGzp2lfGypMuqbHw9aBkx8O4GJ8bNZmh1uE56naSphY9lemerE4Zfr3K4OqNterWgTVis",
   });
 
-  console.log(`|===> getting token | <==== ${token}`);
+  // console.log(`|===> getting token | <==== ${token}`);
 
   return token;
 };

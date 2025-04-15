@@ -20,18 +20,20 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values: Record<string, unknown>) => {
+    // const fcmToken = await generateFCMToken();
+
     try {
+      console.log("start");
       // generate fcm token here
-      const fcmToken = await generateFCMToken();
       const loginInfo: TLoginBody = {
         email: values.email as string,
         password: values.password as string,
-        fcmToken,
+        // TODO: fcm token cleared from here
+        // fcmToken: fcmToken ? fcmToken : "",
       };
-      console.log(loginInfo);
 
       const loginResponse: any = await login(loginInfo).unwrap();
-      console.log(loginResponse);
+
       const user = VerifyToken(loginResponse.data.accessToken);
       dispatch(setUser({ user, token: loginResponse.data.accessToken }));
       toast.success(
@@ -41,7 +43,6 @@ export const LoginForm: React.FC = () => {
       );
       navigate("/");
     } catch (error: any) {
-      console.log(error);
       toast.error(
         error.data.message ? error.data.message : "Something wen wrong!"
       );

@@ -1,7 +1,7 @@
 export type TLoginBody = {
   email: string;
   password: string;
-  fcmToken: string;
+  fcmToken?: string;
 };
 export type TResetPassword = {
   email: string;
