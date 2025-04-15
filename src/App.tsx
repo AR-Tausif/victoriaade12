@@ -240,7 +240,7 @@ const App: React.FC = () => {
                 style={{ fontSize: 18, display: "flex", alignItems: "center" }}
               >
                 <Link to="/notification">
-                  <Badge count={5} offset={[0.1, 5]}>
+                  <Badge offset={[0.1, 5]}>
                     <BellOutlined
                       style={{
                         border: "1px solid #efefef",

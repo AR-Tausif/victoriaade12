@@ -61,7 +61,7 @@ export const LoginForm: React.FC = () => {
 
   return (
     <>
-      <Form
+      {/* <Form
         form={form}
         layout="vertical"
         onFinish={onFinish}
@@ -92,6 +92,73 @@ export const LoginForm: React.FC = () => {
           }}
         >
           <Form.Item name="remember_me" rules={[{ type: "string", min: 4 }]}>
+            <Checkbox onChange={onCheckboxRememberChange}>Remember me</Checkbox>
+          </Form.Item>
+          <Form.Item>
+            <Link to="/forgot-password">
+              <p>Forgot Password</p>
+            </Link>
+          </Form.Item>
+        </div>
+
+        <Form.Item>
+          {isLoading ? (
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "100%", background: "#9D0DFE" }}
+              disabled
+            >
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            </Button>
+          ) : (
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "100%", background: "#9D0DFE" }}
+            >
+              Submit
+            </Button>
+          )}
+        </Form.Item>
+      </Form> */}
+        <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item
+          name="email"
+          label="Email or Username"
+          rules={[
+            { required: true, message: "Please input your email or username!" },
+            { type: "email", message: "Please enter a valid email!" }
+          ]}
+        >
+          <Input type="email" placeholder="Enter your email or username" />
+        </Form.Item>
+
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            { required: true, message: "Please input your password!" },
+            { min: 4, message: "Password must be at least 4 characters!" }
+          ]}
+        >
+          <Input
+            type={showPass ? "text" : "password"}
+            placeholder="Enter your password"
+            addonAfter={
+              <EyeInvisibleOutlined onClick={() => handleShwingPassword()} />
+            }
+          />
+        </Form.Item>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Form.Item name="remember_me">
             <Checkbox onChange={onCheckboxRememberChange}>Remember me</Checkbox>
           </Form.Item>
           <Form.Item>

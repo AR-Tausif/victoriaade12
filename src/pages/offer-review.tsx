@@ -176,7 +176,7 @@ export const OfferReview = () => {
                 src={
                   selectedUser?.photos && selectedUser.photos.length > 0
                     ? selectedUser.photos[0]
-                    : "https://s3-alpha-sig.figma.com/img/898b/9854/d4e0910dc5b6900b5a266309c7c70b01?Expires=1743984000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=P7StuAcwn48xFDsVcturcpCz6S7D2LxnvRw-GgRle0j63I00cmr0NnCsGlLrmKANu4MAPTcGGRGAKWh8OJZpXEgcp8ujlQp1aiuD66mHeoYqmQ8aNXNpagM-I6gG9HCMELlRktVIXB3O1rfjr7JCwaJxeXCds3mPE5q73l1EkEVFCLw6u8UcdUuGeg8qYqxBuQrzwdsZ7Q3BMKAmg8BITWG3kpSfVu3GboCmgAdIbq7p~RY6AeY2-nSkCZ7FslVJdBi-VkCx8xMw~-Q~D8uK84DL7Y2tdLA8mNx-USkXcY6lghOH7Nm0Wf5i1-HjcY~puyJTJZUIeEoL0NArcTpPuw__"
+                    : "https://s3-alpha-sig.figma.com/img/898b/9854/d4e0910dc5b6900b5a266309c7c70b01?Expires=1745798400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=m36~rEyVBzDmxxM6QGbn2ST0NKFbN9Y1lGatvQ9HSjPusp2LhwqAmiPDQ-gSybsFmNdMvQK2Dk~6R5cZJ1vdS6PFPxkRJEFUoc7ckM2jzyMEh5m3Usj8Lj~cc~kTjL0L4CQTxkPlDA8MqTIfxByEw7pLWG-TxZXOZnlDEaf3VHWsWEJkD7bAUIrNor8miM34xUkya8zj0vFFPcaG8IE7cWHQbcxWh95INkHQFRTn~6ArVoiAARgmj6OLkbelO4q3n20SmFGS-v7uMtmRGz3bsKWvUGw0puUK6zzafZWo92cjRm4aqy0SOHN3FSJhfegHCEWQP20HeS96mjO7IZhDoQ__"
                 }
                 alt="modal image"
                 className="object-cover bg-center rounded-md"
