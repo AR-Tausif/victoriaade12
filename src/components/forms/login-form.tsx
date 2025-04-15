@@ -3,7 +3,6 @@ import { Button, Checkbox, CheckboxProps, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined } from "@ant-design/icons";
 import { useLoginMutation } from "../../redux/api/auth.api";
-import { generateFCMToken } from "../../utils";
 import { Loader2 } from "lucide-react";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/features/auth.slice";
