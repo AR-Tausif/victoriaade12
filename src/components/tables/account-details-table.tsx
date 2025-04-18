@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { AdminProfile } from "../../types/profile";
 import { useDeleteProfileMutation } from "../../redux/api/account-details";
 import { toast } from "sonner";
+import { toTitleCase } from "../../utils";
 
 const { Option } = Select;
 
@@ -32,7 +33,7 @@ export const AccountDetailsTable = ({
     serial: `#${(index + 1).toString().padStart(2, "0")}`, // Format serial as #01, #02, etc.
     firstName: `${item.firstName} ${item.surName}`,
     email: item.email,
-    role: item.role, // Adjust based on your role logic
+    role: toTitleCase(item.role), // Adjust based on your role logic
     createdAt: new Date(item.createdAt).toLocaleDateString(),
     avatar: item.profileImage,
     record: item, // Pass the full record for use in render functions
