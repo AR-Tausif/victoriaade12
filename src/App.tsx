@@ -46,7 +46,7 @@ const sidebarItems = [
   {
     key: "/service",
     icon: <ProductOutlined />,
-    label: "Service",
+    label: "Services",
     path: "/service",
   },
   {

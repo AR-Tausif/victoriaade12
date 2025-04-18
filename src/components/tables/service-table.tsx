@@ -1,11 +1,12 @@
 import { Modal, Table, TableColumnsType } from "antd";
 import { useState } from "react";
-import { EyeInvisibleOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EyeInvisibleOutlined, EyeOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import ServiceItemViewCard from "../cards/service-item-view-card";
 import { useDeleteServiceByIdMutation } from "../../redux/api/service.api";
 import { toast } from "sonner";
 import { TService, TServiceMappedData } from "../../types/service";
+import { toTitleCase } from "../../utils";
 
 type TProps = {
   deleteUser: boolean;
@@ -62,7 +63,7 @@ export const ServiceListTable = ({
       align: "center",
       render: (status) => (
         <div style={styles.statusContainer}>
-          <div style={styles.statusBadge}>{status}</div>
+          <div style={ status === "active" ? styles.statusBadge : styles.inActiveStatusBadge}>{toTitleCase(status)}</div>
         </div>
       ),
     },
@@ -81,10 +82,10 @@ export const ServiceListTable = ({
             style={styles.actionIcon}
             onClick={() => handleShowService(_record)}
           >
-            <EyeInvisibleOutlined style={styles.icon} />
+            <EyeOutlined style={styles.icon} />
           </p>
           <p style={styles.actionIcon}>
-            <UserDeleteOutlined
+            <DeleteOutlined
               style={styles.iconDelete}
               onClick={() => {
                 setDeleteUser(true);
@@ -100,11 +101,11 @@ export const ServiceListTable = ({
   const mappedServiceData: TServiceMappedData[] = serviceData.map(
     (service: TService, index: number) => ({
       key: service._id,
-      serial: `#${index}`,
+      serial: `#${index+1}`,
       image: service.image,
       serviceName: service.name,
       status: service.status,
-      date: service.createdAt,
+      date: new Date(service.createdAt).toLocaleDateString(),
       action: "Edit",
     })
   );
@@ -184,10 +185,18 @@ const styles = {
   },
   statusBadge: {
     background: "#D6FEEB7D",
-    padding: "8px 12px",
+    padding: "4px 12px",
     borderRadius: "8px",
-    border: "1px solid #498A6C",
+    border: "1px solid #deede3",
     color: "#498A6C",
+    fontWeight: 700,
+  },
+  inActiveStatusBadge: {
+    background: "#ffdcdc",
+    padding: "4px 12px",
+    borderRadius: "8px",
+    border: "1px solid #ffdcdc",
+    color: "#3d3d3d",
     fontWeight: 700,
   },
   actionContainer: {
