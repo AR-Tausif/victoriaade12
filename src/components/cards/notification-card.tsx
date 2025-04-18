@@ -1,6 +1,7 @@
 import { BellOutlined } from "@ant-design/icons";
 import "./styles/notification-card.css";
 import { NotificationType } from "../../types/notification";
+import { toTitleCase } from "../../utils";
 type NotificationCardProps = {
   notificationItem: NotificationType;
 };
@@ -28,7 +29,7 @@ export const NotificationCard = ({
               //   ? `${notificationItem.title.slice(0, 20)}...`
               //   : notificationItem.title
 
-              notificationItem.title
+              toTitleCase(notificationItem.title)
             }
           </p>
           <p>

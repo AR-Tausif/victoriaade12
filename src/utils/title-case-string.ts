@@ -6,3 +6,12 @@ export const titleCase = (inputString: string) => {
     )
     .join(" "); // Join the words back into a single string
 };
+
+
+// Utility function to convert string to Title Case
+export const toTitleCase = (str: string): string => {
+  return str.replace(/\w\S*/g, (txt) => {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+};
+

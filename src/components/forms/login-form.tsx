@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Checkbox, CheckboxProps, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { EyeInvisibleOutlined } from "@ant-design/icons";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { useLoginMutation } from "../../redux/api/auth.api";
 import { Loader2 } from "lucide-react";
 import { useAppDispatch } from "../../redux/hooks";
@@ -122,22 +122,22 @@ export const LoginForm: React.FC = () => {
           )}
         </Form.Item>
       </Form> */}
-        <Form
+      <Form
         form={form}
         layout="vertical"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        autoComplete="off"
+        // autoComplete="off"
       >
         <Form.Item
           name="email"
-          label="Email or Username"
+          label="Email"
           rules={[
-            { required: true, message: "Please input your email or username!" },
-            { type: "email", message: "Please enter a valid email!" }
+            { required: true, message: "Please input your email!" },
+            { type: "email", message: "Please enter a valid email!" },
           ]}
         >
-          <Input type="email" placeholder="Enter your email or username" />
+          <Input type="email" placeholder="Enter email" />
         </Form.Item>
 
         <Form.Item
@@ -145,19 +145,29 @@ export const LoginForm: React.FC = () => {
           label="Password"
           rules={[
             { required: true, message: "Please input your password!" },
-            { min: 4, message: "Password must be at least 4 characters!" }
+            { min: 8, message: "Password must be at least 8 characters!" },
           ]}
         >
           <Input
             type={showPass ? "text" : "password"}
-            placeholder="Enter your password"
+            placeholder="******"
             addonAfter={
-              <EyeInvisibleOutlined onClick={() => handleShwingPassword()} />
+              showPass ? (
+                <EyeOutlined onClick={handleShwingPassword} />
+              ) : (
+                <EyeInvisibleOutlined onClick={handleShwingPassword} />
+              )
             }
           />
         </Form.Item>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Form.Item name="remember_me">
             <Checkbox onChange={onCheckboxRememberChange}>Remember me</Checkbox>
           </Form.Item>
