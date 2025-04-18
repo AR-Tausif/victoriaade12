@@ -10,6 +10,7 @@ import {
 } from "../redux/api/offer-review.api";
 import { toast } from "sonner";
 import { OfferReviewTableSkeleton } from "../components";
+import { toTitleCase } from "../utils";
 
 export const OfferReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -146,7 +147,7 @@ export const OfferReview = () => {
                             : "bg-green-300/50"
                         }`}
                       >
-                        {offerReview.status}
+                        {toTitleCase(offerReview.status)}
                       </p>
                     </td>
                     <td className="py-4 px-6">

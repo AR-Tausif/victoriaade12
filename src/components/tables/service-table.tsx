@@ -1,6 +1,6 @@
 import { Modal, Table, TableColumnsType } from "antd";
 import { useState } from "react";
-import { DeleteOutlined, EyeInvisibleOutlined, EyeOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { DeleteActionButtons } from "../cards/delete-action-card";
 import ServiceItemViewCard from "../cards/service-item-view-card";
 import { useDeleteServiceByIdMutation } from "../../redux/api/service.api";
@@ -103,7 +103,7 @@ export const ServiceListTable = ({
       key: service._id,
       serial: `#${index+1}`,
       image: service.image,
-      serviceName: service.name,
+      serviceName: toTitleCase(service.name),
       status: service.status,
       date: new Date(service.createdAt).toLocaleDateString(),
       action: "Edit",

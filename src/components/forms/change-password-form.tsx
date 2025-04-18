@@ -5,7 +5,6 @@ import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { TChangePassword } from "../../types/auth.type";
 import { useChangePasswordMutation } from "../../redux/api/auth.api";
 import { Loader2 } from "lucide-react";
-import { HandleLogOut } from "../../lib/handleLogout";
 import { toast } from "sonner";
 
 export const ChangePasswordForm = () => {

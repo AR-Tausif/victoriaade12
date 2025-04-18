@@ -52,7 +52,7 @@ const sidebarItems = [
   {
     key: "/offer-review",
     icon: <BadgePercent className="text-sm" />,
-    label: "Offer Review",
+    label: "Offer Reviews",
     path: "/offer-review",
   },
   // {
