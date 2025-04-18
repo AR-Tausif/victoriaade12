@@ -1,7 +1,7 @@
 import { Form, Input } from "antd";
 import { PrimaryButton } from "../primary-button";
-import { useState } from "react";
-import { EyeInvisibleOutlined } from "@ant-design/icons";
+import { useMemo, useState } from "react";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { TChangePassword } from "../../types/auth.type";
 import { useChangePasswordMutation } from "../../redux/api/auth.api";
 import { Loader2 } from "lucide-react";
@@ -13,6 +13,9 @@ export const ChangePasswordForm = () => {
   const [showCurrPass, setShowCurrPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [form] = Form.useForm();
+  const currentPassword = Form.useWatch("currentPassword", form);
+  const newPassword = Form.useWatch("newPassword", form);
+  const confirmPassword = Form.useWatch("confirmPassword", form);
 
   const [changePassword, { isLoading }] = useChangePasswordMutation();
 
@@ -27,6 +30,10 @@ export const ChangePasswordForm = () => {
     setShowConfirmPass(!showConfirmPass);
   };
 
+  const isButtonDisabled = useMemo(() => {
+    return !(currentPassword && newPassword && confirmPassword);
+  }, [currentPassword, newPassword, confirmPassword]);
+
   // run the function when onSubmit clicked
   const onFinish = async (values: Record<string, unknown>) => {
     console.log(values);
@@ -39,13 +46,20 @@ export const ChangePasswordForm = () => {
       console.log(changePassInfo);
 
       const response: any = await changePassword(changePassInfo).unwrap();
-      console.log(response);
       // TODO: please add toast message while success
       toast.success(
         response.data.message ? response.data.message : "Password changed!"
       );
     } catch (error: any) {
       console.log(error);
+
+      if (error?.data?.errorSources?.length) {
+        const fieldErrors = error?.data?.errorSources.map((err: any) => ({
+          name: err.path,
+          errors: [err.message],
+        }));
+        form.setFields(fieldErrors);
+      }
       toast.error(
         error.data.message ? error.data.message : "Something went wrong!"
       );
@@ -57,53 +71,79 @@ export const ChangePasswordForm = () => {
         <Form.Item
           name="currentPassword"
           label="Current Password"
-          rules={[{ type: "string", min: 7 }]}
+          rules={[{ type: "string", min: 8 }]}
         >
           <Input
             type={showCurrPass ? "text" : "password"}
             placeholder="Enter current password"
             addonAfter={
-              <EyeInvisibleOutlined onClick={() => handleCurrPassword()} />
+              // <EyeInvisibleOutlined onClick={() => handleCurrPassword()} />
+              showCurrPass ? (
+                <EyeOutlined onClick={handleCurrPassword} />
+              ) : (
+                <EyeInvisibleOutlined onClick={handleCurrPassword} />
+              )
             }
           />
         </Form.Item>
         <Form.Item
           name="newPassword"
           label="New Password"
-          rules={[{ type: "string", min: 4 }]}
+          rules={[{ type: "string", min: 8 }]}
         >
           <Input
             type={showPass ? "text" : "password"}
             placeholder="Enter new password"
             addonAfter={
-              <EyeInvisibleOutlined onClick={() => handleShwingPassword()} />
+              // <EyeInvisibleOutlined onClick={() => handleShwingPassword()} />
+              showPass ? (
+                <EyeOutlined onClick={handleShwingPassword} />
+              ) : (
+                <EyeInvisibleOutlined onClick={handleShwingPassword} />
+              )
             }
           />
         </Form.Item>
         <Form.Item
           name="confirmPassword"
           label="Confirm Password"
-          rules={[{ type: "string", min: 4 }]}
+          dependencies={["newPassword"]}
+          rules={[
+            { type: "string", min: 8 },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("newPassword") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error("Passwords do not match!"));
+              },
+            }),
+          ]}
         >
           <Input
             type={showConfirmPass ? "text" : "password"}
             placeholder="Enter confirm password"
             addonAfter={
-              <EyeInvisibleOutlined onClick={() => handleConfirmPassword()} />
+              showConfirmPass ? (
+                <EyeOutlined onClick={handleConfirmPassword} />
+              ) : (
+                <EyeInvisibleOutlined onClick={handleConfirmPassword} />
+              )
             }
           />
         </Form.Item>
-        {isLoading ? (
-          <PrimaryButton type="submit" styles={{ width: "100%" }} disabled>
+
+        <PrimaryButton
+          type="submit"
+          styles={{ width: "100%" }}
+          disabled={isLoading || isButtonDisabled}
+        >
+          {isLoading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          </PrimaryButton>
-        ) : (
-          <HandleLogOut>
-            <PrimaryButton type="submit" styles={{ width: "100%" }}>
-              update
-            </PrimaryButton>
-          </HandleLogOut>
-        )}
+          ) : (
+            "Update"
+          )}
+        </PrimaryButton>
       </Form>
     </>
   );
