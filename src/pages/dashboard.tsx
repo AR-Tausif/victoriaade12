@@ -18,9 +18,11 @@ export const Dashboard = () => {
   const { data, isLoading, isFetching } = useUsersQuery({
     searchTerm: "",
     roleType,
+    createdAt: "",
   });
 
   const handleAccountType = (e: string) => {
+    console.log(e);
     setRoleType(e.trim());
   };
   return (
@@ -55,89 +57,6 @@ export const Dashboard = () => {
 
       {/* dashboard-chart-section */}
       <Col span={24}>
-        {/* <Row gutter={[16, 16]} className="dashboard-chart-section">
-          <Col xs={24} sm={24} md={24} lg={12} xl={12} span={12}>
-            <Card
-              style={{
-                background: "#FDFDFD",
-                color: "#FDFDFD",
-                border: "none",
-              }}
-            >
-              <div
-                className=""
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <h5 style={{ fontWeight: 400, fontSize: 20, color: "#010101" }}>
-                  User Overview
-                </h5>
-                <Select
-                  defaultValue="2025"
-                  style={{
-                    width: 120,
-                    border: "none",
-                    outline: "none",
-                    color: "#010101",
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    { value: "2024", label: "2024" },
-                    { value: "2025", label: "2025" },
-                    { value: "2026", label: "2026" },
-                  ]}
-                />
-              </div>
-              <DashboardAreaChart />
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={12} xl={12} span={12}>
-            <Card
-              style={{
-                background: "#FDFDFD",
-                color: "#FDFDFD",
-                border: "none",
-              }}
-            >
-              <div
-                className=""
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <h5 style={{ fontWeight: 400, fontSize: 20, color: "#010101" }}>
-                  Earning Overview
-                </h5>
-                <div
-                  className=""
-                  style={{ display: "flex", alignItems: "center", gap: 10 }}
-                >
-                  <p
-                    style={{ fontWeight: 400, fontSize: 14, color: "#010101" }}
-                  >
-                    Monthly Growth: 35.80%
-                  </p>
-                  <Select
-                    defaultValue="2025"
-                    style={{ width: 120, border: "none", outline: "none" }}
-                    onChange={handleChange}
-                    options={[
-                      { value: "2024", label: "2024" },
-                      { value: "2025", label: "2025" },
-                      { value: "2026", label: "2026" },
-                    ]}
-                  />
-                </div>
-              </div>
-              <DashboardColumnChart />
-            </Card>
-          </Col>
-        </Row> */}
         <UserManagementChart />
       </Col>
 
@@ -147,7 +66,7 @@ export const Dashboard = () => {
           <TableSkeleton />
         ) : (
           <AccountDetailsTable
-            data={data?.data?.data}
+            data={data?.data?.data.slice(0, 6)}
             handleAccountType={handleAccountType}
           />
         )}

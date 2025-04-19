@@ -8,6 +8,7 @@ export * from "./primary-button";
 export * from "./skeletons";
 export * from "./table-skeleton";
 export * from "./errors"
+export * from "./dropdown"
 
 // Authentication related
 export { PrivateRoute } from "./auth/private-route";

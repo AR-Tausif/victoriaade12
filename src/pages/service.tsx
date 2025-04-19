@@ -15,11 +15,10 @@ export const Service = () => {
   const [deleteUser, setDeleteUser] = useState(false);
   const [serviceId, setServiceId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
+  // const [createdAt, setCreatedAt] = useState("");
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllCategoriesQuery({
     searchTerm,
-    createdAt,
   });
   // Handle search input
   const handleSearch = (e: any) => {
@@ -33,7 +32,9 @@ export const Service = () => {
     const currentYear = new Date().getFullYear();
     const monthString = monthIndex < 10 ? `0${monthIndex}` : monthIndex;
     const dateString = `${currentYear}-${monthString}`;
-    setCreatedAt(dateString);
+    // setCreatedAt(dateString);
+    console.log(dateString);
+    
   };
 
   return (

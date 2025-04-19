@@ -9,7 +9,7 @@ import {
   useRejectOfferMutation,
 } from "../redux/api/offer-review.api";
 import { toast } from "sonner";
-import { OfferReviewTableSkeleton } from "../components";
+import { OfferReviewDropdown, OfferReviewTableSkeleton } from "../components";
 import { toTitleCase } from "../utils";
 
 export const OfferReview = () => {
@@ -66,10 +66,11 @@ export const OfferReview = () => {
         <div className="p-4 flex justify-between items-center gap-4">
           {/* Dropdown */}
           <div className="relative">
-            <button className="px-4 py-2 border rounded-lg flex items-center gap-2 text-gray-600 bg-white hover:bg-gray-50">
+            {/* <button className="px-4 py-2 border rounded-lg flex items-center gap-2 text-gray-600 bg-white hover:bg-gray-50">
               This Month
               <ChevronDown size={16} />
-            </button>
+            </button> */}
+            <OfferReviewDropdown/>
           </div>
 
           {/* Search */}

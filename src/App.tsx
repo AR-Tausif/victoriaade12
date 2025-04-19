@@ -28,6 +28,7 @@ import "./App.css";
 import "./antd-overwrite.css";
 import { HandleLogOut } from "./lib";
 import { BadgePercent } from "lucide-react";
+import { useAdminProfileQuery } from "./redux/api/profile.api";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -111,6 +112,10 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+    // RTK: retrieved an admin profile data from database
+    const { data: adminProfile, isLoading: adminProfileLoading } = useAdminProfileQuery("");
+  console.log({adminProfile});
+  
   // Function to recursively transform menu items
   const transformMenuItem = (item: any) => {
     const transformed = { ...item };
@@ -242,13 +247,14 @@ const App: React.FC = () => {
                 <div className="flex justify-between items-center gap-3 hover:bg-blue-50 px-4 py-1 rounded-md transition-all duration-300">
                   <Flex>
                     <Avatar
+                    src={adminProfile?.data.profileImage ? adminProfile?.data.profileImage : "https://res.cloudinary.com/dyalzfwd4/image/upload/v1738207704/user_wwrref.png"}
                       style={{ backgroundColor: "#87d068" }}
-                      icon={<UserOutlined />}
+                      // icon={<UserOutlined />}
                       size={40}
                     />
                   </Flex>
                   <p className="text-lg font-semibold tracking-tighter">
-                    Victoria De
+                    {adminProfile?.data.firstName} {adminProfile?.data.surName}
                   </p>
                 </div>
               </Dropdown>

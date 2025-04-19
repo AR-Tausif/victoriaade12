@@ -7,17 +7,17 @@ const serviceCategory = victoriaBaseApi.injectEndpoints({
       query: (params?: { searchTerm?: string; createdAt?: string }) => {
         // Create URL params only for non-empty values
         const queryParams = new URLSearchParams();
-        
+
         if (params?.searchTerm) {
-          queryParams.append('searchTerm', params.searchTerm);
+          queryParams.append("searchTerm", params.searchTerm);
         }
-        if (params?.createdAt) {
-          queryParams.append('createdAt', params.createdAt);
-        }
+        // if (params?.createdAt) {
+        //   queryParams.append('createdAt', params.createdAt);
+        // }
 
         const queryString = queryParams.toString();
         return {
-          url: `/category${queryString ? `?${queryString}` : ''}`,
+          url: `/category${queryString ? `?${queryString}` : ""}`,
           method: "GET",
         };
       },
