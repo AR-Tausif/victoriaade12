@@ -18,7 +18,6 @@ import {
 import App from "../App";
 import { AuthWrapper } from "../components/auth-wrapper";
 import Demo from "../pages/demo";
-import { PrivateRoute } from "../components";
 import { PublicRoute } from "../components/auth";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 
