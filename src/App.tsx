@@ -131,7 +131,7 @@ const App: React.FC = () => {
   const items: MenuProps["items"] = [
     {
       key: "user-profile-link",
-      label: "profile",
+      label: "Profile",
       icon: <UserOutlined />,
       onClick: () => {
         navigate("/profile");
@@ -139,7 +139,7 @@ const App: React.FC = () => {
     },
     {
       key: "user-settings-link",
-      label: "settings",
+      label: "Settings",
       icon: <SettingOutlined />,
       onClick: () => {
         navigate("/privacy-policy");
@@ -213,56 +213,46 @@ const App: React.FC = () => {
       {/* Rest of your layout code remains the same */}
       <Layout>
         <Header
+          className="flex justify-between items-center p-3 mr-5"
           style={{
-            padding: "12px",
-            marginRight:20,
             background: colorBgContainer,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div className="flex items-center gap-3">
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: "16px",
-                width: 64,
-                height: 64,
-              }}
+              className="text-2xl w-16 h-16"
             />
-            <h2>Dashboard</h2>
+            <h2 className="text-xl font-bold text-gray-800 tracking-tighter">
+              Dashboard
+            </h2>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 25 }}>
-              <div
-                style={{ fontSize: 18, display: "flex", alignItems: "center" }}
-              >
+          <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-5">
+              <div className="flex items-center">
                 <Link to="/notification">
                   <Badge offset={[0.1, 5]}>
-                    <BellOutlined
-                      style={{
-                        border: "1px solid #efefef",
-                        padding: "8px",
-                        borderRadius: "50%",
-                      }}
-                    />
+                    <BellOutlined className="border border-[#efefef] p-3 rounded-full " />
                   </Badge>
                 </Link>
               </div>
               <Dropdown menu={{ items }} trigger={["click"]}>
-                <Flex>
-                  <Avatar
-                    style={{ backgroundColor: "#87d068" }}
-                    icon={<UserOutlined />}
-                    size={40}
-                  />
-                </Flex>
+                <div className="flex justify-between items-center gap-3 hover:bg-blue-50 px-4 py-1 rounded-md transition-all duration-300">
+                  <Flex>
+                    <Avatar
+                      style={{ backgroundColor: "#87d068" }}
+                      icon={<UserOutlined />}
+                      size={40}
+                    />
+                  </Flex>
+                  <p className="text-lg font-semibold tracking-tighter">
+                    Victoria De
+                  </p>
+                </div>
               </Dropdown>
             </div>
-            <p style={{ fontWeight: 600 }}>Natederwin</p>
           </div>
         </Header>
         <Content
