@@ -29,6 +29,7 @@ import "./antd-overwrite.css";
 import { HandleLogOut } from "./lib";
 import { BadgePercent } from "lucide-react";
 import { useAdminProfileQuery } from "./redux/api/profile.api";
+import { useGetAllNotificationQuery } from "./redux/api/notification.api";
 
 // Updated sidebarItems with proper nested structure
 const sidebarItems = [
@@ -112,10 +113,14 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-    // RTK: retrieved an admin profile data from database
-    const { data: adminProfile, isLoading: adminProfileLoading } = useAdminProfileQuery("");
-  console.log({adminProfile});
-  
+  // RTK: retrieved an admin profile data from database
+  const { data: adminProfile, isLoading: adminProfileLoading } =
+    useAdminProfileQuery("");
+  // RTK: retrieved notification data from database
+  const { data: notification, isLoading: notificationLoading } =
+    useGetAllNotificationQuery("");
+  console.log({ adminProfile });
+
   // Function to recursively transform menu items
   const transformMenuItem = (item: any) => {
     const transformed = { ...item };
@@ -238,7 +243,10 @@ const App: React.FC = () => {
             <div className="flex items-center gap-5">
               <div className="flex items-center">
                 <Link to="/notification">
-                  <Badge offset={[0.1, 5]}>
+                  <Badge
+                    offset={[0.1, 5]}
+                    count={notificationLoading ? 0 : notification?.data.length}
+                  >
                     <BellOutlined className="border border-[#efefef] p-3 rounded-full " />
                   </Badge>
                 </Link>
@@ -247,7 +255,11 @@ const App: React.FC = () => {
                 <div className="flex justify-between items-center gap-3 hover:bg-blue-50 px-4 py-1 rounded-md transition-all duration-300">
                   <Flex>
                     <Avatar
-                    src={adminProfile?.data.profileImage ? adminProfile?.data.profileImage : "https://res.cloudinary.com/dyalzfwd4/image/upload/v1738207704/user_wwrref.png"}
+                      src={
+                        adminProfile?.data.profileImage
+                          ? adminProfile?.data.profileImage
+                          : "https://res.cloudinary.com/dyalzfwd4/image/upload/v1738207704/user_wwrref.png"
+                      }
                       style={{ backgroundColor: "#87d068" }}
                       // icon={<UserOutlined />}
                       size={40}

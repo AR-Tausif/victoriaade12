@@ -11,6 +11,7 @@ export const tagTypes = {
   product: "Product",
   privacy: "Privacy",
   terms: "Terms",
+  notification: "Notification",
 };
 
 export const tagTypesList = [
@@ -20,4 +21,5 @@ export const tagTypesList = [
   tagTypes.terms,
   tagTypes.advertise,
   tagTypes.post,
+  tagTypes.notification,
 ];

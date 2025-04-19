@@ -22,13 +22,13 @@ export const OfferReviewDropdown = () => {
     },
   ];
 
-  const handleActionButtonClick = (item) => {
+  const handleActionButtonClick = (item:any) => {
     setActionButtonText(item);
     setActionButtonActive(false);
   };
 
   useEffect(() => {
-    const handleClick = (event) => {
+    const handleClick = (event:any) => {
       if (
         !event.target.closest(".publishButtonOptions") &&
         !event.target.closest(".publishButton")

@@ -1,4 +1,5 @@
 import { victoriaBaseApi } from ".";
+import { tagTypes } from "../tag.types";
 
 const notificationApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -7,8 +8,17 @@ const notificationApi = victoriaBaseApi.injectEndpoints({
         url: `/notification`,
         method: "GET",
       }),
+      providesTags: [tagTypes.notification],
+    }),
+    readNotification: builder.mutation({
+      query: (notificationId: string) => ({
+        url: `/notification/make-read?notId=${notificationId}`,
+        method: "PUT",
+      }),
+      invalidatesTags: [tagTypes.notification],
     }),
   }),
 });
 
-export const { useGetAllNotificationQuery } = notificationApi;
+export const { useGetAllNotificationQuery, useReadNotificationMutation } =
+  notificationApi;
