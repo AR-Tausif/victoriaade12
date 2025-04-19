@@ -215,6 +215,7 @@ const App: React.FC = () => {
         <Header
           style={{
             padding: "12px",
+            marginRight:20,
             background: colorBgContainer,
             display: "flex",
             justifyContent: "space-between",

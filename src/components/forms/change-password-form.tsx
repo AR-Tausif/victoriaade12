@@ -6,6 +6,7 @@ import { TChangePassword } from "../../types/auth.type";
 import { useChangePasswordMutation } from "../../redux/api/auth.api";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { HandleLogOut } from "../../lib";
 
 export const ChangePasswordForm = () => {
   const [showPass, setShowPass] = useState(false);
@@ -46,6 +47,13 @@ export const ChangePasswordForm = () => {
 
       const response: any = await changePassword(changePassInfo).unwrap();
       // TODO: please add toast message while success
+      // if(response.data.success){
+      //   HandleLogOut()
+      // }
+      console.log(response);
+      console.log({response: response?.data});
+        HandleLogOut()
+
       toast.success(
         response.data.message ? response.data.message : "Password changed!"
       );

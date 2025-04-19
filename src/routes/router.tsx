@@ -20,14 +20,17 @@ import { AuthWrapper } from "../components/auth-wrapper";
 import Demo from "../pages/demo";
 import { PrivateRoute } from "../components";
 import { PublicRoute } from "../components/auth";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute>
+      <ProtectedRoute>
+
         <App />
-      </PrivateRoute>
+      </ProtectedRoute>
+
     ),
     children: [
       {
