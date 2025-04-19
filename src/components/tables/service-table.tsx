@@ -63,7 +63,15 @@ export const ServiceListTable = ({
       align: "center",
       render: (status) => (
         <div style={styles.statusContainer}>
-          <div style={ status === "active" ? styles.statusBadge : styles.inActiveStatusBadge}>{toTitleCase(status)}</div>
+          <div
+            style={
+              status === "active"
+                ? styles.statusBadge
+                : styles.inActiveStatusBadge
+            }
+          >
+            {toTitleCase(status)}
+          </div>
         </div>
       ),
     },
@@ -98,10 +106,10 @@ export const ServiceListTable = ({
     },
   ];
 
-  const mappedServiceData: TServiceMappedData[] = serviceData.map(
+  const mappedServiceData: TServiceMappedData[] = serviceData?.map(
     (service: TService, index: number) => ({
       key: service._id,
-      serial: `#${index+1}`,
+      serial: `#${index + 1}`,
       image: service.image,
       serviceName: toTitleCase(service.name),
       status: service.status,
@@ -129,6 +137,8 @@ export const ServiceListTable = ({
       toast.success(
         response.message ? response.message : "Deleted category service"
       );
+      // setDeleteUser(true);
+      // setOpenAccountDetail(false);
     } catch (error: any) {
       toast.error(
         error.data.message ? error.data.message : "something went wrong!"
@@ -151,7 +161,15 @@ export const ServiceListTable = ({
         onCancel={() => setOpenAccountDetail(false)}
         footer={null}
       >
-        <ServiceItemViewCard serviceItem={selectedService!} />
+        <ServiceItemViewCard
+          deleteUser={deleteUser}
+          handleDelete={handleDelete}
+          setOpenAccountDetail={setOpenAccountDetail}
+          setDeleteServiceId={setDeleteServiceId}
+          setDeleteUser={setDeleteUser}
+          isLoading={isLoading}
+          serviceItem={selectedService!}
+        />
       </Modal>
       <DeleteActionButtons
         open={deleteUser}
@@ -159,6 +177,7 @@ export const ServiceListTable = ({
         onCancel={() => setDeleteUser(false)}
         handleDelete={handleDelete}
         isLoading={isLoading}
+        textContent="Are you sure you want to delete this service?"
       />
     </>
   );

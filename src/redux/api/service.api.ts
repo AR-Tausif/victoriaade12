@@ -1,13 +1,26 @@
 import { victoriaBaseApi } from ".";
 import { tagTypes } from "../tag.types";
 
-const derviceCategory = victoriaBaseApi.injectEndpoints({
+const serviceCategory = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllCategories: builder.query({
-      query: () => ({
-        url: `/category`,
-        method: "GET",
-      }),
+      query: (params?: { searchTerm?: string; createdAt?: string }) => {
+        // Create URL params only for non-empty values
+        const queryParams = new URLSearchParams();
+        
+        if (params?.searchTerm) {
+          queryParams.append('searchTerm', params.searchTerm);
+        }
+        if (params?.createdAt) {
+          queryParams.append('createdAt', params.createdAt);
+        }
+
+        const queryString = queryParams.toString();
+        return {
+          url: `/category${queryString ? `?${queryString}` : ''}`,
+          method: "GET",
+        };
+      },
       providesTags: [tagTypes.category],
     }),
     createService: builder.mutation({
@@ -47,4 +60,4 @@ export const {
   useCreateServiceMutation,
   useDeleteServiceByIdMutation,
   useUpdateServiceByIdMutation,
-} = derviceCategory;
+} = serviceCategory;

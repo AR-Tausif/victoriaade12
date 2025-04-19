@@ -4,16 +4,30 @@ import { TServiceMappedData } from "../../types/service";
 import { useUpdateServiceByIdMutation } from "../../redux/api/service.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { DeleteActionButtons } from "../cards/delete-action-card";
 
 export const ServiceViewForm = ({
   serviceViewContent,
+  handleDelete,
+  deleteUser,
+  isLoading,
+  setDeleteUser,
+  setDeleteServiceId,
+  setOpenAccountDetail,
 }: {
   serviceViewContent: TServiceMappedData;
+  handleDelete: () => void;
+  isLoading?: boolean;
+  setOpenAccountDetail: (value: boolean) => void;
+  setDeleteUser: (value: boolean) => void;
+  setDeleteServiceId: (value: string) => void;
+  deleteUser: boolean;
 }) => {
   const [form] = Form.useForm();
   // RTK: update service item mutation
-  const [updateServiceById, { isLoading }] = useUpdateServiceByIdMutation();
-  const { serviceName, status } = serviceViewContent;
+  const [updateServiceById, { isLoading: updateLoading }] =
+    useUpdateServiceByIdMutation();
+  const { serviceName, status, key } = serviceViewContent;
 
   const onFinish = async (values: Record<string, unknown>) => {
     console.log(values);
@@ -33,6 +47,7 @@ export const ServiceViewForm = ({
       console.log(response, "response");
 
       toast.success("service updated");
+      setOpenAccountDetail(false);
     } catch (error: any) {
       toast.error(error.message ? error.message : "something went wrong");
       console.log(error);
@@ -72,7 +87,7 @@ export const ServiceViewForm = ({
         </Form.Item>
         <div className="flex justify-center gap-2">
           <Form.Item style={{ width: "100%" }}>
-            {isLoading ? (
+            {updateLoading ? (
               <Button
                 style={{
                   width: "100%",
@@ -99,10 +114,28 @@ export const ServiceViewForm = ({
             )}
           </Form.Item>
           <Form.Item style={{ width: "100%" }}>
-            <Button style={{ width: "100%" }}>Delete</Button>
+            <Button
+              onClick={() => {
+                setDeleteUser(true);
+                setDeleteServiceId(key);
+              }}
+              style={{ width: "100%" }}
+            >
+              Delete
+            </Button>
           </Form.Item>
         </div>
       </Form>
+
+      {/* Delete confirm modal */}
+      <DeleteActionButtons
+        textContent="Are you sure you want to delete this service?"
+        open={deleteUser}
+        onConfirm={() => setDeleteUser(false)}
+        onCancel={() => setDeleteUser(false)}
+        handleDelete={handleDelete}
+        isLoading={isLoading}
+      />
     </>
   );
 };

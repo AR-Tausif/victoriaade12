@@ -14,9 +14,27 @@ export const Service = () => {
   const [openResponsive, setOpenResponsive] = useState(false);
   const [deleteUser, setDeleteUser] = useState(false);
   const [serviceId, setServiceId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [form] = Form.useForm();
-  const { data, isLoading } = useGetAllCategoriesQuery("");
-  const onFinish = () => {};
+  const { data, isLoading } = useGetAllCategoriesQuery({
+    searchTerm,
+    createdAt,
+  });
+  // Handle search input
+  const handleSearch = (e: any) => {
+    const value = e.target.value.trim();
+    setSearchTerm(value);
+  };
+
+  // Handle month selection
+  const handleMonthSelect = (value: string) => {
+    const monthIndex = months.indexOf(value) + 1;
+    const currentYear = new Date().getFullYear();
+    const monthString = monthIndex < 10 ? `0${monthIndex}` : monthIndex;
+    const dateString = `${currentYear}-${monthString}`;
+    setCreatedAt(dateString);
+  };
 
   return (
     <div style={styles.container}>
@@ -26,24 +44,22 @@ export const Service = () => {
       </div>
       <div>
         <h2 style={styles.title}>Service List</h2>
-        <Form
-          form={form}
-          name="login"
-          onFinish={onFinish}
-          style={styles.form}
-          scrollToFirstError
-        >
+        <Form form={form} name="login" style={styles.form} scrollToFirstError>
           <Form.Item name="month" style={styles.formItem}>
-            <Select placeholder="This Month">
+            <Select placeholder="This Month" onChange={handleMonthSelect}>
               {months.map((month) => (
-                <Option key={month} value={month.toLowerCase()}>
+                <Option key={month} value={month}>
                   {month}
                 </Option>
               ))}
             </Select>
           </Form.Item>
           <Form.Item name="search_user" style={styles.formItem}>
-            <Input placeholder="Search User" />
+            <Input
+              placeholder="Search Service"
+              onChange={handleSearch}
+              onPressEnter={handleSearch}
+            />
           </Form.Item>
         </Form>
       </div>

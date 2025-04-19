@@ -10,6 +10,7 @@ interface ActionButtonsProps {
   onCancel: () => void;
   handleDelete: () => void;
   isLoading?: boolean;
+  textContent?: string;
 }
 
 export const DeleteActionButtons: React.FC<ActionButtonsProps> = ({
@@ -18,6 +19,7 @@ export const DeleteActionButtons: React.FC<ActionButtonsProps> = ({
   onCancel,
   handleDelete,
   isLoading,
+  textContent="Do you want to delete this User?",
 }) => {
   const deleteAction = async () => {
     try {
@@ -43,7 +45,7 @@ export const DeleteActionButtons: React.FC<ActionButtonsProps> = ({
     >
       <div style={styles.container}>
         <h3 style={styles.title}>Are You Sure!</h3>
-        <p>Do you want to delete this User?</p>
+        <p>{textContent}</p>
         {isLoading ? (
           <PrimaryButton type="submit" styles={{ width: "100%" }} disabled>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

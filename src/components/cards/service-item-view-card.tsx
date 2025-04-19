@@ -1,10 +1,22 @@
-import {  TServiceMappedData } from "../../types/service";
+import { TServiceMappedData } from "../../types/service";
 import { ServiceViewForm } from "../forms/service-view-form";
 
 export default function ServiceItemViewCard({
   serviceItem,
+  handleDelete,
+  deleteUser,
+  isLoading,
+  setDeleteUser,
+  setDeleteServiceId,
+  setOpenAccountDetail
 }: {
   serviceItem: TServiceMappedData;
+  handleDelete: () => void;
+  isLoading?: boolean;
+  setOpenAccountDetail: (value: boolean) => void;
+  setDeleteUser: (value: boolean) => void;
+  setDeleteServiceId: (value: string) => void;
+  deleteUser: boolean;
 }) {
   console.log(serviceItem, "serviceItem");
 
@@ -34,7 +46,15 @@ export default function ServiceItemViewCard({
           }}
         />
       </div>
-      <ServiceViewForm serviceViewContent={serviceItem} />
+      <ServiceViewForm
+        handleDelete={handleDelete}
+        deleteUser={deleteUser}
+        isLoading={isLoading}
+        setDeleteUser={setDeleteUser}
+        setOpenAccountDetail={setOpenAccountDetail}
+        setDeleteServiceId={setDeleteServiceId}
+        serviceViewContent={serviceItem}
+      />
     </div>
   );
 }
