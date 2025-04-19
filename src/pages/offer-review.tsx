@@ -1,5 +1,5 @@
 import { Button, Modal, Popconfirm } from "antd";
-import { ChevronDown, Eye, Search } from "lucide-react";
+import { Eye, Search } from "lucide-react";
 import { useState } from "react";
 import { OfferReviewTextField } from "../components/boxes/offer-review-text-field";
 import { OfferReviewType } from "../types/offer-review";
@@ -15,6 +15,10 @@ import { toTitleCase } from "../utils";
 export const OfferReview = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<OfferReviewType>();
+  // const [searchTerm, setSearchTerm] = useState("");
+  // const [dateFilter, setDateFilter] = useState("");
+
+  // Update the query to include filters
   const { data, isLoading: offerReviewLoading } = useGetAllOffersQuery();
 
   const [rejectOffer, { isLoading: rejectOfferIsLoading }] =
@@ -25,6 +29,16 @@ export const OfferReview = () => {
     setIsModalOpen(true);
     setSelectedUser(record);
   };
+
+  // Handle date filter change
+  // const handleDateFilter = (filter: string) => {
+  //   setDateFilter(filter);
+  // };
+
+  // Handle search input
+  // const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchTerm(e.target.value);
+  // };
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -70,7 +84,7 @@ export const OfferReview = () => {
               This Month
               <ChevronDown size={16} />
             </button> */}
-            <OfferReviewDropdown/>
+            <OfferReviewDropdown />
           </div>
 
           {/* Search */}

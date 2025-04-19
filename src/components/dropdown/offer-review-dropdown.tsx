@@ -1,5 +1,5 @@
-import { Check, ChevronDown, Copy, Edit } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Check, Copy, Edit } from "lucide-react";
+import  { useEffect, useState } from "react";
 
 // react icons
 

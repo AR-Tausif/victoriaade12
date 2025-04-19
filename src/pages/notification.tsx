@@ -7,12 +7,15 @@ export const Notification = () => {
   const { data, isLoading } = useGetAllNotificationQuery("");
   if (isLoading) {
     return (
-      <Loader2
+      <div className="min-h-[90vh] flex justify-center items-center">
+        <Loader2
         className="animate-spin"
         size={40}
-        color="#000"
+        color="rgb(160, 17, 255)"
         style={{ margin: "auto", display: "block" }}
       />
+      </div>
+    
     );
   }
 

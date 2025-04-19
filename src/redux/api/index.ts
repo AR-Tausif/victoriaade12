@@ -25,10 +25,9 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
   // Handle errors
   if (result.error) {
     const status = result.error.status;
-    // If unauthorized or not found, logout user
-    if (status === 401 || status === 404) {
+    // Only logout for authentication errors, not for all 404s
+    if (status === 401) {
       api.dispatch(logOut());
-      // You can also use window.location.href for hard redirect
       window.location.href = '/login';
     }
   }

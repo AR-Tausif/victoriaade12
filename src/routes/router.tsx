@@ -26,7 +26,6 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-
         <App />
       </ProtectedRoute>
 

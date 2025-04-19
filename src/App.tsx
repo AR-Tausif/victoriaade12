@@ -114,7 +114,7 @@ const App: React.FC = () => {
   const { pathname } = useLocation();
 
   // RTK: retrieved an admin profile data from database
-  const { data: adminProfile, isLoading: adminProfileLoading } =
+  const { data: adminProfile, } =
     useAdminProfileQuery("");
   // RTK: retrieved notification data from database
   const { data: notification, isLoading: notificationLoading } =
