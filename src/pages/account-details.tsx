@@ -8,24 +8,35 @@ import { useState } from "react";
 export const AccountDetails = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [roleType, setRoleType] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [form] = Form.useForm();
 
   // RTK: retrieved an admin profile data from database
   const { data, isLoading, isFetching } = useUsersQuery({
     searchTerm,
     roleType,
+    createdAt,
   });
 
   const onFinish = () => {};
-  // Handle search on blur
+
   const onSearch = (e: any) => {
-    const value = e.target.value.trim(); // Get the input value
-    setSearchTerm(value); // Update search term state
+    const value = e.target.value.trim();
+    setSearchTerm(value);
   };
 
-  console.log(data);
   const handleAccountType = (e: string) => {
     setRoleType(e.trim());
+  };
+
+  // Modified to handle month selection
+  const handleMonthSelect = (value: string) => {
+    // Convert month name to date format (e.g., "January" to "2024-01")
+    const monthIndex = months.indexOf(value) + 1;
+    const currentYear = new Date().getFullYear();
+    const monthString = monthIndex < 10 ? `0${monthIndex}` : monthIndex;
+    const dateString = `${currentYear}-${monthString}`;
+    setCreatedAt(dateString);
   };
 
   return (
@@ -38,9 +49,11 @@ export const AccountDetails = () => {
         scrollToFirstError
       >
         <Form.Item name="month" style={{ width: "100%" }}>
-          <Select placeholder="This Month">
+          <Select placeholder="This Month" onChange={handleMonthSelect}>
             {months.map((month) => (
-              <Option value={month}>{month}</Option>
+              <Option key={month} value={month}>
+                {month}
+              </Option>
             ))}
           </Select>
         </Form.Item>

@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { tagTypesList } from "../tag.types";
 import { logOut } from "../features/auth.slice";
-
-const baseURL = "http://204.197.173.195:5008/api/v1";
+// TODO: Change base URL
+const baseURL = "http://192.168.10.180:5008/api/v1";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,

@@ -8,13 +8,16 @@ const accountDetailsApi = victoriaBaseApi.injectEndpoints({
       query: ({
         roleType,
         searchTerm,
+        createdAt,
       }: {
         searchTerm: string;
         roleType: string;
+        createdAt: string;
       }) => ({
-        url: roleType
-          ? `/account-details?searchTerm=${searchTerm}&role=${roleType}`
-          : `/account-details?searchTerm=${searchTerm}`,
+        url:
+          roleType || createdAt
+            ? `/account-details?searchTerm=${searchTerm}&role=${roleType}&createdAt=${createdAt}`
+            : `/account-details?searchTerm=${searchTerm}`,
         method: "GET",
       }),
       providesTags: [tagTypes.user],
