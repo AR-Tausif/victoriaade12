@@ -1,5 +1,6 @@
 export const tagTypes = {
   auth: "Auth",
+  profile: "Profile",
   user: "User",
   otp: "Otp",
   wishlist: "Wishlist",
@@ -22,4 +23,5 @@ export const tagTypesList = [
   tagTypes.advertise,
   tagTypes.post,
   tagTypes.notification,
+  tagTypes.profile
 ];

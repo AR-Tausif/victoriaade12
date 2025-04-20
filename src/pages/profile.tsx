@@ -1,6 +1,6 @@
 import { Tabs } from "antd";
 import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
-import { PencilLine } from "lucide-react";
+
 import { useState } from "react";
 import { useAdminProfileQuery } from "../redux/api/profile.api";
 import ProflieSkeleton from "../components/skeletons/profile-skeleton";
@@ -86,7 +86,7 @@ export const Profile = () => {
           />
 
           {/* Edit button */}
-          <label
+          {/* <label
             htmlFor="photo"
             className="absolute bg-white rounded-full flex-center bottom-4 right-4 aspect-square text-white/95"
             style={{
@@ -94,7 +94,7 @@ export const Profile = () => {
             }}
           >
             <PencilLine color="#000" size={20} />
-          </label>
+          </label> */}
           <input
             id="photo"
             onChange={(e) => {
@@ -111,7 +111,7 @@ export const Profile = () => {
 
         <div>
           <h3 className="text-3xl !font-semibold text-white">
-            {adminProfile?.data?.firstName}
+            {adminProfile?.data?.firstName} 
           </h3>
           <p className="mt-1 text-lg font-medium text-white">
             {adminProfile?.data?.role}

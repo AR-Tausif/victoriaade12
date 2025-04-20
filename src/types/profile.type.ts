@@ -1,4 +1,4 @@
 export type TProfileEdit = {
-  userName: string;
-  contactNumber: string;
+  firstName: string;
+  // contactNumber: string;
 };

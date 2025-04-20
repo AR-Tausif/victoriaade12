@@ -9,7 +9,7 @@ import {
   useRejectOfferMutation,
 } from "../redux/api/offer-review.api";
 import { toast } from "sonner";
-import { OfferReviewDropdown, OfferReviewTableSkeleton } from "../components";
+import { OfferReviewTableSkeleton } from "../components";
 import { toTitleCase } from "../utils";
 
 export const OfferReview = () => {

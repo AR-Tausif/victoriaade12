@@ -114,8 +114,7 @@ const App: React.FC = () => {
   const { pathname } = useLocation();
 
   // RTK: retrieved an admin profile data from database
-  const { data: adminProfile, } =
-    useAdminProfileQuery("");
+  const { data: adminProfile } = useAdminProfileQuery("");
   // RTK: retrieved notification data from database
   const { data: notification, isLoading: notificationLoading } =
     useGetAllNotificationQuery("");
@@ -245,7 +244,13 @@ const App: React.FC = () => {
                 <Link to="/notification">
                   <Badge
                     offset={[0.1, 5]}
-                    count={notificationLoading ? 0 : notification?.data.length}
+                    count={
+                      notificationLoading
+                        ? 0
+                        : notification?.data.filter(
+                            (item: any) => item.isRead === false
+                          ).length
+                    }
                   >
                     <BellOutlined className="border border-[#efefef] p-3 rounded-full " />
                   </Badge>
@@ -266,7 +271,8 @@ const App: React.FC = () => {
                     />
                   </Flex>
                   <p className="text-lg font-semibold tracking-tighter">
-                    {adminProfile?.data.firstName} {adminProfile?.data.surName}
+                    {adminProfile?.data.firstName}
+                    {/* {adminProfile?.data.surName} */}
                   </p>
                 </div>
               </Dropdown>

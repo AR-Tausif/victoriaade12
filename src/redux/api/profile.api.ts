@@ -1,6 +1,7 @@
 import { victoriaBaseApi } from ".";
 import {} from "../../types/auth.type";
 import { TProfileEdit } from "../../types/profile.type";
+import { tagTypes } from "../tag.types";
 
 const profileApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,6 +10,7 @@ const profileApi = victoriaBaseApi.injectEndpoints({
         url: `/admin`,
         method: "GET",
       }),
+      providesTags: [tagTypes.profile],
     }),
     editProfile: builder.mutation({
       query: (userInfo: TProfileEdit) => ({
@@ -16,6 +18,7 @@ const profileApi = victoriaBaseApi.injectEndpoints({
         method: "PUT",
         body: userInfo,
       }),
+      invalidatesTags: [tagTypes.profile],
     }),
   }),
 });

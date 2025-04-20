@@ -20,6 +20,8 @@ export const NotificationCard = ({
       toast.error(error?.data?.message);
     }
   };
+
+  
   return (
     <div
       className={`flex justify-between items-center ${

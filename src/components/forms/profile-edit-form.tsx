@@ -19,8 +19,8 @@ export const ProfileEditForm = ({ adminProfile }: TProps) => {
     try {
       // store in object request body data to sending server
       const changePassInfo: TProfileEdit = {
-        userName: values.username as string,
-        contactNumber: values.contactNumber as string,
+        firstName: values.firstName as string,
+        // contactNumber: values.contactNumber as string,
       };
 
       // RTK: sending the request body to backend server with redux toolkit
@@ -44,13 +44,13 @@ export const ProfileEditForm = ({ adminProfile }: TProps) => {
     <>
       <Form form={form} layout="vertical" onFinish={onFinish}>
         <Form.Item
-          label="Username"
-          name="username"
+          label="First Name"
+          name="firstName"
           rules={[{ message: "Please input the title of collection!" }]}
         >
           <Input
-            placeholder="@username"
-            defaultValue={adminProfile?.userName && adminProfile?.userName}
+            placeholder="@firstName"
+            defaultValue={adminProfile?.firstName && adminProfile?.firstName}
           />
         </Form.Item>
 
@@ -71,6 +71,7 @@ export const ProfileEditForm = ({ adminProfile }: TProps) => {
             defaultValue={
               adminProfile?.contactNumber && adminProfile?.contactNumber
             }
+            disabled
           />
         </Form.Item>
         {isLoading ? (

@@ -20,7 +20,7 @@ export const DashboardTable = ({ data = [], handleAccountType }: TProps) => {
   const tableData = data?.map((item, index) => ({
     key: item._id,
     serial: `#${(index + 1).toString().padStart(2, "0")}`, // Format serial as #01, #02, etc.
-    firstName: `${item.firstName} ${item.surName}`,
+    firstName: `${item.firstName}`,
     email: item.email,
     role: item.role, // Adjust based on your role logic
     createdAt: new Date(item.createdAt).toLocaleDateString(),
