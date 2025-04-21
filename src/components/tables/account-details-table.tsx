@@ -14,11 +14,13 @@ const { Option } = Select;
 type TProps = {
   data?: AdminProfile[]; // Make data optional to handle undefined case
   handleAccountType: any;
+  pagination?: false;
 };
 
 export const AccountDetailsTable = ({
   data = [],
   handleAccountType,
+  pagination,
 }: TProps) => {
   const [deleteUser, setDeleteUser] = useState(false);
   const [openAccountDetail, setOpenAccountDetail] = useState(false);
@@ -151,7 +153,7 @@ export const AccountDetailsTable = ({
       <Table
         columns={columns}
         dataSource={tableData}
-        // pagination={true}
+        pagination={pagination ? undefined : pagination}
         className="custom-table"
       />
       <UserDetailsModal

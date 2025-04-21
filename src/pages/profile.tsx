@@ -4,9 +4,11 @@ import { ChangePasswordForm, ProfileEditForm } from "../components/forms";
 import { useState } from "react";
 import { useAdminProfileQuery } from "../redux/api/profile.api";
 import ProflieSkeleton from "../components/skeletons/profile-skeleton";
+import { PencilLine } from "lucide-react";
 
 export const Profile = () => {
   const [profile, setProfile] = useState<File>();
+  console.log({profile});
 
   // RTK: retrieved an admin profile data from database
   const { data: adminProfile, isLoading } = useAdminProfileQuery("");
@@ -86,7 +88,7 @@ export const Profile = () => {
           />
 
           {/* Edit button */}
-          {/* <label
+          <label
             htmlFor="photo"
             className="absolute bg-white rounded-full flex-center bottom-4 right-4 aspect-square text-white/95"
             style={{
@@ -94,7 +96,7 @@ export const Profile = () => {
             }}
           >
             <PencilLine color="#000" size={20} />
-          </label> */}
+          </label>
           <input
             id="photo"
             onChange={(e) => {

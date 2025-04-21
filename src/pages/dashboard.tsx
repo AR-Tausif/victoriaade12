@@ -66,6 +66,7 @@ export const Dashboard = () => {
           <TableSkeleton />
         ) : (
           <AccountDetailsTable
+            pagination={false}
             data={data?.data?.data.slice(0, 4)}
             handleAccountType={handleAccountType}
           />

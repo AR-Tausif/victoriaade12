@@ -187,7 +187,7 @@ export const OfferReview = () => {
           onCancel={handleCancel}
         >
           <div className="p-4">
-            <div className="h-[270px]">
+            <div className="h-[270px] overflow-hidden rounded-md my-4">
               <img
                 src={
                   selectedUser?.photos && selectedUser.photos.length > 0
@@ -198,7 +198,7 @@ export const OfferReview = () => {
                 className="object-cover bg-center rounded-md"
               />
             </div>
-            <div className="flex justify-between">
+            <div className="grid grid-cols-2 gap-x-10 gap-y-2">
               <div className="">
                 <OfferReviewTextField
                   title="Category Name"
@@ -210,10 +210,6 @@ export const OfferReview = () => {
                 />
               </div>
               <div className="">
-                {/* <OfferReviewTextField
-                  title="Duration Time"
-                  value="Limited time offer"
-                /> */}
                 {/* <OfferReviewTextField title="Discount Price" value="50%" /> */}
                 <OfferReviewTextField
                   title="Discount"
@@ -222,11 +218,16 @@ export const OfferReview = () => {
                   }
                 />
               </div>
+              <OfferReviewTextField
+                title="Duration Time"
+                value="Limited time offer"
+              />
+              <OfferReviewTextField
+                title="Description"
+                value={selectedUser?.description as string}
+              />
             </div>
-            <OfferReviewTextField
-              title="Description"
-              value={selectedUser?.description as string}
-            />
+
             <div className=""></div>
           </div>
           <div className="flex justify-center gap-2">
