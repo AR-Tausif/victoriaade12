@@ -47,6 +47,6 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 export const victoriaBaseApi = createApi({
   reducerPath: "victoriaApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: tagTypesList,
+  tagTypes: [...tagTypesList, "adminInfo"],
   endpoints: () => ({}), // Empty initial setup for endpoints
 });

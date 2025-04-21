@@ -11,7 +11,7 @@ export const Profile = () => {
   console.log({ profile });
 
   // RTK: retrieved an admin profile data from database
-  const { data: adminProfile, isLoading } = useAdminProfileQuery("");
+  const { data: adminProfile, isLoading, refetch } = useAdminProfileQuery("");
   console.log(adminProfile);
   if (isLoading) {
     return (
@@ -39,6 +39,7 @@ export const Profile = () => {
             Edit Your Profile
           </h5>
           <ProfileEditForm
+          refetch={refetch}
             updatedProfileImage={profile}
             adminProfile={adminProfile?.data}
             profileLoading={isLoading}

@@ -9,8 +9,9 @@ type TProps = {
   adminProfile: AdminProfile;
   profileLoading?: boolean;
   updatedProfileImage?: File;
+  refetch?:any
 };
-export const ProfileEditForm = ({ adminProfile,updatedProfileImage }: TProps) => {
+export const ProfileEditForm = ({ adminProfile,updatedProfileImage, refetch }: TProps) => {
   const [form] = Form.useForm();
   console.log(updatedProfileImage)
 
@@ -32,7 +33,7 @@ export const ProfileEditForm = ({ adminProfile,updatedProfileImage }: TProps) =>
 
       // RTK: sending the request body to backend server with redux toolkit
       const response: any = await profileEdit(forms).unwrap();
-
+      refetch()
       // TOAST: popup the toast message when dont the work
       toast.success(
         response.data.message ? response.data.message : "Profile changed"
