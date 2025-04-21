@@ -1,32 +1,28 @@
-
 // src/api/victoriaApi/endpoints/adminProfile.ts
 
 import { victoriaBaseApi } from ".";
-
-
+import { tagTypes } from "../tag.types";
 
 export const adminProfileApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
-     // Fetching admin profile
-     adminProfile: builder.query({
+    // Fetching admin profile
+    adminProfile: builder.query({
       query: () => `/admin`,
-      providesTags: ["adminInfo"], // This query will provide the "adminInfo" tag
+      providesTags: [tagTypes.profile], // This query will provide the "adminInfo" tag
     }),
-      // Editing the admin profile
-      editProfile: builder.mutation({
-        query: (userInfo: FormData) => ({
-          url: "/overview/update-admin", // API endpoint for updating the admin profile
-          method: "PUT",
-          body: userInfo,
-        }),
-        invalidatesTags: ["adminInfo"], // Invalidating the "adminInfo" tag after the mutation
+    // Editing the admin profile
+    editProfile: builder.mutation({
+      query: (userInfo: FormData) => ({
+        url: "/overview/update-admin", // API endpoint for updating the admin profile
+        method: "PUT",
+        body: userInfo,
       }),
+      invalidatesTags: [tagTypes.profile], // Invalidating the "adminInfo" tag after the mutation
+    }),
   }),
 });
 
 export const { useAdminProfileQuery, useEditProfileMutation } = adminProfileApi;
-
-
 
 // import { victoriaBaseApi } from ".";
 // import {} from "../../types/auth.type";

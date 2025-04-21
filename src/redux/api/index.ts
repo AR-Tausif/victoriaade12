@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-import { tagTypesList } from "../tag.types";
 import { logOut } from "../features/auth.slice";
+import { tagTypesList } from "../tag.types";
 // TODO: Change base URL
 // const baseURL = "http://192.168.10.180:5008/api/v1";
 const baseURL = "http://204.197.173.195:5008/api/v1";
@@ -47,6 +47,6 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 export const victoriaBaseApi = createApi({
   reducerPath: "victoriaApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["adminInfo"],
+  tagTypes: tagTypesList,
   endpoints: () => ({}), // Empty initial setup for endpoints
 });

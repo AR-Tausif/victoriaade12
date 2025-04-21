@@ -1,6 +1,6 @@
 import { Form, Input } from "antd";
 import { PrimaryButton } from "../primary-button";
-import { TProfileData, TProfileEdit } from "../../types/profile.type";
+import { TProfileEdit } from "../../types/profile.type";
 import { useEditProfileMutation } from "../../redux/api/profile.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
