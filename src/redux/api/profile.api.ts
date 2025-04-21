@@ -1,26 +1,55 @@
-import { victoriaBaseApi } from ".";
-import {} from "../../types/auth.type";
-import { TProfileEdit } from "../../types/profile.type";
-import { tagTypes } from "../tag.types";
 
-const profileApi = victoriaBaseApi.injectEndpoints({
+// src/api/victoriaApi/endpoints/adminProfile.ts
+
+import { victoriaBaseApi } from ".";
+
+
+
+export const adminProfileApi = victoriaBaseApi.injectEndpoints({
   endpoints: (builder) => ({
-    adminProfile: builder.query({
-      query: () => ({
-        url: `/admin`,
-        method: "GET",
-      }),
-      providesTags: [tagTypes.profile],
+     // Fetching admin profile
+     adminProfile: builder.query({
+      query: () => `/admin`,
+      providesTags: ["adminInfo"], // This query will provide the "adminInfo" tag
     }),
-    editProfile: builder.mutation({
-      query: (userInfo: TProfileEdit) => ({
-        url: "/overview/update-admin",
-        method: "PUT",
-        body: userInfo,
+      // Editing the admin profile
+      editProfile: builder.mutation({
+        query: (userInfo: FormData) => ({
+          url: "/overview/update-admin", // API endpoint for updating the admin profile
+          method: "PUT",
+          body: userInfo,
+        }),
+        invalidatesTags: ["adminInfo"], // Invalidating the "adminInfo" tag after the mutation
       }),
-      invalidatesTags: [tagTypes.profile],
-    }),
   }),
 });
 
-export const { useAdminProfileQuery, useEditProfileMutation } = profileApi;
+export const { useAdminProfileQuery, useEditProfileMutation } = adminProfileApi;
+
+
+
+// import { victoriaBaseApi } from ".";
+// import {} from "../../types/auth.type";
+// import { tagTypes } from "../tag.types";
+
+// const profileApi = victoriaBaseApi.injectEndpoints({
+//   endpoints: (builder) => ({
+//     adminProfile: builder.query({
+//       query: () => ({
+//         url: `/admin`,
+//         method: "GET",
+//       }),
+//       providesTags: ["adminInfo"],
+//     }),
+//     editProfile: builder.mutation({
+//       query: (userInfo: FormData) => ({
+//         url: "/overview/update-admin",
+//         method: "PUT",
+//         body: userInfo,
+//       }),
+//       invalidatesTags: ["adminInfo"],
+//     }),
+//   }),
+// });
+
+// export const { useAdminProfileQuery, useEditProfileMutation } = profileApi;

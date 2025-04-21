@@ -1,4 +1,8 @@
-export type TProfileEdit = {
+export type TProfileData = {
   firstName: string;
-  // contactNumber: string;
+  surName?: string;
+};
+export type TProfileEdit = {
+  data: TProfileData;
+  profileImage?: File;
 };

@@ -3,8 +3,8 @@ import { RootState } from "../store";
 import { tagTypesList } from "../tag.types";
 import { logOut } from "../features/auth.slice";
 // TODO: Change base URL
-// const baseURL = "http://192.168.10.180:5008/api/v1";
-const baseURL = "http://204.197.173.195:5008/api/v1";
+const baseURL = "http://192.168.10.180:5008/api/v1";
+// const baseURL = "http://204.197.173.195:5008/api/v1";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
@@ -34,9 +34,19 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
   return result;
 };
 
+// export const victoriaBaseApi = createApi({
+//   reducerPath: "victoriaApi",
+//   baseQuery: baseQueryWithReauth,
+//   tagTypes: ["adminInfo"],
+//   endpoints: () => ({}),
+// });
+
+
+
+
 export const victoriaBaseApi = createApi({
   reducerPath: "victoriaApi",
   baseQuery: baseQueryWithReauth,
-  tagTypes: tagTypesList,
-  endpoints: () => ({}),
+  tagTypes: ["adminInfo"],
+  endpoints: () => ({}), // Empty initial setup for endpoints
 });

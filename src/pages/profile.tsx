@@ -8,7 +8,7 @@ import { PencilLine } from "lucide-react";
 
 export const Profile = () => {
   const [profile, setProfile] = useState<File>();
-  console.log({profile});
+  console.log({ profile });
 
   // RTK: retrieved an admin profile data from database
   const { data: adminProfile, isLoading } = useAdminProfileQuery("");
@@ -39,6 +39,7 @@ export const Profile = () => {
             Edit Your Profile
           </h5>
           <ProfileEditForm
+            updatedProfileImage={profile}
             adminProfile={adminProfile?.data}
             profileLoading={isLoading}
           />
@@ -113,7 +114,7 @@ export const Profile = () => {
 
         <div>
           <h3 className="text-3xl !font-semibold text-white">
-            {adminProfile?.data?.firstName} 
+            {adminProfile?.data?.firstName}
           </h3>
           <p className="mt-1 text-lg font-medium text-white">
             {adminProfile?.data?.role}

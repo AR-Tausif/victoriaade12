@@ -1,6 +1,6 @@
 import { Form, Input } from "antd";
 import { PrimaryButton } from "../primary-button";
-import { TProfileEdit } from "../../types/profile.type";
+import { TProfileData, TProfileEdit } from "../../types/profile.type";
 import { useEditProfileMutation } from "../../redux/api/profile.api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
@@ -8,23 +8,30 @@ import { AdminProfile } from "../../types/profile";
 type TProps = {
   adminProfile: AdminProfile;
   profileLoading?: boolean;
+  updatedProfileImage?: File;
 };
-export const ProfileEditForm = ({ adminProfile }: TProps) => {
+export const ProfileEditForm = ({ adminProfile,updatedProfileImage }: TProps) => {
   const [form] = Form.useForm();
+  console.log(updatedProfileImage)
 
   // RTK: server profile edit mutation endpoind selection
   const [profileEdit, { isLoading }] = useEditProfileMutation();
 
   const onFinish = async (values: Record<string, unknown>) => {
     try {
+
+      const forms = new FormData();
       // store in object request body data to sending server
-      const changePassInfo: TProfileEdit = {
-        firstName: values.firstName as string,
+      const changeProfileInfo: TProfileEdit = {
+        data: { firstName: values.firstName as string },
         // contactNumber: values.contactNumber as string,
       };
+      
+      forms.append("data", JSON.stringify(changeProfileInfo.data));
+      forms.append("profileImage", updatedProfileImage!) ;
 
       // RTK: sending the request body to backend server with redux toolkit
-      const response: any = await profileEdit(changePassInfo).unwrap();
+      const response: any = await profileEdit(forms).unwrap();
 
       // TOAST: popup the toast message when dont the work
       toast.success(
