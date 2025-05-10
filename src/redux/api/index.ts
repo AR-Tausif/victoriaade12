@@ -4,7 +4,8 @@ import { logOut } from "../features/auth.slice";
 import { tagTypesList } from "../tag.types";
 // TODO: Change base URL
 // const baseURL = "http://192.168.10.180:5008/api/v1";
-const baseURL = "http://172.252.13.74:5008/api/v1";
+// const baseURL = "http://172.252.13.74:5008/api/v1";
+const baseURL = "https://assured-tidy-sunbeam.ngrok-free.app/api/v1"
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
