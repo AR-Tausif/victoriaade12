@@ -4,7 +4,7 @@ import { logOut } from "../features/auth.slice";
 import { tagTypesList } from "../tag.types";
 // TODO: Change base URL
 // const baseURL = "http://192.168.10.180:5008/api/v1";
-const baseURL = "http://204.197.173.195:5008/api/v1";
+const baseURL = "http://172.252.13.74:5008/api/v1";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,
